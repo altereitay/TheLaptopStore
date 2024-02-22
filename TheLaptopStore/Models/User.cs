@@ -18,14 +18,14 @@ namespace TheLaptopStore.Models
 
         [Required]
         [RegularExpression("^[A-Z][a-z]+$", ErrorMessage = "Last Name must start with uppercase latter and be at least 2 characters length")]
-        public string LasttName { get; set; }
+        public string LastName { get; set; }
 
         [Required]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
-        [RegularExpression("^05[0-9]{8}$", ErrorMessage = "Phone number must start with 05 and by the digits long")]
+        [RegularExpression("^05[0-9]{8}$", ErrorMessage = "Phone number must start with 05 and by 10 digits long")]
         public string Phone { get; set; }
 
         public CreditCard[] creditCards { get; set; }
@@ -45,11 +45,11 @@ namespace TheLaptopStore.Models
         public string City { get; set; }
 
         [Required]
-        [RegularExpression("^d$", ErrorMessage = "Building number are digits only")]
+        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Building number are digits only")]
         public int BuildingNumber{ get; set; }
 
         [Required]
-        [RegularExpression("^d$", ErrorMessage = "Apartment number are digits only")]
+        [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Apartment number are digits only")]
         public int ApartmentNumber { get; set; }
     }
 }

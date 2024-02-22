@@ -1,0 +1,22 @@
+﻿@model TheLaptopStore.Models.User
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<div>
+    <form method="post">
+        First Name: <input type="text" id="FirstName" name="FirstName" /> @Html.ValidationMessageFor(x => x.FirstName) <br/>
+        Last Name: <input type="text" id="LastName" name="LastName" /> @Html.ValidationMessageFor(x => x.LastName) <br />
+        ID: <input type="text" id="ID" name="ID" /> @Html.ValidationMessageFor(x => x.ID) <br />
+        Email: <input type="email" id="Email" name="Email" /> @Html.ValidationMessageFor(x => x.Email) <br />
+        Phone Number: <input type="text" id="Phone" name="Phone" /> @Html.ValidationMessageFor(x => x.Phone) <br />
+        Date Of Birth: <input type="date" id="DateOfBirth" name="DateOfBirth" /> @Html.ValidationMessageFor(x => x.DateOfBirth) <br />
+        Password: <input type="text" id="Password" name="Password" /> @Html.ValidationMessageFor(x => x.Password) <br />
+        City: <input type="text" id="City" name="City" /> @Html.ValidationMessageFor(x => x.City) <br />
+        Building Number: <input type="text" id="BuildingNumber" name="BuildingNumber" /> @Html.ValidationMessageFor(x => x.BuildingNumber) <br />
+        Apartment Number: <input type="text" id="ApartmentNumber" name="ApartmentNumber" /> @Html.ValidationMessageFor(x => x.ApartmentNumber) <br />
+        <input type="submit" id="Submit" name="Submit" value="Register" />
+    </form>
+</div>
+
