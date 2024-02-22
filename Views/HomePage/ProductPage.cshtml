@@ -1,0 +1,82 @@
+﻿@model TheLaptopStore.Models.Laptop
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .product {
+            float: left;
+            width: 30%;
+            margin: 1.66%;
+            background: #fff;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .item img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <form action="ShowHomePage" method="post">
+        <div class="product">
+            <img src="@Model.Picture" />
+            <p>Description: @Model.Description</p>
+            <p>Ram: @Model.Ram</p>
+            <p>SSD: @Model.SSD</p>
+            <p>CPU: @Model.CPU</p>
+            <p>ScreenSize: @Model.ScreenSize</p>
+            <p>GPU: @Model.GPU</p>
+            <p>Price: @Model.Price</p>
+            <p>Maker: @Model.Maker</p>
+            <p>Color: @Model.Color</p>
+            <p>Ram: @Model.Quantity</p>
+            <p>ReleaseDate: @Model.ReleaseDate</p>
+            <p>model: @Model.Model</p>
+            <input id="btn1" type="submit" value="Back To Store" />
+
+        </div>
+    </form>
+</body>
+</html>
