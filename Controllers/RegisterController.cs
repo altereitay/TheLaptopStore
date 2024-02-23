@@ -10,11 +10,11 @@ namespace TheLaptopStore.Controllers
     public class RegisterController : Controller
     {
         // GET: Register
-        public ActionResult Register(User user)
+        public ActionResult Submit(User user)
         {
             if (ModelState.IsValid)
             {
-                return View("Good");
+                return RedirectToAction("ShowHomePage", "HomePage");
             } 
             else
             {
@@ -22,6 +22,12 @@ namespace TheLaptopStore.Controllers
             }
             
         }
+
+        public ActionResult View_Register(User user)
+        {
+            return View("Register");
+        }
+
 
         public ActionResult Good()
         {

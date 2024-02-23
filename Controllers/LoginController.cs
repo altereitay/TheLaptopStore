@@ -53,14 +53,14 @@ namespace TheLaptopStore.Controllers
                 {
                     ViewData["UserEmail"] = Email.Split('@')[0];
                     ViewData["pass"] = password;
-                    return View("hi");
+                    return RedirectToAction("ShowHomePage", "HomePage");
                 }
 
                 else return View("Login");
             }
             else
             {
-                return View("hi");
+                return RedirectToAction("View_Register", "Register");
             }
         }
 
