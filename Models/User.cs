@@ -37,7 +37,7 @@ namespace TheLaptopStore.Models
         [Required]
         public DateTime DateOfBirth { get; set; }
 
-        [Required]
+        
         public string Type { get; set; }
 
         [Required]

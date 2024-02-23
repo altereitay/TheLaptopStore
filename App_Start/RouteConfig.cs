@@ -20,6 +20,19 @@ namespace TheLaptopStore
             );
             */
             routes.MapRoute(
+            name: "Login",
+            url: "",
+            defaults: new { controller = "Login", action = "Login", id = UrlParameter.Optional }
+        );
+            routes.MapRoute(
+          name: "Default2",
+          url: "Submit",
+          defaults: new { controller = "LogIn", action = "Submit", id = UrlParameter.Optional }
+          );
+
+
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
