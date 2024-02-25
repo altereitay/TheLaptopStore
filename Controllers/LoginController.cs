@@ -47,7 +47,7 @@ namespace TheLaptopStore.Controllers
 
         public ActionResult Submit(string Email, string password, string submitButton)
         {
-            if (submitButton == "connect us")
+            if (submitButton == "Login")
             {
                 if (IsValidUser(Email, password))
                 {

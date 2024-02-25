@@ -16,7 +16,7 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
+            font-family: Poppins, 'Arial', sans-serif;
             background-color: #e6e6e6; /* Set a background color for the entire page */
             display: flex;
             align-items: center;
@@ -70,6 +70,11 @@
             .inputStyle:hover {
                 background-color: #0056b3; /* Darker background color on hover */
             }
+
+        #not_registered {
+            font-weight: bold;
+            text-align: center;
+        }
     </style>
 
     <div class="login-container">
@@ -82,7 +87,7 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" placeholder="Enter your password" />
             @Html.ValidationMessage("password")
-            <input class="inputStyle" id="LogIn" name="submitButton" type="submit" value="connect us" />
+            <input class="inputStyle" id="LogIn" name="submitButton" type="submit" value="Login" />
             <input class="inputStyle" id="signup" name="submitButton" type="submit" value="sign up" />
         </form>
     </div>
