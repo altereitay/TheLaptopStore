@@ -4,81 +4,198 @@
     ViewBag.Title = "Register";
 }
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Page</title>
+    <link rel="stylesheet" href="Styles.css">
+</head>
+<body>
     <style>
         body {
-            font-family: Poppins, Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #e6e6e6;
+            width: 100vw;
+            box-sizing: border-box;
         }
 
-        div {
-            width: 50%;
-            margin: auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 50px;
-        }
-
-        h1 {
+        h2 {
             text-align: center;
+            margin-bottom: 20px;
+            color: #333;
         }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #0056b3;
+            }
+
+        button {
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Button text color */
+            padding: 10px 15px; /* Padding around the button text */
+            border: none; /* Remove border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Add a pointer cursor on hover */
+            font-size: 16px; /* Adjust font size */
+        }
+
+            /* Button hover effect */
+            button:hover {
+                background-color: #0056b3; /* Darker background color on hover */
+            }
 
         form {
-            display: grid;
-            gap: 10px;
+            width: 55%;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            justify-content: center;
+            button
+
+        {
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            background-color: #0056b3;
+            color: white;
+            font-size: 0.85rem;
+            margin-top: 2rem;
+            &:hover
+
+        {
+            background-color: #007bff;
         }
 
-        input {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+        }
+        }
+
+        .multi-inputs {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: 0.5rem;
+        }
+
+        .input_container {
+            display: inline-flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            flex-grow: 1;
+            min-width: 40%;
+            &.long
+
+        {
             width: 100%;
         }
 
-            input[type="submit"] {
-                background-color: #007bff;
-                color: #fff;
-                cursor: pointer;
-            }
+        &.mid {
+            width: 50%;
+        }
 
-                input[type="submit"]:hover {
-                    background-color: #007bff;
-                }
+        &.short {
+            width: 30%;
+        }
 
-        a {
-            text-decoration: none;
-            font-weight: 400;
-            color: #007bff;
+        label {
+            font-weight: bold;
+        }
+
         }
 
     </style>
-</head>
-<body>
-    <div>
-        <form action="Submit"  method="post">
-            First Name: <input type="text" id="FirstName" name="FirstName" /> @Html.ValidationMessageFor(x => x.FirstName) <br />
-            Last Name: <input type="text" id="LastName" name="LastName" /> @Html.ValidationMessageFor(x => x.LastName) <br />
-            ID: <input type="text" id="ID" name="ID" /> @Html.ValidationMessageFor(x => x.ID) <br />
-            Email: <input type="email" id="Email" name="Email" /> @Html.ValidationMessageFor(x => x.Email) <br />
-            Phone Number: <input type="text" id="Phone" name="Phone" /> @Html.ValidationMessageFor(x => x.Phone) <br />
-            Date Of Birth: <input type="date" id="DateOfBirth" name="DateOfBirth" /> @Html.ValidationMessageFor(x => x.DateOfBirth) <br />
-            Password: <input type="text" id="Password" name="Password" /> @Html.ValidationMessageFor(x => x.Password) <br />
-            City: <input type="text" id="City" name="City" /> @Html.ValidationMessageFor(x => x.City) <br />
-            Building Number: <input type="text" id="BuildingNumber" name="BuildingNumber" /> @Html.ValidationMessageFor(x => x.BuildingNumber) <br />
-            Apartment Number: <input type="text" id="ApartmentNumber" name="ApartmentNumber" /> @Html.ValidationMessageFor(x => x.ApartmentNumber) <br />
-            <input type="submit" id="Submit" name="Submit" value="Register" />
-        </form>
-    </div>
+    <form action="Submit" method="post">
+        <h2>Create an account</h2>
+        <div class="multi-inputs">
+            <div class="input_container mid">
+                <label for="FirstName">First name</label>
+                <input type="text" id="FirstName" name="FirstName" />
+                @Html.ValidationMessageFor(x => x.LastName)
+            </div>
+
+            <div class="input_container mid">
+                <label for="LastName">Last name</label>
+                <input type="text" id="LastName" name="LastName" />
+                @Html.ValidationMessageFor(x => x.LastName)
+            </div>
+        </div>
+
+        <div class="multi-inputs">
+            <div class="input_container long">
+                <label for="ID">ID</label>
+                <input type="text" id="ID" name="ID" />
+                @Html.ValidationMessageFor(x => x.ID)
+            </div>
+
+            <div class="input_container long">
+                <label for="Phone">Phone number</label>
+                <input type="text" id="Phone" name="Phone" />
+                @Html.ValidationMessageFor(x => x.Phone)
+            </div>
+        </div>
+
+
+        <div class="input_container long">
+            <label for="Email">Email</label>
+            <input type="email" id="Email" name="Email" />
+            @Html.ValidationMessageFor(x => x.Email)
+        </div>
+
+
+        <div class="input_container long">
+            <label for="DateOfBirth">Date of birth</label>
+            <input type="date" id="DateOfBirth" name="DateOfBirth" />
+            @Html.ValidationMessageFor(x => x.DateOfBirth)
+        </div>
+
+        <div class="input_container long">
+            <label for="Password">Password</label>
+            <input type="password" id="Password" name="Password" />
+            @Html.ValidationMessageFor(x => x.Password)
+        </div>
+
+        <div class="input_container long">
+            <label for="City">City</label>
+            <input type="text" id="City" name="City" />
+            @Html.ValidationMessageFor(x => x.City)
+        </div>
+
+        <div class="multi-inputs">
+            <div class="input_container mid">
+                <label for="BuildingNumber">Building number</label>
+                <input type="text" id="BuildingNumber" name="BuildingNumber" />
+                @Html.ValidationMessageFor(x => x.BuildingNumber)
+
+            </div>
+
+            <div class="input_container mid">
+                <label for="ApartmentNumber">Apartment number</label>
+                <input type="text" id="ApartmentNumber" name="ApartmentNumber" />
+                @Html.ValidationMessageFor(x => x.ApartmentNumber)
+            </div>
+        </div>
+
+        <button type="submit">Register</button>
+    </form>
 </body>
 </html>
+
 
