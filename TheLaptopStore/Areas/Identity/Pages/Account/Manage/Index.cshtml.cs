@@ -59,18 +59,34 @@ namespace TheLaptopStore.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+            public string PersonalID { get; set; }          
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public DateTime DateOfBirth { get; set; }
+            public string City { get; set; }
+            public string StreetName { get; set; }
+            public int BuildingNumber { get; set; }
+            public int ApartmentNumber { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
+            
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PersonalID = user.PersonalID,
+                DateOfBirth = user.DateOfBirth,
+                City = user.City,
+                StreetName = user.StreetName,
+                BuildingNumber = user.BuildingNumber,
+                ApartmentNumber = user.ApartmentNumber      
             };
         }
 
@@ -110,7 +126,15 @@ namespace TheLaptopStore.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
-
+                user.FirstName = Input.FirstName;         
+                user.LastName = Input.LastName;             
+                user.PersonalID = Input.PersonalID;         
+                user.DateOfBirth = Input.DateOfBirth;          
+                user.City = Input.City;          
+                user.BuildingNumber = Input.BuildingNumber;           
+                user.ApartmentNumber = Input.ApartmentNumber;
+   
+            await _userManager.UpdateAsync(user);
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

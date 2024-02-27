@@ -1,21 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using TheLaptopStore.Data;
 using TheLaptopStore.Models;
+using System.IO;
 
 namespace TheLaptopStore.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _db;
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _logger = logger;
+            _db = db;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<Laptop> laptops = _db.Laptops.ToList();
+
+            return View(laptops);
         }
 
         public IActionResult Privacy()
@@ -28,5 +33,7 @@ namespace TheLaptopStore.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 }
