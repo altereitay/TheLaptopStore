@@ -19,7 +19,7 @@
      
         @if (User.IsInRole("Admin")){
             <li class="nav-item">
-                <form class="form-inline" asp-area="Identity" asp-page="" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <form class="form-inline"  method="post" asp-controller="AdminPage" asp-action="Managment">
                     <button type="submit" class="nav-link btn btn-link text-dark">Managment</button>
                 </form>
             </li>
