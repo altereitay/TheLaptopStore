@@ -97,7 +97,7 @@
         }
 
         }
-   
+
 
         nav {
             background-color: #333;
@@ -132,18 +132,8 @@
 </head>
 <body>
 
-    <nav>
-        <ul>
-            <li><a asp-controller="AdminPage" asp-action="Add" >Add Products</a></li>
-            <li><a asp-controller="AdminPage" asp-action="deleteProduct">Delete Products</a></li>
-            <li><a href="#addUsers">Add Users</a></li>
-            <li><a href="#deleteUsers">Delete Users</a></li>
-        </ul>
-    </nav>
-
-
-    <div id="addProduct" style="display: none;">
-        <form  method="post">
+    <div id="addProduct" >
+        <form method="post">
             <label for="ram">RAM:</label>
             <input type="number" name="ram" required>
 
@@ -173,10 +163,6 @@
 
             <label for="description">Description:</label>
             <textarea name="description" rows="4" required></textarea>
-
-            <label for="picture">Picture URL:</label>
-            <input type="text" name="picture" required>
-
 
             <label for="category">Category:</label>
             <input type="text" name="category" required>

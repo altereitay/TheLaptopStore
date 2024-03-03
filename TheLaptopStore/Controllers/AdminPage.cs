@@ -36,5 +36,18 @@ namespace TheLaptopStore.Controllers
             List<Laptop> laptops = _db.Laptops.ToList();
             return View("AdminPage", laptops);
         }
+
+        public IActionResult deleteProduct()
+        {
+            List<Laptop> laptops = _db.Laptops.ToList();
+            return View("deleteProduct", laptops);
+        }
+
+
+        public IActionResult Add()
+        {
+            return View("addProduct");
+        }
+
     }
 }

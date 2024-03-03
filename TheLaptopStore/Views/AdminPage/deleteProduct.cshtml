@@ -97,7 +97,7 @@
         }
 
         }
-   
+
 
         nav {
             background-color: #333;
@@ -132,65 +132,25 @@
 </head>
 <body>
 
-    <nav>
-        <ul>
-            <li><a asp-controller="AdminPage" asp-action="Add" >Add Products</a></li>
-            <li><a asp-controller="AdminPage" asp-action="deleteProduct">Delete Products</a></li>
-            <li><a href="#addUsers">Add Users</a></li>
-            <li><a href="#deleteUsers">Delete Users</a></li>
-        </ul>
-    </nav>
 
+    <div class="grid-container" id="deleteProduct">
+        <div class="design">
+            @foreach (var laptop in Model)
+            {
+                <div class="product">
 
-    <div id="addProduct" style="display: none;">
-        <form  method="post">
-            <label for="ram">RAM:</label>
-            <input type="number" name="ram" required>
-
-            <label for="ssd">SSD:</label>
-            <input type="number" name="ssd" required>
-
-            <label for="cpu">CPU:</label>
-            <input type="text" name="cpu" required>
-
-            <label for="screenSize">Screen Size:</label>
-            <input type="number" step="0.1" name="screenSize" required>
-
-            <label for="gpu">GPU:</label>
-            <input type="text" name="gpu" required>
-
-            <label for="price">Price:</label>
-            <input type="number" name="price" required>
-
-            <label for="maker">Maker:</label>
-            <input type="text" name="maker" required>
-
-            <label for="color">Color:</label>
-            <input type="text" name="color" required>
-
-            <label for="quantity">Quantity:</label>
-            <input type="number" name="quantity" required>
-
-            <label for="description">Description:</label>
-            <textarea name="description" rows="4" required></textarea>
-
-            <label for="picture">Picture URL:</label>
-            <input type="text" name="picture" required>
-
-
-            <label for="category">Category:</label>
-            <input type="text" name="category" required>
-
-            <label for="releaseDate">Release Date:</label>
-            <input type="date" name="releaseDate" required>
-
-            <label for="model">Model:</label>
-            <input type="text" name="model" required>
-
-            <input type="submit">Add Product</input>
-        </form>
-
+                    <h2>@laptop.Model</h2>
+                    <img id="img" src="~/photos/@laptop.Picture" alt="@laptop.Model">
+                    <p id="description">Description: @laptop.Description</p>
+                    <p id="Ram">Ram: @laptop.Ram</p>
+                    <p id="price">Price: $@laptop.Price</p>
+                    <a asp-controller="AdminPage" asp-action="Delete" asp-route-model="@laptop.Model" class="nav-link btn btn-link text-dark">Delete</a>
+                </div>
+            }
+        </div>
     </div>
 
+
+   
 </body>
 </html>
