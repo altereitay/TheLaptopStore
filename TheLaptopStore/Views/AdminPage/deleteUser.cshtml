@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using TheLaptopStore.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -97,7 +102,7 @@
         }
 
         }
-   
+
 
         nav {
             background-color: #333;
@@ -132,16 +137,26 @@
 </head>
 <body>
 
-    <nav>
-        <ul>
-            <li><a asp-controller="AdminPage" asp-action="Add" >Add Products</a></li>
-            <li><a asp-controller="AdminPage" asp-action="deleteProduct">Delete Products</a></li>
-            <li><a asp-controller="AdminPage" asp-action="showAddAdmin">Add Admin</a></li>
-            <li><a asp-controller="AdminPage" asp-action="ShowdeleteUser">Delete Users</a></li>
-        </ul>
-    </nav>
 
-   
+    <div class="grid-container" id="deleteUser">
+        <div class="design">
+            @foreach (var user in Model)
+            {
+                ApplicationUser curruser = await UserManager.GetUserAsync(User);
+                @if (user.Id != curruser.Id)
+                {
+                <div class="product">
+                    <h2>@user.FirstName</h2>
+                    <p id="LastName">LastName: @user.LastName</p>
+                    <p id="PersonalID">PersonalID: @user.PersonalID</p>
+                        <a asp-controller="AdminPage" asp-action="deleteUser" asp-route-Id="@user.Id" class="nav-link btn btn-link text-dark">Delete</a>
+                </div>
+            }
+            }
+        </div>
+    </div>
+
+
 
 </body>
 </html>
