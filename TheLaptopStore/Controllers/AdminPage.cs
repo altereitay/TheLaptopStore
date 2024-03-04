@@ -123,17 +123,42 @@ namespace TheLaptopStore.Controllers
         
                 return  View("addAdmin");
         }
-
-      
-
-        /*public IActionResult addAdmin()
-        {
-     
-
-
-
+    
+        public IActionResult showEditProduct() {
+            List<Laptop> laptops = _db.Laptops.ToList();
+            return View("showEditProduct", laptops);
         }
-        */
+
+        public IActionResult editProduct(string model) {
+            var laptop = _db.Laptops.Find(model);
+            if (laptop == null) {
+                return NotFound();
+            }
+            return View("editProduct", laptop);
+        }
+
+        public IActionResult edit(string? model) {
+            Laptop laptop = _db.Laptops.Find(model);
+            laptop.Ram = Convert.ToInt32(Request.Form["Ram"]);
+            laptop.SSD = Convert.ToInt32(Request.Form["SSD"]);
+            laptop.CPU = Request.Form["CPU"];
+            laptop.ScreenSize = Convert.ToDouble(Request.Form["ScreenSize"]);
+            laptop.GPU = Request.Form["GPU"];
+            laptop.Price = Convert.ToInt32(Request.Form["Price"]);
+            laptop.Maker = Request.Form["Maker"];
+            laptop.Color = Request.Form["Color"];
+            laptop.Quantity = Convert.ToInt32(HttpContext.Request.Form["Quantity"]);
+            laptop.Description = Request.Form["Description"];
+            laptop.Picture = Request.Form["Picture"];
+            laptop.IsOnSale = Request.Form["IsOnSale"].Count > 0 ? true : false;
+            laptop.SalePrecentage = Convert.ToInt32(Request.Form["SalePrecentage"]);
+            laptop.PopularityIndex = Convert.ToInt32(HttpContext.Request.Form["PopularityIndex"]);
+            laptop.Category = Request.Form["Category"];
+            laptop.ReleaseDate = Request.Form["ReleaseDate"];
+            laptop.Model = Request.Form["Model"];
+            _db.SaveChanges();
+            return View("AdminPage");
+        }
 
     }
 }

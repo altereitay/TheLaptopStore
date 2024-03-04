@@ -1,104 +1,100 @@
 ﻿@model TheLaptopStore.Data.Laptop
 
 @{
-    ViewData["Title"] = "addProduct";
+    ViewData["Title"] = "editProduct";
 }
 
-<h1>addProduct</h1>
+<h1>editProduct</h1>
 
 <h4>Laptop</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="addProduct">
+        <form asp-action="editProduct">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Ram" class="control-label"></label>
-                <input asp-for="Ram" class="form-control" />
+                <input asp-for="Ram" class="form-control" value="@Model.Ram"/>
                 <span asp-validation-for="Ram" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SSD" class="control-label"></label>
-                <input asp-for="SSD" class="form-control" />
+                <input asp-for="SSD" class="form-control" value="@Model.SSD" />
                 <span asp-validation-for="SSD" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CPU" class="control-label"></label>
-                <input asp-for="CPU" class="form-control" />
+                <input asp-for="CPU" class="form-control" value="@Model.CPU" />
                 <span asp-validation-for="CPU" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ScreenSize" class="control-label"></label>
-                <input asp-for="ScreenSize" class="form-control" />
+                <input asp-for="ScreenSize" class="form-control" value="@Model.ScreenSize" />
                 <span asp-validation-for="ScreenSize" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GPU" class="control-label"></label>
-                <input asp-for="GPU" class="form-control" />
+                <input asp-for="GPU" class="form-control" value="@Model.GPU" />
                 <span asp-validation-for="GPU" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
+                <input asp-for="Price" class="form-control" value="@Model.Price" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Maker" class="control-label"></label>
-                <input asp-for="Maker" class="form-control" />
+                <input asp-for="Maker" class="form-control" value="@Model.Maker" />
                 <span asp-validation-for="Maker" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Color" class="control-label"></label>
-                <input asp-for="Color" class="form-control" />
+                <input asp-for="Color" class="form-control" value="@Model.Color" />
                 <span asp-validation-for="Color" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
+                <input asp-for="Quantity" class="form-control" value="@Model.Quantity" />
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <input asp-for="Description" class="form-control" value="@Model.Description" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Picture" class="control-label"></label>
-                <input asp-for="Picture" class="form-control" />
+                <input asp-for="Picture" class="form-control" value="@Model.Picture" />
                 <span asp-validation-for="Picture" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsOnSale" /> @Html.DisplayNameFor(model => model.IsOnSale)
+                    <input class="form-check-input" asp-for="IsOnSale" value="@Model.IsOnSale" /> @Html.DisplayNameFor(model => model.IsOnSale)
                 </label>
             </div>
             <div class="form-group">
                 <label asp-for="SalePrecentage" class="control-label"></label>
-                <input asp-for="SalePrecentage" class="form-control" />
+                <input asp-for="SalePrecentage" class="form-control" value="@Model.SalePrecentage" />
                 <span asp-validation-for="SalePrecentage" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PopularityIndex" class="control-label"></label>
-                <input asp-for="PopularityIndex" class="form-control" />
+                <input asp-for="PopularityIndex" class="form-control" value="@Model.PopularityIndex" />
                 <span asp-validation-for="PopularityIndex" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
+                <input asp-for="Category" class="form-control" value="@Model.Category" />
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ReleaseDate" class="control-label"></label>
-                <input asp-for="ReleaseDate" class="form-control" />
+                <input asp-for="ReleaseDate" class="form-control" value="@Model.ReleaseDate" />
                 <span asp-validation-for="ReleaseDate" class="text-danger"></span>
             </div>
+            <input type="hidden" asp-for="Model" />
             <div class="form-group">
-                <label asp-for="Model" class="control-label"></label>
-                <input asp-for="Model" class="form-control" />
-                <span asp-validation-for="Model" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" asp-route-model="@Model.Model" asp-action="edit"/>
             </div>
         </form>
     </div>

@@ -97,7 +97,7 @@
         }
 
         }
-   
+
 
         nav {
             background-color: #333;
@@ -132,16 +132,24 @@
 </head>
 <body>
 
-    <nav>
-        <ul>
-            <li><a asp-controller="AdminPage" asp-action="Add">Add Products</a></li>
-            <li><a asp-controller="AdminPage" asp-action="deleteProduct">Delete Products</a></li>
-            <li><a asp-controller="AdminPage" asp-action="showEditProduct">Edit Product</a></li>
-            <li><a asp-controller="AdminPage" asp-action="ShowdeleteUser">Delete Users</a></li>
-        </ul>
-    </nav>
 
-   
+    <div class="grid-container" id="editProduct">
+        <div class="design">
+            @foreach (var laptop in Model) {
+                <div class="product">
+
+                    <h2>@laptop.Model</h2>
+                    <img id="img" src="~/photos/@laptop.Picture" alt="@laptop.Model">
+                    <p id="description">Description: @laptop.Description</p>
+                    <p id="Ram">Ram: @laptop.Ram</p>
+                    <p id="price">Price: $@laptop.Price</p>
+                    <a asp-controller="AdminPage" asp-action="editProduct" asp-route-model="@laptop.Model" class="nav-link btn btn-link text-dark">Edit</a>
+                </div>
+            }
+        </div>
+    </div>
+
+
 
 </body>
 </html>
