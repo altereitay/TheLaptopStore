@@ -107,7 +107,7 @@
             @foreach (var laptop in Model) {
                 <div class="product">
                     <h2>@laptop.Model</h2>
-                    <img id="img" src="~/photos/@laptop.Picture" alt="@laptop.Model">
+                    <img id="img" src="~/photos/@(laptop.Picture).jpg" alt="@laptop.Model">
                     <p id="description">Description: @laptop.Description </p>
                     <p id="Ram">Ram: @laptop.Ram</p>
                     <p id="price">Price: $@laptop.Price</p>
