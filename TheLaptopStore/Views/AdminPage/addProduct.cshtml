@@ -1,121 +1,16 @@
 ﻿@model TheLaptopStore.Data.Laptop
 
 @{
-    Layout = null;
+    ViewData["Title"] = "addProduct";
 }
-@*     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #e6e6e6;
-            width: 100vw;
-            box-sizing: border-box;
-        }
 
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        button {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-            button:hover {
-                background-color: #0056b3;
-            }
-
-        button {
-            background-color: #007bff; /* Button background color */
-            color: #fff; /* Button text color */
-            padding: 10px 15px; /* Padding around the button text */
-            border: none; /* Remove border */
-            border-radius: 4px; /* Rounded corners */
-            cursor: pointer; /* Add a pointer cursor on hover */
-            font-size: 16px; /* Adjust font size */
-        }
-
-            /* Button hover effect */
-            button:hover {
-                background-color: #0056b3; /* Darker background color on hover */
-            }
-
-        form {
-            width: 55%;
-            margin: 2rem auto;
-            padding: 1rem 2rem;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            justify-content: center;
-            button
-
-        {
-            width: 100%;
-            border: none;
-            border-radius: 5px;
-            background-color: #0056b3;
-            color: white;
-            font-size: 0.85rem;
-            margin-top: 2rem;
-            &:hover
-
-        {
-            background-color: #007bff;
-        }
-
-        }
-        }
-
-        .multi-inputs {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            gap: 0.5rem;
-        }
-
-        .input_container {
-            display: inline-flex;
-            flex-direction: column;
-            gap: 0.25rem;
-            flex-grow: 1;
-            min-width: 40%;
-            &.long
-
-        {
-            width: 100%;
-        }
-
-        &.mid {
-            width: 50%;
-        }
-
-        &.short {
-            width: 30%;
-        }
-
-        label {
-            font-weight: bold;
-        }
-
-        }
-    </style> *@
+<h1>addProduct</h1>
 
 <h4>Laptop</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-            <form asp-action="addProduct" method="post">
+        <form asp-action="addProduct">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Ram" class="control-label"></label>
