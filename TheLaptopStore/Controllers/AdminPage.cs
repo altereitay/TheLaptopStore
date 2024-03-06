@@ -70,7 +70,12 @@ namespace TheLaptopStore.Controllers
 
         public IActionResult addProduct()
         {
-  
+            Laptop l1 = _db.Laptops.Find(Request.Form["Model"]);
+            if(l1 != null)
+            {
+                ModelState.AddModelError("Model", "Model already exists. Please choose a different one.");
+                return View("addProduct");
+            }
             if (ModelState.IsValid)
             {
                 Laptop laptop = new Laptop();
