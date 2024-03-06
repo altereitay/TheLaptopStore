@@ -11,5 +11,6 @@ namespace TheLaptopStore.Data
         }
         public DbSet<Laptop> Laptops { get; set; }
         public DbSet<CreditCard> CreditCards { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set;}
     }
 }

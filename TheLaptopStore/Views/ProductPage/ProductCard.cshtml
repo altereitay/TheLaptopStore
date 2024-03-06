@@ -49,11 +49,22 @@
 
                 <dt class="col-sm-4">Release Date</dt>
                 <dd class="col-sm-8">@Model.ReleaseDate</dd>
+          
+                <form asp-action="AddToCart" asp-controller="ProductCard" method="post">
+                    <!-- Other form fields here -->
+                    <input id="quantity" name="quantity" type="number" />
+                    <input type="hidden" id="model" name="model" value="@Model.Model" />
+                    <input type="submit" value="Add to Cart"/>
+                </form>
+
+                
+                
             </dl>
         </div>
     </div>
 
     <div class="text-center">
         <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3">Back to List</a>
+        
     </div>
 </div>
