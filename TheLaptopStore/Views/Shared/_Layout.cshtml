@@ -1,4 +1,31 @@
 ﻿<!DOCTYPE html>
+
+<style>
+    .a {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        border: 2px solid #3498db; /* Button border color */
+        color: #3498db; /* Button text color */
+        background-color: #fff; /* Button background color */
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+        .a:hover {
+            background-color: #3498db; /* Button background color on hover */
+            color: #fff; /* Button text color on hover */
+        }
+
+    /* Shopping cart icon styles */
+    .shopping-cart-icon {
+        display: inline-block;
+        font-size: 18px;
+    }
+</style>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,8 +49,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                    
+                        <li class="nav-item"> 
+                            <a class="button" asp-controller="ShoppingCart" asp-action="Index">
+                                <span class="shopping-cart-icon">🛒</span>
+                            </a>
+                        </li>
                     </ul>
+
                     <partial name="_LoginPartial" />
                 </div>
             </div>

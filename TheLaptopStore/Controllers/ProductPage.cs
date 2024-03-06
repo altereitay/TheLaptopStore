@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TheLaptopStore.Data;
 
 namespace TheLaptopStore.Controllers {
@@ -32,16 +33,25 @@ namespace TheLaptopStore.Controllers {
             if (laptop == null) {
                 return NotFound();
             }
-            int quantity =Convert.ToInt32(Request.Form["quantity"]);
-            int totalPrice = quantity * laptop.Price;
 
-            ShoppingCart cart = new ShoppingCart();
-            cart.laptop = laptop; 
-            cart.totalPrice = totalPrice;   
-            cart.quantity = quantity;
-            cart.userId = id;
+            ShoppingCart sc = _db.ShoppingCarts.Find(model, id);
+            if (sc is not null) {
+                sc.quantity += Convert.ToInt32(Request.Form["quantity"]);
+                sc.totalPrice = sc.quantity * laptop.Price;
+            } 
+            else {
+                int quantity = Convert.ToInt32(Request.Form["quantity"]);
+                int totalPrice = quantity * laptop.Price;
 
-            _db.ShoppingCarts.Add(cart);
+                ShoppingCart cart = new ShoppingCart();
+                cart.laptop = laptop;
+                cart.laptopModel = model;
+                cart.totalPrice = totalPrice;
+                cart.quantity = quantity;
+                cart.userId = id;
+
+                _db.ShoppingCarts.Add(cart);
+            }            
             _db.SaveChanges();
 
             return View("ProductCard", laptop);

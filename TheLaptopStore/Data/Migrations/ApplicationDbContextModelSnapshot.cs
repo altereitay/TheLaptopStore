@@ -346,10 +346,10 @@ namespace TheLaptopStore.Data.Migrations
 
             modelBuilder.Entity("TheLaptopStore.Data.ShoppingCart", b =>
                 {
-                    b.Property<string>("userId")
+                    b.Property<string>("laptopModel")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("laptopModel")
+                    b.Property<string>("userId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("quantity")
@@ -358,9 +358,7 @@ namespace TheLaptopStore.Data.Migrations
                     b.Property<int>("totalPrice")
                         .HasColumnType("int");
 
-                    b.HasKey("userId");
-
-                    b.HasIndex("laptopModel");
+                    b.HasKey("laptopModel", "userId");
 
                     b.ToTable("ShoppingCart");
                 });
@@ -427,7 +425,9 @@ namespace TheLaptopStore.Data.Migrations
                 {
                     b.HasOne("TheLaptopStore.Data.Laptop", "laptop")
                         .WithMany()
-                        .HasForeignKey("laptopModel");
+                        .HasForeignKey("laptopModel")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("laptop");
                 });
