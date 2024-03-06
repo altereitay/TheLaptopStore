@@ -24,7 +24,7 @@ namespace TheLaptopStore.Controllers {
             return View("ProductCard", obj);
         }
 
-        public async Task<IActionResult> AddToCart(string ? model, int quantity) {
+        public IActionResult AddToCart(string ? model) {
 
             string id = _userManager.GetUserId(User);
             var laptop = _db.Laptops.Find(model);
@@ -32,7 +32,7 @@ namespace TheLaptopStore.Controllers {
             if (laptop == null) {
                 return NotFound();
             }
-          
+            int quantity =Convert.ToInt32(Request.Form["quantity"]);
             int totalPrice = quantity * laptop.Price;
 
             ShoppingCart cart = new ShoppingCart();

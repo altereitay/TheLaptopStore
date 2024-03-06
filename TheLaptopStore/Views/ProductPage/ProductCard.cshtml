@@ -50,11 +50,11 @@
                 <dt class="col-sm-4">Release Date</dt>
                 <dd class="col-sm-8">@Model.ReleaseDate</dd>
           
-                <form asp-action="AddToCart" asp-controller="ProductCard" method="post">
+                <form asp-action="AddToCart" asp-controller="ProductPage">
                     <!-- Other form fields here -->
                     <input id="quantity" name="quantity" type="number" />
                     <input type="hidden" id="model" name="model" value="@Model.Model" />
-                    <input type="submit" value="Add to Cart"/>
+                    <input type="submit" value="Add to Cart" />
                 </form>
 
                 
@@ -65,6 +65,6 @@
 
     <div class="text-center">
         <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3">Back to List</a>
-        
+        <a asp-action="AddToCart" asp-route-model="@Model.Model" class="btn btn-primary mt-3">Add To Shopping Cart</a>
     </div>
 </div>
