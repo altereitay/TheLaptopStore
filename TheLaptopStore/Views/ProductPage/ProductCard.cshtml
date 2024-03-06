@@ -1,0 +1,59 @@
+﻿@model TheLaptopStore.Data.Laptop
+
+@{
+    ViewData["Title"] = "ProductCard";
+}
+
+<div class="container">
+    <h1 class="text-center">Laptop Details</h1>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <img src="~/photos/@Model.Picture" class="img-fluid" alt="Laptop Image">
+        </div>
+        <div class="col-md-6">
+            <dl class="row">
+                <dt class="col-sm-4">RAM</dt>
+                <dd class="col-sm-8">@Model.Ram</dd>
+
+                <dt class="col-sm-4">Storage</dt>
+                <dd class="col-sm-8">@Model.SSD</dd>
+
+                <dt class="col-sm-4">CPU</dt>
+                <dd class="col-sm-8">@Model.CPU</dd>
+
+                <dt class="col-sm-4">Screen Size</dt>
+                <dd class="col-sm-8">@Model.ScreenSize</dd>
+
+                <dt class="col-sm-4">GPU</dt>
+                <dd class="col-sm-8">@Model.GPU</dd>
+
+                <dt class="col-sm-4">Price</dt>
+                <dd class="col-sm-8">@Model.Price</dd>
+
+                <dt class="col-sm-4">Maker</dt>
+                <dd class="col-sm-8">@Model.Maker</dd>
+
+                <dt class="col-sm-4">Color</dt>
+                <dd class="col-sm-8">@Model.Color</dd>
+
+                <dt class="col-sm-4">Quantity</dt>
+                <dd class="col-sm-8">@Model.Quantity</dd>
+
+                <dt class="col-sm-4">Description</dt>
+                <dd class="col-sm-8">@Model.Description</dd>
+
+                <dt class="col-sm-4">Category</dt>
+                <dd class="col-sm-8">@Model.Category</dd>
+
+                <dt class="col-sm-4">Release Date</dt>
+                <dd class="col-sm-8">@Model.ReleaseDate</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3">Back to List</a>
+    </div>
+</div>
