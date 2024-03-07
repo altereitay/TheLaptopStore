@@ -19,6 +19,10 @@ namespace TheLaptopStore.Controllers {
         public IActionResult Index() {
 
             string id = _userManager.GetUserId(User);
+            if (id == null)
+            {
+                return Redirect("Identity/Account/Login");
+            }
             var cartList = _db.ShoppingCarts.Include(c => c.laptop).Where(c => c.userId == id).ToList();
             return View("ShoppingCartPage", cartList);
         }

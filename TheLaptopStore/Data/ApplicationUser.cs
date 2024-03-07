@@ -17,7 +17,7 @@ namespace TheLaptopStore.Data
         [RegularExpression("^[A-Z][a-z]+$", ErrorMessage = "Last Name must start with uppercase latter and be at least 2 characters length")]
         public string LastName { get; set; }
 
-        public CreditCard[] creditCards { get; set; }
+        public CreditCard [] creditCards { get; set; }
 
         [Required]
         public DateTime DateOfBirth { get; set; }
