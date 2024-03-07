@@ -115,25 +115,28 @@
                 <h6 class="mb-0">Shopping cart</h6>
                 <div class="d-flex justify-content-between">
                     <span>You have 4 items in your cart</span>
-                    
+
                 </div>
-                @foreach (var laptop in Model) {
-                <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
-                    
+                @foreach (var laptop in Model)
+                {
+                    <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
+
                         <div class="d-flex flex-row">
                             <img class="rounded" src="~/photos/@laptop.laptop.Picture" width="40">
                             <div class="ml-2">
                                 <span class="font-weight-bold d-block">@laptop.laptop.Model</span>
-                                <span class="spec">@laptop.laptop.Description</span></div>
+                                <span class="spec">@laptop.laptop.Description</span>
+                            </div>
                         </div>
                         <div class="d-flex flex-row align-items-center">
                             <span class="d-block">@laptop.quantity</span>
                             <span class="d-block ml-5 font-weight-bold">@laptop.totalPrice</span>
                             <i class="fa fa-trash-o ml-3 text-black-50"></i>
                         </div>
-                                      
-                </div>
+
+                    </div>
                 }
+                <a name="toPayment" asp-controller="Payment" asp-action="showPaymentPage">Checkout</a>
             </div>
         </div>
     </div>

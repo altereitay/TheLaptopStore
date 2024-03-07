@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TheLaptopStore.Data
 {
-    public class ApplicationUser: IdentityUser
+    public class ApplicationUser : IdentityUser
     {
         [Required]
         [RegularExpression("^[0-9]{9}$", ErrorMessage = "ID must be 9 numbers long")]
@@ -16,8 +16,16 @@ namespace TheLaptopStore.Data
         [Required]
         [RegularExpression("^[A-Z][a-z]+$", ErrorMessage = "Last Name must start with uppercase latter and be at least 2 characters length")]
         public string LastName { get; set; }
+        public long CreditCardNumber { get; set; }
 
-        public CreditCard [] creditCards { get; set; }
+        [RegularExpression("^[0-9]{2}$")]
+        public int ExpDateYear { get; set; }
+
+        [RegularExpression("^[0-9]{2}$")]
+        public int ExpDateMonth { get; set; }
+
+        [RegularExpression("^d{3}$", ErrorMessage = "CVV must be 3 digits only")]
+        public int CVV { get; set; }
 
         [Required]
         public DateTime DateOfBirth { get; set; }
@@ -37,5 +45,7 @@ namespace TheLaptopStore.Data
         [Required]
         [RegularExpression("^[0-9]{1,}$", ErrorMessage = "Apartment number are digits only")]
         public int ApartmentNumber { get; set; }
+
+
     }
 }
