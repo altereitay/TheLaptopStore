@@ -25,17 +25,33 @@ namespace TheLaptopStore.Controllers {
             return View("ProductCard", obj);
         }
 
-        public IActionResult AddToCart(string ? model) {
+        public IActionResult AddToCart(string ? model, string addToCart, string buyNow) {
 
             string id = _userManager.GetUserId(User);
             var laptop = _db.Laptops.Find(model);
-            
+
+            if (id == null)
+            {
+                return Redirect("~/Identity/Account/Login");
+            }
+
             if (laptop == null) {
                 return NotFound();
             }
+            if(laptop.Quantity< Convert.ToInt32(Request.Form["quantity"]))
+            {
+                ModelState.AddModelError("Model", "Only " + laptop.Quantity + " laptops left");
+                return View("ProductCard",laptop);
+            }
+
 
             ShoppingCart sc = _db.ShoppingCarts.Find(model, id);
             if (sc is not null) {
+                int checkQuantity = sc.quantity + Convert.ToInt32(Request.Form["quantity"]);
+                if (checkQuantity > laptop.Quantity) {
+                    ModelState.AddModelError("Model", "You have in your cart "+ sc.quantity + "\nThere is left: "+(laptop.Quantity- sc.quantity));
+                    return View("ProductCard", laptop);
+                }
                 sc.quantity += Convert.ToInt32(Request.Form["quantity"]);
                 sc.totalPrice = sc.quantity * laptop.Price;
             } 
@@ -53,8 +69,19 @@ namespace TheLaptopStore.Controllers {
                 _db.ShoppingCarts.Add(cart);
             }            
             _db.SaveChanges();
+            if (!string.IsNullOrEmpty(addToCart))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else 
+            {
 
-            return View("ProductCard", laptop);
+                return Redirect("~/ShoppingCart"); // Redirect to the checkout page or any other appropriate action
+            }
+
         }
+        
+
+
     }
 }
