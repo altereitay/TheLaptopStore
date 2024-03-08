@@ -76,8 +76,7 @@ namespace TheLaptopStore.Controllers
                 ModelState.AddModelError("Model", "Model already exists. Please choose a different one.");
                 return View("addProduct");
             }
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid) {
                 Laptop laptop = new Laptop();
                 laptop.Ram = Convert.ToInt32(Request.Form["Ram"]);
                 laptop.SSD = Convert.ToInt32(Request.Form["SSD"]);
@@ -90,9 +89,9 @@ namespace TheLaptopStore.Controllers
                 laptop.Quantity = Convert.ToInt32(HttpContext.Request.Form["Quantity"]);
                 laptop.Description = Request.Form["Description"];
                 laptop.Picture = Request.Form["Picture"];
-                laptop.IsOnSale = Request.Form["IsOnSale"].Count > 0 ? true : false;
+                laptop.IsOnSale = true;
                 laptop.SalePrecentage = Convert.ToInt32(Request.Form["SalePrecentage"]);
-                laptop.PopularityIndex = Convert.ToInt32(HttpContext.Request.Form["PopularityIndex"]);
+                laptop.PopularityIndex = 1;
                 laptop.Category = Request.Form["Category"];
                 laptop.ReleaseDate = Request.Form["ReleaseDate"];
                 laptop.Model = Request.Form["Model"];
