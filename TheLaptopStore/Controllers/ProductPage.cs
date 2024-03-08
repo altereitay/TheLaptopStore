@@ -38,10 +38,17 @@ namespace TheLaptopStore.Controllers {
             if (laptop == null) {
                 return NotFound();
             }
-            if(laptop.Quantity< Convert.ToInt32(Request.Form["quantity"]))
+            string quan = Request.Form["quantity"];
+
+            if (!string.IsNullOrEmpty(quan) && laptop.Quantity< Convert.ToInt32(Request.Form["quantity"]))
             {
-                ModelState.AddModelError("Model", "Only " + laptop.Quantity + " laptops left");
+                TempData["TooMuchProducts"] = "Only " + laptop.Quantity + " laptops left";
                 return View("ProductCard",laptop);
+            }
+            else
+            {
+                TempData["EmptyQuantity"] = "Add products";
+                return View("ProductCard", laptop);
             }
 
 

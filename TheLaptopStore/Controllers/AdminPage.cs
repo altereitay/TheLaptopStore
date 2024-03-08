@@ -156,7 +156,12 @@ namespace TheLaptopStore.Controllers
             laptop.Description = Request.Form["Description"];
             laptop.Picture = Request.Form["Picture"];
             laptop.IsOnSale = Request.Form["IsOnSale"].Count > 0 ? true : false;
+            
             laptop.SalePrecentage = Convert.ToInt32(Request.Form["SalePrecentage"]);
+            if (laptop.SalePrecentage > 0)
+            {
+                laptop.Price -= Convert.ToInt32(laptop.Price * (laptop.SalePrecentage * 0.01));
+            }
             laptop.PopularityIndex = Convert.ToInt32(HttpContext.Request.Form["PopularityIndex"]);
             laptop.Category = Request.Form["Category"];
             laptop.ReleaseDate = Request.Form["ReleaseDate"];
