@@ -53,7 +53,7 @@ namespace TheLaptopStore.Controllers
             _db.Laptops.Remove(obj);
             _db.SaveChanges();
             List<Laptop> laptops = _db.Laptops.ToList();
-            return View("AdminPage");
+            return View("deleteProduct", laptops);
         }
 
         public IActionResult deleteProduct()
