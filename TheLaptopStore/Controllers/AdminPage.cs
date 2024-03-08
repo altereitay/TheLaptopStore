@@ -164,7 +164,7 @@ namespace TheLaptopStore.Controllers
             laptop.ReleaseDate = Request.Form["ReleaseDate"];
             laptop.Model = Request.Form["Model"];
             _db.SaveChanges();
-            return View("AdminPage");
+            return RedirectToAction("Index", "Home");
         }
 
     }
