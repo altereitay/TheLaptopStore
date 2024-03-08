@@ -20,10 +20,19 @@ namespace TheLaptopStore.Controllers
         }
         public IActionResult showPaymentPage()
         {
-            string id = _userManager.GetUserId(User);
-            ApplicationUser user = _db.Users.Find(id);
+            string userId = _userManager.GetUserId(User);
+            ApplicationUser user = _db.Users.Find(userId);
 
-            return View("PaymentPage", user);
+            // Check if the shopping cart for the user exists
+            ShoppingCart userCart = _db.ShoppingCarts.FirstOrDefault(cart => cart.userId == userId);
+
+            if (userCart == null)
+            {
+                TempData["ModelError"] = "Add products to your cart";
+                return Redirect("~/ShoppingCart");
+            } 
+                return View("PaymentPage", user);
+            
         }
 
         public IActionResult payNow(string? cardnumber, string? expmonth, string? expyear, string? cvv)

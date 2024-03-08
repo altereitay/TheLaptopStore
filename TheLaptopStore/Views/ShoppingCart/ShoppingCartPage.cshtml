@@ -136,7 +136,12 @@
 
                     </div>
                 }
+                @{
+                    var modelError = TempData["ModelError"] as string;
+                }
+
                 <a name="toPayment" asp-controller="Payment" asp-action="showPaymentPage">Checkout</a>
+                <span id="modelError" class="text-danger">@modelError</span>
             </div>
         </div>
     </div>
