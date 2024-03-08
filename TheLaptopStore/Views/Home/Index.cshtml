@@ -309,6 +309,44 @@
     </style>
 
 <div class="container">
+    <!-- Filter Section -->
+    <form method="post" action="@Url.Action("FilterProducts", "Home")">
+        <div class="row mb-4">
+            <div class="col-md-4 text-center">
+                <label for="ramFilter">Filter by RAM:</label>
+                <select id="ramFilter" name="ramFilter" class="form-control" multiple size="5">
+                    <option value="4">4 GB</option>
+                    <option value="8">8 GB</option>
+                    <option value="16">16 GB</option>
+                    <option value="32">32 GB</option>
+                    <option value="64">64 GB</option>
+                    
+                </select>
+            </div>
+            <div class="col-md-4 text-center">
+                <label for="cpuFilter">Filter by CPU:</label>
+                <select id="cpuFilter" name="cpuFilter[]" class="form-control" multiple size="5">
+                    <option value="i3">i3</option>
+                    <option value="i5">i5</option>
+                    <option value="i7">i7</option>
+                    <option value="i9">i9</option>
+                </select>
+            </div>
+            <div class="col-md-4 text-center">
+                <label for="gpuFilter">Filter by GPU:</label>
+                <select id="gpuFilter" name="gpuFilter" class="form-control" multiple size="5">
+                    <option value="3050">3050</option>
+                    <option value="3070">3070</option>
+                    <option value="4080">4080</option>
+                    
+                </select>
+            </div>
+            <div class="col-md-12 text-center mt-3">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+        </div>
+    </form>
+        </div>
     <div class="row">
         @foreach (var laptop in Model) {
             <!-- product -->
