@@ -98,7 +98,7 @@ namespace TheLaptopStore.Controllers
                 laptop.Model = Request.Form["Model"];
                 _db.Laptops.Add(laptop);
                 _db.SaveChanges();
-                return View("AdminPage");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
