@@ -306,8 +306,6 @@
 .product-deatil .message-text {
     width: calc(100% - 70px)
 }
-
-}
     </style>
 
 <div class="container">
@@ -331,7 +329,11 @@
                                     </a>
                                 </h5>
                                 <p class="price-container">
-                                    <span>@laptop.Price $</span>
+                                    @if (laptop.SalePrecentage > 0) {
+                                    <p id="old-price" style="text-decoration: line-through;">Price: @laptop.Price</p>
+                                    }
+
+                                <p id="price">Price: $@((int)(Math.Floor(laptop.Price - laptop.Price * (laptop.SalePrecentage * 0.01))))</p>
                                 </p>
                                 <span class="tag1"></span>
                             </div>
@@ -340,6 +342,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="product-info smart-form" style="position: absolute; bottom: 10px; right: 10px;">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
@@ -347,35 +350,32 @@
                             </div>
                         </div>
                     </div>
-<div class="text-center">
-    <div class="grid-container">
-        <form action="Product" method="post">
-            @foreach (var laptop in Model)
-            {
-                <div class="product">
-                    <h2>@laptop.Model</h2>
-                    <img id="img" src="~/photos/@(laptop.Picture).jpg" alt="@laptop.Model">
-                    <p id="description">Description: @laptop.Description </p>
-                    <p id="Ram">Ram: @laptop.Ram</p>
-
-                    @if (laptop.SalePrecentage >0)
-                    {
-                        <p id="old-price" style="text-decoration: line-through;">Price: @laptop.Price</p>
-                    }
-
-                    <p id="price">Price: $@((int)(Math.Floor(laptop.Price - laptop.Price * (laptop.SalePrecentage * 0.01))))</p>
-
-                    <button class="btn btn-info" asp-controller="ProductPage" asp-action="showProductCard" asp-route-model="@laptop.Model">More Information</button>
-                    <script>
-                        console.log(Directory.GetCurrentDirectory())
-                    </script>
-                </div>
-            </div>
-            <!-- end product -->
-        }
+        </div>
     </div>
+    }
 </div>
-</div>
 
 
 
+            @* <div class="text-center">
+        <div class="grid-container">
+        <form action="Product" method="post">
+        @foreach (var laptop in Model)
+        {
+        <div class="product">
+        <h2>@laptop.Model</h2>
+        <img id="img" src="~/photos/@(laptop.Picture).jpg" alt="@laptop.Model">
+        <p id="description">Description: @laptop.Description </p>
+        <p id="Ram">Ram: @laptop.Ram</p>
+
+
+
+        <button class="btn btn-info" asp-controller="ProductPage" asp-action="showProductCard" asp-route-model="@laptop.Model">More Information</button>
+        <script>
+        console.log(Directory.GetCurrentDirectory())
+        </script>
+        </div>
+        </div>
+        <!-- end product -->
+        }
+        </div> *@
