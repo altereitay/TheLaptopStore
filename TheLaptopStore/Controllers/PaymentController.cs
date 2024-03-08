@@ -56,7 +56,7 @@ namespace TheLaptopStore.Controllers
                     if (_db.Laptops.Find(laptopModel).Quantity > cart.quantity)
                     {
                         cart.quantity++;
-                        cart.totalPrice = cart.quantity * cart.laptop.Price;
+                        cart.totalPrice = Convert.ToInt32(cart.quantity * (cart.laptop.Price- cart.laptop.Price*cart.laptop.SalePrecentage*0.01));
                         _db.SaveChanges();
                         int price = 0;
                         var cartList = _db.ShoppingCarts.Include(c => c.laptop).Where(c => c.userId == userId).ToList();
@@ -96,7 +96,7 @@ namespace TheLaptopStore.Controllers
                     if (cart.quantity>1)
                     {
                         cart.quantity--;
-                        cart.totalPrice=cart.quantity*cart.laptop.Price;
+                        cart.totalPrice = Convert.ToInt32(cart.quantity * (cart.laptop.Price - cart.laptop.Price * cart.laptop.SalePrecentage * 0.01));
                         _db.SaveChanges();
                         int price = 0;
                         var cartList = _db.ShoppingCarts.Include(c => c.laptop).Where(c => c.userId == userId).ToList();

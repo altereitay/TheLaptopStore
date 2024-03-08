@@ -47,5 +47,6 @@ namespace TheLaptopStore.Data
         public int ApartmentNumber { get; set; }
 
 
+
     }
 }

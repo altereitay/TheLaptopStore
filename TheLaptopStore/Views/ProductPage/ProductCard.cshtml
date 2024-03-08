@@ -47,7 +47,7 @@
                 <dd class="col-sm-8">@Model.GPU</dd>
 
                 <dt class="col-sm-4">Price</dt>
-                <dd class="col-sm-8">@Model.Price</dd>
+                <dd class="col-sm-8">$@((int)(Math.Floor(Model.Price - Model.Price * (Model.SalePrecentage * 0.01))))</dd>
 
                 <dt class="col-sm-4">Maker</dt>
                 <dd class="col-sm-8">@Model.Maker</dd>
