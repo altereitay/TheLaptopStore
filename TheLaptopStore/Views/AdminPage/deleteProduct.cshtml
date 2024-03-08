@@ -330,9 +330,14 @@
                                         <span>@laptop.Category</span>
                                     </a>
                                 </h5>
-                                <p class="price-container">
-                                    <span>@laptop.Price $</span>
-                                </p>
+                                <div class="price-container">
+                                    @if (laptop.SalePrecentage > 0) {
+                                        <div id="old-price" style="display: inline-block; text-decoration: line-through;">@laptop.Price $</div>
+                                    }
+                                    <div id="price" style="display: inline-block;">
+                                        <strong style="font-weight: bold;">@((int)(Math.Floor(laptop.Price - laptop.Price * (laptop.SalePrecentage * 0.01)))) $</strong>
+                                    </div>
+                                </div>
                                 <span class="tag1"></span>
                             </div>
                             <div class="description">

@@ -328,13 +328,15 @@
                                         <span>@laptop.Category</span>
                                     </a>
                                 </h5>
-                                <p class="price-container">
+                                <div class="price-container">
                                     @if (laptop.SalePrecentage > 0) {
-                                    <p id="old-price" style="text-decoration: line-through;">Price: @laptop.Price</p>
+                                        <div id="old-price" style="display: inline-block; text-decoration: line-through;">@laptop.Price $</div>
                                     }
+                                    <div id="price" style="display: inline-block;">
+                                        <strong style="font-weight: bold;">@((int)(Math.Floor(laptop.Price - laptop.Price * (laptop.SalePrecentage * 0.01)))) $</strong>
+                                    </div>
+                                </div>
 
-                                <p id="price">Price: $@((int)(Math.Floor(laptop.Price - laptop.Price * (laptop.SalePrecentage * 0.01))))</p>
-                                </p>
                                 <span class="tag1"></span>
                             </div>
                             <div class="description">
@@ -357,25 +359,4 @@
 
 
 
-            @* <div class="text-center">
-        <div class="grid-container">
-        <form action="Product" method="post">
-        @foreach (var laptop in Model)
-        {
-        <div class="product">
-        <h2>@laptop.Model</h2>
-        <img id="img" src="~/photos/@(laptop.Picture).jpg" alt="@laptop.Model">
-        <p id="description">Description: @laptop.Description </p>
-        <p id="Ram">Ram: @laptop.Ram</p>
-
-
-
-        <button class="btn btn-info" asp-controller="ProductPage" asp-action="showProductCard" asp-route-model="@laptop.Model">More Information</button>
-        <script>
-        console.log(Directory.GetCurrentDirectory())
-        </script>
-        </div>
-        </div>
-        <!-- end product -->
-        }
-        </div> *@
+ 
