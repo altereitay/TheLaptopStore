@@ -23,7 +23,16 @@ namespace TheLaptopStore.Controllers {
             {
                 return Redirect("Identity/Account/Login");
             }
+            int price = 0;
             var cartList = _db.ShoppingCarts.Include(c => c.laptop).Where(c => c.userId == id).ToList();
+            foreach (var cart in cartList)
+             {
+
+               price += cart.totalPrice;
+
+             }
+        
+            TempData["Price"] = price;
             return View("ShoppingCartPage", cartList);
         }
     }

@@ -104,6 +104,21 @@
     .spec {
         font-size: 11px;
     }
+
+    .quantity-link {
+        text-decoration: none;
+        color: #333; /* Change the color if desired */
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        .quantity-link:hover {
+            color: #555; /* Change the hover color if desired */
+            text-decoration: underline; /* Add underline on hover if desired */
+        }
+
+
+
 </style>
 
 <div class="container mt-5 p-3 rounded cart">
@@ -114,34 +129,81 @@
                 <hr>
                 <h6 class="mb-0">Shopping cart</h6>
                 <div class="d-flex justify-content-between">
-                    <span>You have 4 items in your cart</span>
+                    
 
                 </div>
-                @foreach (var laptop in Model)
-                {
-                    <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
+                <table class="table mt-3 items rounded">
+                    <tr>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                    </tr>
 
-                        <div class="d-flex flex-row">
-                            <img class="rounded" src="~/photos/@laptop.laptop.Picture" width="40">
-                            <div class="ml-2">
-                                <span class="font-weight-bold d-block">@laptop.laptop.Model</span>
+
+
+
+
+                    @foreach (var laptop in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex flex-row align-items-center">
+                                    <img class="rounded" src="~/photos/@(laptop.laptop.Picture).jpg" width="40">
+                                    <div class="ml-2">
+                                        <span class="font-weight-bold">@laptop.laptop.Model</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
                                 <span class="spec">@laptop.laptop.Description</span>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row align-items-center">
-                            <span class="d-block">@laptop.quantity</span>
-                            <span class="d-block ml-5 font-weight-bold">@laptop.totalPrice</span>
-                            <i class="fa fa-trash-o ml-3 text-black-50"></i>
-                        </div>
+                            </td>
+                            <td>
+                                <span class="quantity-value">@laptop.quantity</span>
+                                <a href="@Url.Action("AddProductCart", "Payment", new { laptopModel = laptop.laptopModel })" class="quantity-link" onclick="changeQuantity('@laptop.laptopModel', 'increase')">&#9650;</a>
+                                
+                                <a href="@Url.Action("DecreaseProductCart", "Payment", new { laptopModel = laptop.laptopModel })" class="quantity-link" onclick="changeQuantity('@laptop.laptopModel', 'decrease')">&#9660;</a>
 
-                    </div>
-                }
+                            </td>
+                            <td>
+                                <span class="font-weight-bold">@laptop.totalPrice</span>
+                            </td>
+                            <td>
+                                <i class="fa fa-trash-o text-black-50"></i>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="@Url.Action("RemoveProductCart", "Payment", new { laptopModel = laptop.laptopModel })" role="button">Remove</a><br />
+                            </td>
+                            <td>
+                            <span id="cantAddMessage" class="font-weight-bold">@TempData["CantAdd"]</span>
+
+                            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                            <script>
+                                $(document).ready(function () {
+                                    // Set the duration in milliseconds (e.g., 5000 for 5 seconds)
+                                    var duration = 1000;
+
+                                    // Hide the message after the specified duration
+                                    setTimeout(function () {
+                                        $("#cantAddMessage").fadeOut();
+                                    }, duration);
+                                });
+                            </script>
+                            </td>
+                        </tr>
+                    }
+                </table>
                 @{
                     var modelError = TempData["ModelError"] as string;
                 }
+              
 
-                <a name="toPayment" asp-controller="Payment" asp-action="showPaymentPage">Checkout</a>
-                <span id="modelError" class="text-danger">@modelError</span>
+
+
+                <a class="btn btn-primary" href="@Url.Action("showPaymentPage", "Payment")" role="button">Checkout</a><br />
+                <span id="modelError" class="text-danger">@modelError</span><br/>
+                <span class="font-weight-bold">Total price:  @TempData["Price"]</span><br />
+                <span id="modelError" class="text-danger">@TempData["UnavailableLaptop"]</span><br/>
             </div>
         </div>
     </div>
