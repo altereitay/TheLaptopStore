@@ -24,6 +24,7 @@ namespace TheLaptopStore.Controllers
         public IActionResult RemoveProductCart(string? laptopModel)
         {
             string userId = _userManager.GetUserId(User);
+       
             ApplicationUser user = _db.Users.Find(userId);
             List<ShoppingCart> userCarts = _db.ShoppingCarts.Include(c => c.laptop).Where(cart => cart.userId == userId).ToList();
             foreach (ShoppingCart cart in userCarts)
@@ -34,6 +35,8 @@ namespace TheLaptopStore.Controllers
                     _db.SaveChanges();
                     return Redirect("~/ShoppingCart");
                 }
+             
+               
 
             }
             return Redirect("~/ShoppingCart");
@@ -53,7 +56,18 @@ namespace TheLaptopStore.Controllers
                     if (_db.Laptops.Find(laptopModel).Quantity > cart.quantity)
                     {
                         cart.quantity++;
+                        cart.totalPrice = cart.quantity * cart.laptop.Price;
                         _db.SaveChanges();
+                        int price = 0;
+                        var cartList = _db.ShoppingCarts.Include(c => c.laptop).Where(c => c.userId == userId).ToList();
+                        foreach (var Cart in cartList)
+                        {
+
+                            price += Cart.totalPrice;
+
+                        }
+                        TempData["Price"] = price;
+                        
                         return Redirect("~/ShoppingCart");
 
                     }
@@ -82,14 +96,36 @@ namespace TheLaptopStore.Controllers
                     if (cart.quantity>1)
                     {
                         cart.quantity--;
+                        cart.totalPrice=cart.quantity*cart.laptop.Price;
                         _db.SaveChanges();
+                        int price = 0;
+                        var cartList = _db.ShoppingCarts.Include(c => c.laptop).Where(c => c.userId == userId).ToList();
+                        foreach (var Cart in cartList)
+                        {
+
+                            price += Cart.totalPrice;
+
+                        }
+                        TempData["Price"] = price;
+                        
                         return Redirect("~/ShoppingCart");
 
                     }
                     else
                     {
+
+
                         _db.ShoppingCarts.Remove(cart);
                         _db.SaveChanges();
+                        int price = 0;
+                        var cartList = _db.ShoppingCarts.Include(c => c.laptop).Where(c => c.userId == userId).ToList();
+                        foreach (var Cart in cartList)
+                        {
+
+                            price += Cart.totalPrice;
+
+                        }
+                        TempData["Price"] = price;
                         return Redirect("~/ShoppingCart");
                     }
                 }
