@@ -3,6 +3,23 @@
 @{
     ViewData["Title"] = "ProductCard";
 }
+<style>
+    button.waitlist-button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+        button.waitlist-button:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+</style>
+
+
 
 <div class="container">
     <h1 class="text-center">Laptop Details</h1>
@@ -10,7 +27,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <img src="~/photos/@Model.Picture" class="img-fluid" alt="Laptop Image">
+            <img src="~/photos/@(Model.Picture).jpg" class="img-fluid" alt="Laptop Image">
         </div>
         <div class="col-md-6">
             <dl class="row">
@@ -53,16 +70,23 @@
                 @{
                     var modelError = ViewData.ModelState["Model"]?.Errors.FirstOrDefault()?.ErrorMessage;
                 }
-          
-                <form asp-action="AddToCart" asp-controller="ProductPage">
-                    <!-- Other form fields here -->
-                    <input id="quantity" name="quantity" type="number" />
-                    <span asp-validation-for="Model" class="text-danger"></span>
-                    <span id="modelError" class="text-danger"></span>
-                    <input type="hidden" id="model" name="model" value="@Model.Model" />
-                    <input name="addToCart" id="addToCart" type="submit" value="Add to Cart" />
-                    <input name="buyNow" id="buyNow" type="submit" value="buyNow"/>
-                </form>
+
+                @if (Model.Quantity > 0)
+                {
+                    <form asp-action="AddToCart" asp-controller="ProductPage">
+                        <input id="quantity" name="quantity" type="number" />
+                        <span asp-validation-for="Model" class="text-danger"></span>
+                        <span id="modelError" class="text-danger"></span>
+                        <input type="hidden" id="model" name="model" value="@Model.Model" />
+                        <input name="addToCart" id="addToCart" type="submit" value="Add to Cart" />
+                        <input name="buyNow" id="buyNow" type="submit" value="buyNow" />
+                    </form>
+                }
+                else
+                {
+                    <p>Sorry, this product is currently out of stock.</p>
+                    <button class="waitlist-button">Add me to wait-list</button>
+                }
 
                 
                 
