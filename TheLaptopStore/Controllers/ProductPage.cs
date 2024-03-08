@@ -38,10 +38,17 @@ namespace TheLaptopStore.Controllers {
             if (laptop == null) {
                 return NotFound();
             }
-            if(laptop.Quantity< Convert.ToInt32(Request.Form["quantity"]))
+            string quan = Request.Form["quantity"];
+
+            if (!string.IsNullOrEmpty(quan) && laptop.Quantity< Convert.ToInt32(Request.Form["quantity"]))
             {
-                ModelState.AddModelError("Model", "Only " + laptop.Quantity + " laptops left");
+                TempData["TooMuchProducts"] = "Only " + laptop.Quantity + " laptops left";
                 return View("ProductCard",laptop);
+            }
+            if(string.IsNullOrEmpty(quan))
+            {
+                TempData["EmptyQuantity"] = "Add products";
+                return View("ProductCard", laptop);
             }
 
 
@@ -56,9 +63,16 @@ namespace TheLaptopStore.Controllers {
                 sc.totalPrice = sc.quantity * laptop.Price;
             } 
             else {
+                int totalPrice = 0;
                 int quantity = Convert.ToInt32(Request.Form["quantity"]);
-                int totalPrice = quantity * laptop.Price;
-
+                if (laptop.SalePrecentage > 0)
+                {
+                    totalPrice = Convert.ToInt32(quantity * (laptop.Price - laptop.Price * (laptop.SalePrecentage * 0.01)));
+                }
+                else
+                {
+                    totalPrice = quantity * laptop.Price;
+                }
                 ShoppingCart cart = new ShoppingCart();
                 cart.laptop = laptop;
                 cart.laptopModel = model;

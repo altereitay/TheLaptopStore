@@ -104,13 +104,21 @@
 <div class="text-center">
     <div class="grid-container">
         <form action="Product" method="post">
-            @foreach (var laptop in Model) {
+            @foreach (var laptop in Model)
+            {
                 <div class="product">
                     <h2>@laptop.Model</h2>
                     <img id="img" src="~/photos/@(laptop.Picture).jpg" alt="@laptop.Model">
                     <p id="description">Description: @laptop.Description </p>
                     <p id="Ram">Ram: @laptop.Ram</p>
-                    <p id="price">Price: $@laptop.Price</p>
+
+                    @if (laptop.SalePrecentage >0)
+                    {
+                        <p id="old-price" style="text-decoration: line-through;">Price: @laptop.Price</p>
+                    }
+
+                    <p id="price">Price: $@((int)(Math.Floor(laptop.Price - laptop.Price * (laptop.SalePrecentage * 0.01))))</p>
+
                     <button class="btn btn-info" asp-controller="ProductPage" asp-action="showProductCard" asp-route-model="@laptop.Model">More Information</button>
                     <script>
                         console.log(Directory.GetCurrentDirectory())
@@ -119,4 +127,5 @@
             }
         </form>
     </div>
+</div>
 </div>
