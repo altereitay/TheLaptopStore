@@ -16,24 +16,50 @@ namespace TheLaptopStore.Controllers
             _db = db;
         }
 
-        public IActionResult Index()
-        {
+        public IActionResult Index(){
             List<Laptop> laptops = _db.Laptops.ToList();
 
             return View(laptops);
         }
 
-        public IActionResult Privacy()
-        {
+        public IActionResult Privacy(){
             return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
+        public IActionResult Error(){
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult FilterProducts(List<int> ramFilter, List<string> cpuFilter, List<string> gpuFilter, List<int> ssdFilter, List<double> screenFilter, List<string> categoryFilter) {
+            IQueryable<Laptop> filteredProducts = _db.Laptops.AsQueryable();
 
+            if (ramFilter != null && ramFilter.Any()) {
+                filteredProducts = filteredProducts.Where(laptop => ramFilter.Contains(laptop.Ram));
+            }
+
+            if (cpuFilter != null && cpuFilter.Any()) {
+                filteredProducts = filteredProducts.Where(laptop => cpuFilter.Contains(laptop.CPU));
+            }
+
+            if (gpuFilter != null && gpuFilter.Any()) {
+                filteredProducts = filteredProducts.Where(laptop => gpuFilter.Contains(laptop.GPU));
+            }
+
+            if (ssdFilter != null && ssdFilter.Any()) {
+                filteredProducts = filteredProducts.Where(laptop => ssdFilter.Contains(laptop.SSD));
+            }
+
+            if (screenFilter != null && screenFilter.Any()) {
+                filteredProducts = filteredProducts.Where(laptop => screenFilter.Contains(laptop.ScreenSize));
+            }
+
+            if (categoryFilter != null && categoryFilter.Any()) {
+                filteredProducts = filteredProducts.Where(laptop => categoryFilter.Contains(laptop.Category));
+            }
+
+            List<Laptop> result = filteredProducts.ToList();
+            return View("Index", result);
+        }
     }
 }
