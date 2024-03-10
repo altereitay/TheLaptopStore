@@ -33,7 +33,7 @@ namespace TheLaptopStore.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public IActionResult FilterProducts(List<int> ramFilter, List<string> cpuFilter, List<string> gpuFilter,List<int> PriceFilter, List<int> ssdFilter,List<string> MakerFilter)
+        public IActionResult FilterProducts(List<int> ramFilter, List<string> cpuFilter, List<string> gpuFilter,List<int> PriceFilter, List<int> ssdFilter,List<string> MakerFilter, List<double> screenFilter,List<string> categoryFilter)
         {
             IQueryable<Laptop> filteredProducts = _db.Laptops.AsQueryable();
 
@@ -69,7 +69,14 @@ namespace TheLaptopStore.Controllers
             {
                 filteredProducts = filteredProducts.Where(laptop => MakerFilter.Contains(laptop.Maker));
             }
-
+            if (screenFilter != null && screenFilter.Any())
+            {
+                filteredProducts = filteredProducts.Where(laptop => screenFilter.Contains(laptop.ScreenSize));
+            }
+            if (categoryFilter != null && categoryFilter.Any())
+            {
+                filteredProducts = filteredProducts.Where(laptop => categoryFilter.Contains(laptop.Category));
+            }
 
             // Execute the query and retrieve the filtered products
             List<Laptop> result = filteredProducts.ToList();

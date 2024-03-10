@@ -367,10 +367,14 @@
                     <div class="mb-3">
                         <label for="cpuFilter">Filter by CPU:</label>
                         <select id="cpuFilter" name="cpuFilter[]" class="form-control form-control-sm" multiple size="5">
-                            <option value="i3">i3</option>
-                            <option value="i5">i5</option>
-                            <option value="i7">i7</option>
-                            <option value="i9">i9</option>
+                            <option value="I3">Intel I3</option>
+                            <option value="I5">Intel I5</option>
+                            <option value="I7">Intel I7</option>
+                            <option value="I9">Intel I9</option>
+                            <option value="R3">Ryzen 3</option>
+                            <option value="R5">Ryzen 5</option>
+                            <option value="R7">Ryzen 7</option>
+                            <option value="R9">Ryzen 9</option>
                         </select>
                     </div>
                     <script>
@@ -403,9 +407,23 @@
                     <div class="mb-3">
                         <label for="gpuFilter">Filter by GPU:</label>
                         <select id="gpuFilter" name="gpuFilter" class="form-control form-control-sm" multiple size="5">
-                            <option value="3050">3050</option>
-                            <option value="3070">3070</option>
-                            <option value="4080">4080</option>
+                            <option value="irisxe">Intel IrisXe</option>
+                            <option value="arc">Intel Arc</option>
+                            <option value="apple18">Apple 18 Core</option>
+                            <option value="apple40">Apple 40 Core</option>
+                            <option value="rtx3050">Nvidia RTX 3050</option>
+                            <option value="rtx3060">Nvidia RTX 3060</option>
+                            <option value="rtx3070">Nvidia RTX 3070</option>
+                            <option value="rtx3080">Nvidia RTX 3080</option>
+                            <option value="rtx3090">Nvidia RTX 3090</option>
+                            <option value="rtx4050">Nvidia RTX 4050</option>
+                            <option value="rtx4060">Nvidia RTX 4060</option>
+                            <option value="rtx4070">Nvidia RTX 4070</option>
+                            <option value="rtx4080">Nvidia RTX 4080</option>
+                            <option value="rtx4090">Nvidia RTX 4090</option>
+                            <option value="amdrx6850">AMD RX6850</option>
+                            <option value="amd780">AMD 780M</option>
+                            <option value="amdrx6500">AMD RX6500</option>
                         </select>
                     </div>
                     <script>
@@ -447,8 +465,10 @@
                         <label for="ssdFilter">Filter by SSD:</label>
                         <select id="ssdFilter" name="ssdFilter" class="form-control form-control-sm" multiple size="5">
                             <option value="128">128 GB</option>
+                            <option value="256">256 GB</option>
                             <option value="512">512 GB</option>
-                            <option value="1000">1000 GB</option>
+                            <option value="1024">1 TB</option>
+                            <option value="2048">2 TB</option>
                         </select>
                     </div>
                     <script>
@@ -511,11 +531,80 @@
                             }
                         }
                     </script>
+                    <div class="mb-3">
+                        <label for="screenFilter">Filter by Screen:</label>
+                        <select id="screenFilter" name="screenFilter" class="form-control form-control-sm" multiple size="5">
+                            <option value="13.3">13.3"</option>
+                            <option value="14">14"</option>
+                            <option value="14.5">14.5"</option>
+                            <option value="15.6">15.6"</option>
+                            <option value="16">16"</option>
+                            <option value="17.3">17.3"</option>
+                            <option value="18">18"</option>
+                        </select>
+                    </div>
+                    <script>
+                        var isMouseDown = false;
 
+                        document.getElementById('screenFilter').addEventListener('mousedown', function (e) {
+                            e.preventDefault();
+                            isMouseDown = true;
+                            selectOption(e);
+                        });
 
+                        document.addEventListener('mouseup', function () {
+                            isMouseDown = false;
+                        });
 
+                        document.getElementById('screenFilter').addEventListener('mousemove', function (e) {
+                            if (isMouseDown) {
+                                selectOption(e);
+                            }
+                        });
 
+                        function selectOption(event) {
+                            var option = document.elementFromPoint(event.clientX, event.clientY);
+                            if (option && option.tagName === 'OPTION') {
+                                option.selected = !option.selected;
+                            }
+                        }
+                    </script>
+                    <div class="mb-3">
+                    <label for="categoryFilter">Filter by Screen:</label>
+                        <select id="categoryFilter" name="categoryFilter" class="form-control form-control-sm" multiple size="5">
+                        <option value="gaming">Gaming</option>
+                        <option value="2-in-1">2-in-1</option>
+                        <option value="everyday">Every Day Work</option>
+                        <option value="office">Expert Office Work</option>
+                        <option value="students">Students</option>
+                    </select>
+                </div>
+                <script>
+                    var isMouseDown = false;
 
+                    document.getElementById('categoryFilter').addEventListener('mousedown', function (e) {
+                        e.preventDefault();
+                        isMouseDown = true;
+                        selectOption(e);
+                    });
+
+                    document.addEventListener('mouseup', function () {
+                        isMouseDown = false;
+                    });
+
+                    document.getElementById('categoryFilter').addEventListener('mousemove', function (e) {
+                        if (isMouseDown) {
+                            selectOption(e);
+                        }
+                    });
+
+                    function selectOption(event) {
+                        var option = document.elementFromPoint(event.clientX, event.clientY);
+                        if (option && option.tagName === 'OPTION') {
+                            option.selected = !option.selected;
+                        }
+                    }
+                </script>
                   
                     <div>
                         <button type="submit" class="btn btn-primary">Filter</button>
