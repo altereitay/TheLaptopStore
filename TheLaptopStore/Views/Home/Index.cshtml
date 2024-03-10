@@ -9,6 +9,23 @@
         background: #eee;
     }
 
+    .filter-section label.toggle-btn {
+        cursor: pointer;
+        color: #007FFF;
+        font-weight: bold;
+        margin-bottom: 0;
+        display: block;
+    }
+
+    .filter-section .options {
+        display: none;
+    }
+
+    .filter-section label.toggle-btn:hover {
+        text-decoration: underline;
+    }
+
+
     .product-content {
         height: 320px; /* Adjust the height as needed */
         border: 2px solid #dfe5e9;
@@ -327,29 +344,33 @@
         <div class="col-md-3">
             <form method="post" action="@Url.Action("FilterProducts", "Home")">
                 <div class="d-flex flex-column">
-                    <div style="width: 200px" class="mb-3">
-                        <label>Filter by RAM:</label>
-                        @foreach (var ramOption in new List<SelectListItem>
-                        {
-                        new SelectListItem { Value = "4", Text = "4 GB" },
-                        new SelectListItem { Value = "8", Text = "8 GB" },
-                        new SelectListItem { Value = "16", Text = "16 GB" },
-                        new SelectListItem { Value = "32", Text = "32 GB" },
-                        new SelectListItem { Value = "64", Text = "64 GB" }
-                        })
-                        {
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="ramCheckbox_@ramOption.Value" name="ramFilter" value="@ramOption.Value">
-                                <label class="form-check-label" for="ramCheckbox_@ramOption.Value">
-                                    @ramOption.Text
-                                </label>
-                            </div>
-                        }
+                    <div style="width: 200px" class="mb-3 filter-section">
+                        <label class="toggle-btn" data-toggle="ramOptions">Filter by RAM:</label>
+                        <div class="options" id="ramOptions">
+                            @foreach (var ramOption in new List<SelectListItem>
+                            {
+                            new SelectListItem { Value = "4", Text = "4 GB" },
+                            new SelectListItem { Value = "8", Text = "8 GB" },
+                            new SelectListItem { Value = "16", Text = "16 GB" },
+                            new SelectListItem { Value = "32", Text = "32 GB" },
+                            new SelectListItem { Value = "64", Text = "64 GB" }
+                            })
+                            {
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="ramCheckbox_@ramOption.Value" name="ramFilter" value="@ramOption.Value">
+                                    <label class="form-check-label" for="ramCheckbox_@ramOption.Value">
+                                        @ramOption.Text
+                                    </label>
+                                </div>
+                            }
+                        </div>
                     </div>
 
+                   
 
-                    <div style="width: 200px" class="mb-3">
-                        <label>Filter by CPU:</label>
+                    <div style="width: 200px" class="mb-3 filter-section">
+                        <label class="toggle-btn" data-toggle="cpuOptions">Filter by CPU:</label>
+                        <div class="options" id="cpuOptions">
                         @foreach (var cpuOption in new List<SelectListItem>
                         {
                         new SelectListItem { Value = "I3", Text = "Intel I3" },
@@ -369,10 +390,14 @@
                                 </label>
                             </div>
                         }
+                        </div>
                     </div>
 
-                    <div style="width: 200px" class="mb-3">
-                        <label>Filter by GPU:</label>
+
+
+                    <div style="width: 200px"  class="mb-3 filter-section">
+                        <label class="toggle-btn" data-toggle="gpuOptions" >Filter by GPU:</label>
+                        <div class="options" id="gpuOptions">
                         @foreach (var gpuOption in new List<SelectListItem>
                         {
                         new SelectListItem { Value = "irisxe", Text = "Intel IrisXe" },
@@ -401,9 +426,15 @@
                                 </label>
                             </div>
                         }
+                        </div>
                     </div>
-                    <div style="width: 200px" class="mb-3">
-                        <label>Filter by Price:</label>
+
+
+
+
+                    <div style="width: 200px" class="mb-3 filter-section">
+                        <label class="toggle-btn" data-toggle="priceOptions">Filter by Price:</label>
+                        <div class="options" id="priceOptions">
                         @foreach (var priceOption in new List<SelectListItem>
                         {
                         new SelectListItem { Value = "1000", Text = "over 1000$" },
@@ -418,10 +449,12 @@
                                 </label>
                             </div>
                         }
+                        </div>
                     </div>
 
-                    <div style="width: 200px" class="mb-3">
-                        <label>Filter by SSD:</label>
+                    <div style="width: 200px" class="mb-3 filter-section">
+                        <label class="toggle-btn" data-toggle="ssdOptions">Filter by SSD:</label>
+                        <div class="options" id="ssdOptions">
                         @foreach (var ssdOption in new List<SelectListItem>
                         {
                         new SelectListItem { Value = "128", Text = "128 GB" },
@@ -438,9 +471,11 @@
                                 </label>
                             </div>
                         }
+                        </div>
                     </div>
-                    <div style="width: 200px" class="mb-3">
-                        <label>Filter by Maker:</label>
+                    <div style="width: 200px" class="mb-3 filter-section">
+                        <label class="toggle-btn" data-toggle="makerOptions">Filter by Maker:</label>
+                        <div class="options" id="makerOptions">
                         @foreach (var makerOption in new List<SelectListItem>
                         {
                         new SelectListItem { Value = "Asus", Text = "Asus" },
@@ -456,9 +491,11 @@
                                 </label>
                             </div>
                         }
+                        </div>
                     </div>
-                    <div style="width: 200px" class="mb-3">
-                        <label>Filter by Screen:</label>
+                    <div style="width: 200px" class="mb-3 filter-section">
+                        <label class="toggle-btn" data-toggle="screenOptions">Filter by Screen:</label>
+                        <div class="options" id="screenOptions">
                         @foreach (var screenOption in new List<SelectListItem>
                         {
                         new SelectListItem { Value = "13.3", Text = "13.3\"" },
@@ -478,9 +515,11 @@
                                 </label>
                             </div>
                         }
+                        </div>
                     </div>
-                    <div style="width: 200px" class="mb-3">
-                        <label>Filter by Category:</label>
+                    <div style="width: 200px" class="mb-3 filter-section">
+                        <label class="toggle-btn" data-toggle="categoryOptions">Filter by Category:</label>
+                        <div class="options" id="categoryOptions">
                         @foreach (var categoryOption in new List<SelectListItem>
                         {
                         new SelectListItem { Value = "gaming", Text = "Gaming" },
@@ -498,8 +537,20 @@
                                 </label>
                             </div>
                         }
+                        </div>
                     </div>
-                  
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            var toggleButtons = document.querySelectorAll('.toggle-btn');
+
+                            toggleButtons.forEach(function (button) {
+                                button.addEventListener('click', function () {
+                                    var options = document.getElementById(button.getAttribute('data-toggle'));
+                                    options.style.display = options.style.display === 'none' || options.style.display === '' ? 'block' : 'none';
+                                });
+                            });
+                        });
+                    </script>
                     <div>
                         <button type="submit" class="btn btn-primary">Filter</button>
                     </div>
