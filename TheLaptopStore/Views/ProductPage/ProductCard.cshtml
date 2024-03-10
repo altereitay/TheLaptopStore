@@ -18,100 +18,102 @@
             background-color: #0056b3; /* Darker shade on hover */
         }
 </style>
+<body style="background-color: #E1EBEE">
+    <div class="container">
+        <div class="col-lg-12 border p-3 main-section bg-white">
+            <div class="row m-0">
+                <div class="col-lg-4 left-side-product-box pb-3">
+                    <img src="~/photos/@(Model.Picture).jpg" class="img-fluid img-thumbnail" style="width: 100%;" alt="Laptop Image">
+                </div>
+                <div class="col-lg-8">
+                    <div class="right-side-pro-detail border p-3 m-0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <span><strong>@Model.Maker</strong></span>
+                                <p class="m-0 p-0"><strong>@Model.Model</strong></p>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="d-inline-flex justify-content-between align-items-center">
+                                    <strong><h3>@((int)(Math.Floor(Model.Price - Model.Price * (Model.SalePrecentage * 0.01)))) $</h3></strong>
+                                    @if (Model.SalePrecentage > 0) {
+                                        <div id="old-price" class="ml-3" style="text-decoration: line-through; margin-left: 30px; "><h5>@Model.Price $</h5></div>
+                                        <div style="margin-left: 15px;">- @Model.SalePrecentage %</div>
+                                    }
+                                </div>
+                                <hr class="p-0 m-0">
+                            </div>
+                            <div class="col-lg-12 pt-2">
+                                <h5><strong>Description: </strong></h5>
+                                <span>@Model.Description</span>
+
+                            </div>
+                            <div class="col-lg-12 pt-3">
+                                <p class="tag-section"><strong>Category: </strong>@Model.Category</p>
+                                <p class="tag-section"><strong>Ram: </strong>@Model.Ram</p>
+                                <p class="tag-section"><strong>SSD: </strong>@Model.SSD</p>
+                                <p class="tag-section"><strong>GPU: </strong>@Model.GPU</p>
+                                <p class="tag-section"><strong>Screen Size: </strong>@Model.ScreenSize</p>
+                                <p class="tag-section"><strong>Color: </strong>@Model.Color</p>
+                                <p class="tag-section"><strong>Release Date: </strong>@Model.ReleaseDate</p>
+                                <p class="tag-section"><strong>Popularity Index: </strong>@Model.PopularityIndex</p>
+                            </div>
+                            <div class="col-lg-12">
+                                <h6><strong>Quantity in stock: </strong>@Model.Quantity</h6>
+                                @if (Model.Quantity > 0) {
+                                    <form asp-action="AddToCart" asp-controller="ProductPage">
+                                        <input id="quantity" name="quantity" type="number" placeholder="Choose Quantity" />
+                                        <span id="EmptyQuantity" class="text-danger">@TempData["EmptyQuantity"]</span>
+                                        <span id="TooMuchProducts" class="text-danger">@TempData["TooMuchProducts"]</span>
+                                        <span id="cartPlusQuantity" class="text-danger">@TempData["cartPlusQuantity"]</span>
+                                        <input type="hidden" id="model" name="model" value="@Model.Model" />
+
+                                        <!-- Adjusted structure with div elements -->
+                                        <div class="row">
+                                            <div class="col-lg-12 mt-3">
+                                                <div class="row">
+                                                    <div class="col-lg-6 pb-2">
+                                                        <input class="btn btn-danger w-100" name="addToCart" id="addToCart" type="submit" value="Add to Cart" />
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <input class="btn btn-success w-100" name="buyNow" id="buyNow" type="submit" value="buyNow" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
 
 
+                                } else {
+                                    <p>Sorry, this product is currently out of stock.</p>
+                                    <button class="waitlist-button">Add me to wait-list</button>
+                                }
+                            </div>
 
-<div class="container">
-    <h1 class="text-center">Laptop Details</h1>
-    <hr />
-
-    <div class="row">
-        <div class="col-md-6">
-            <img src="~/photos/@(Model.Picture).jpg" class="img-fluid" alt="Laptop Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6">
-            <dl class="row">
-                <dt class="col-sm-4">RAM</dt>
-                <dd class="col-sm-8">@Model.Ram</dd>
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // Set the duration in milliseconds (e.g., 5000 for 5 seconds)
+                var duration = 1000;
 
-                <dt class="col-sm-4">Storage</dt>
-                <dd class="col-sm-8">@Model.SSD</dd>
-
-                <dt class="col-sm-4">CPU</dt>
-                <dd class="col-sm-8">@Model.CPU</dd>
-
-                <dt class="col-sm-4">Screen Size</dt>
-                <dd class="col-sm-8">@Model.ScreenSize</dd>
-
-                <dt class="col-sm-4">GPU</dt>
-                <dd class="col-sm-8">@Model.GPU</dd>
-
-                <dt class="col-sm-4">Price</dt>
-                <dd class="col-sm-8">$@((int)(Math.Floor(Model.Price - Model.Price * (Model.SalePrecentage * 0.01))))</dd>
-
-                <dt class="col-sm-4">Maker</dt>
-                <dd class="col-sm-8">@Model.Maker</dd>
-
-                <dt class="col-sm-4">Color</dt>
-                <dd class="col-sm-8">@Model.Color</dd>
-
-                <dt class="col-sm-4">Quantity</dt>
-                <dd class="col-sm-8">@Model.Quantity</dd>
-
-                <dt class="col-sm-4">Description</dt>
-                <dd class="col-sm-8">@Model.Description</dd>
-
-                <dt class="col-sm-4">Category</dt>
-                <dd class="col-sm-8">@Model.Category</dd>
-
-                <dt class="col-sm-4">Release Date</dt>
-                <dd class="col-sm-8">@Model.ReleaseDate</dd>
-
-           
-
-                @if (Model.Quantity > 0)
-                {
-                    <form asp-action="AddToCart" asp-controller="ProductPage">
-                        <input id="quantity" name="quantity" type="number" />
-                        <span id="EmptyQuantity" class="text-danger">@TempData["EmptyQuantity"]</span>
-                        <span id="TooMuchProducts" class="text-danger">@TempData["TooMuchProducts"]</span>
-                        <input type="hidden" id="model" name="model" value="@Model.Model" />
-                        <input name="addToCart" id="addToCart" type="submit" value="Add to Cart" />
-                        <input name="buyNow" id="buyNow" type="submit" value="buyNow" />
-                    </form>
-                }
-                else
-                {
-                    <p>Sorry, this product is currently out of stock.</p>
-                    <button class="waitlist-button">Add me to wait-list</button>
-                }
-                
-                
-            </dl>
-            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-            <script>
-                $(document).ready(function () {
-                    // Set the duration in milliseconds (e.g., 5000 for 5 seconds)
-                    var duration = 1000;
-
-                    // Hide the message after the specified duration
-                    setTimeout(function () {
-                        $("#EmptyQuantity").fadeOut();
-                    }, duration);
-                    setTimeout(function () {
-                        $("#TooMuchProducts").fadeOut();
-                    }, duration);
+                // Hide the message after the specified duration
+                setTimeout(function () {
+                    $("#EmptyQuantity").fadeOut();
+                }, duration);
+                setTimeout(function () {
+                    $("#TooMuchProducts").fadeOut();
+                }, duration);
+                setTimeout(function () {
+                    $("#cartPlusQuantity").fadeOut();
+                }, duration);
 
 
-                });
-            </script>
+            });
+        </script>
 
-
-        </div>
     </div>
-
-    <div class="text-center">
-        <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3">Back to List</a>
-        
-    </div>
-</div>
+</body>
