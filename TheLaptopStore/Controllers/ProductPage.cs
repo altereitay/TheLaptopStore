@@ -56,7 +56,7 @@ namespace TheLaptopStore.Controllers {
             if (sc is not null) {
                 int checkQuantity = sc.quantity + Convert.ToInt32(Request.Form["quantity"]);
                 if (checkQuantity > laptop.Quantity) {
-                    ModelState.AddModelError("Model", "You have in your cart "+ sc.quantity + "\nThere is left: "+(laptop.Quantity- sc.quantity));
+                    TempData["cartPlusQuantity"]="You have in your cart "+ sc.quantity + "\nThere is left: "+(laptop.Quantity- sc.quantity);
                     return View("ProductCard", laptop);
                 }
                 sc.quantity += Convert.ToInt32(Request.Form["quantity"]);
