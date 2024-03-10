@@ -366,21 +366,11 @@
                         </div>
                     </div>
 
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function () {
-                            var toggleButtons = document.querySelectorAll('.toggle-btn');
-
-                            toggleButtons.forEach(function (button) {
-                                button.addEventListener('click', function () {
-                                    var options = document.getElementById(button.getAttribute('data-toggle'));
-                                    options.style.display = options.style.display === 'none' || options.style.display === '' ? 'block' : 'none';
-                                });
-                            });
-                        });
-                    </script>
+                   
 
                     <div style="width: 200px" class="mb-3 filter-section">
-                        <label class="toggle-btn" >Filter by CPU:</label>
+                        <label class="toggle-btn" data-toggle="cpuOptions">Filter by CPU:</label>
+                        <div class="options" id="cpuOptions">
                         @foreach (var cpuOption in new List<SelectListItem>
                         {
                         new SelectListItem { Value = "I3", Text = "Intel I3" },
@@ -400,10 +390,14 @@
                                 </label>
                             </div>
                         }
+                        </div>
                     </div>
 
+
+
                     <div style="width: 200px"  class="mb-3 filter-section">
-                        <label class="toggle-btn" >Filter by GPU:</label>
+                        <label class="toggle-btn" data-toggle="gpuOptions" >Filter by GPU:</label>
+                        <div class="options" id="gpuOptions">
                         @foreach (var gpuOption in new List<SelectListItem>
                         {
                         new SelectListItem { Value = "irisxe", Text = "Intel IrisXe" },
@@ -432,9 +426,15 @@
                                 </label>
                             </div>
                         }
+                        </div>
                     </div>
+
+
+
+
                     <div style="width: 200px" class="mb-3 filter-section">
-                        <label class="toggle-btn" >Filter by Price:</label>
+                        <label class="toggle-btn" data-toggle="priceOptions">Filter by Price:</label>
+                        <div class="options" id="priceOptions">
                         @foreach (var priceOption in new List<SelectListItem>
                         {
                         new SelectListItem { Value = "1000", Text = "over 1000$" },
@@ -449,10 +449,12 @@
                                 </label>
                             </div>
                         }
+                        </div>
                     </div>
 
                     <div style="width: 200px" class="mb-3 filter-section">
-                        <label class="toggle-btn" >Filter by SSD:</label>
+                        <label class="toggle-btn" data-toggle="ssdOptions">Filter by SSD:</label>
+                        <div class="options" id="ssdOptions">
                         @foreach (var ssdOption in new List<SelectListItem>
                         {
                         new SelectListItem { Value = "128", Text = "128 GB" },
@@ -469,9 +471,11 @@
                                 </label>
                             </div>
                         }
+                        </div>
                     </div>
                     <div style="width: 200px" class="mb-3 filter-section">
-                        <label class="toggle-btn" >Filter by Maker:</label>
+                        <label class="toggle-btn" data-toggle="makerOptions">Filter by Maker:</label>
+                        <div class="options" id="makerOptions">
                         @foreach (var makerOption in new List<SelectListItem>
                         {
                         new SelectListItem { Value = "Asus", Text = "Asus" },
@@ -487,9 +491,11 @@
                                 </label>
                             </div>
                         }
+                        </div>
                     </div>
                     <div style="width: 200px" class="mb-3 filter-section">
-                        <label class="toggle-btn">Filter by Screen:</label>
+                        <label class="toggle-btn" data-toggle="screenOptions">Filter by Screen:</label>
+                        <div class="options" id="screenOptions">
                         @foreach (var screenOption in new List<SelectListItem>
                         {
                         new SelectListItem { Value = "13.3", Text = "13.3\"" },
@@ -509,9 +515,11 @@
                                 </label>
                             </div>
                         }
+                        </div>
                     </div>
                     <div style="width: 200px" class="mb-3 filter-section">
-                        <label class="toggle-btn" >Filter by Category:</label>
+                        <label class="toggle-btn" data-toggle="categoryOptions">Filter by Category:</label>
+                        <div class="options" id="categoryOptions">
                         @foreach (var categoryOption in new List<SelectListItem>
                         {
                         new SelectListItem { Value = "gaming", Text = "Gaming" },
@@ -529,8 +537,20 @@
                                 </label>
                             </div>
                         }
+                        </div>
                     </div>
-                  
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            var toggleButtons = document.querySelectorAll('.toggle-btn');
+
+                            toggleButtons.forEach(function (button) {
+                                button.addEventListener('click', function () {
+                                    var options = document.getElementById(button.getAttribute('data-toggle'));
+                                    options.style.display = options.style.display === 'none' || options.style.display === '' ? 'block' : 'none';
+                                });
+                            });
+                        });
+                    </script>
                     <div>
                         <button type="submit" class="btn btn-primary">Filter</button>
                     </div>
