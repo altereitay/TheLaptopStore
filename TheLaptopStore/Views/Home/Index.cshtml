@@ -327,284 +327,178 @@
         <div class="col-md-3">
             <form method="post" action="@Url.Action("FilterProducts", "Home")">
                 <div class="d-flex flex-column">
-                    <div class="mb-3">
-                        <label for="ramFilter">Filter by RAM:</label>
-                        <select id="ramFilter" name="ramFilter" class="form-control form-control-sm" multiple size="5">
-                            <option value="4">4 GB</option>
-                            <option value="8">8 GB</option>
-                            <option value="16">16 GB</option>
-                            <option value="32">32 GB</option>
-                            <option value="64">64 GB</option>
-                        </select>
-                    </div>
-                    <script>
-                        var isMouseDown = false;
-
-                        document.getElementById('ramFilter').addEventListener('mousedown', function (e) {
-                            e.preventDefault();
-                            isMouseDown = true;
-                            selectOption(e);
-                        });
-
-                        document.addEventListener('mouseup', function () {
-                            isMouseDown = false;
-                        });
-
-                        document.getElementById('ramFilter').addEventListener('mousemove', function (e) {
-                            if (isMouseDown) {
-                                selectOption(e);
-                            }
-                        });
-
-                        function selectOption(event) {
-                            var option = document.elementFromPoint(event.clientX, event.clientY);
-                            if (option && option.tagName === 'OPTION') {
-                                option.selected = !option.selected;
-                            }
+                    <div style="width: 200px" class="mb-3">
+                        <label>Filter by RAM:</label>
+                        @foreach (var ramOption in new List<SelectListItem>
+                        {
+                        new SelectListItem { Value = "4", Text = "4 GB" },
+                        new SelectListItem { Value = "8", Text = "8 GB" },
+                        new SelectListItem { Value = "16", Text = "16 GB" },
+                        new SelectListItem { Value = "32", Text = "32 GB" },
+                        new SelectListItem { Value = "64", Text = "64 GB" }
+                        })
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ramCheckbox_@ramOption.Value" name="ramFilter" value="@ramOption.Value">
+                                <label class="form-check-label" for="ramCheckbox_@ramOption.Value">
+                                    @ramOption.Text
+                                </label>
+                            </div>
                         }
-                    </script>
-
-                    <div class="mb-3">
-                        <label for="cpuFilter">Filter by CPU:</label>
-                        <select id="cpuFilter" name="cpuFilter[]" class="form-control form-control-sm" multiple size="5">
-                            <option value="I3">Intel I3</option>
-                            <option value="I5">Intel I5</option>
-                            <option value="I7">Intel I7</option>
-                            <option value="I9">Intel I9</option>
-                            <option value="R3">Ryzen 3</option>
-                            <option value="R5">Ryzen 5</option>
-                            <option value="R7">Ryzen 7</option>
-                            <option value="R9">Ryzen 9</option>
-                        </select>
-                    </div>
-                    <script>
-                        var isMouseDown = false;
-
-                        document.getElementById('cpuFilter').addEventListener('mousedown', function (e) {
-                            e.preventDefault();
-                            isMouseDown = true;
-                            selectOption(e);
-                        });
-
-                        document.addEventListener('mouseup', function () {
-                            isMouseDown = false;
-                        });
-
-                        document.getElementById('cpuFilter').addEventListener('mousemove', function (e) {
-                            if (isMouseDown) {
-                                selectOption(e);
-                            }
-                        });
-
-                        function selectOption(event) {
-                            var option = document.elementFromPoint(event.clientX, event.clientY);
-                            if (option && option.tagName === 'OPTION') {
-                                option.selected = !option.selected;
-                            }
-                        }
-                    </script>
-
-                    <div class="mb-3">
-                        <label for="gpuFilter">Filter by GPU:</label>
-                        <select id="gpuFilter" name="gpuFilter" class="form-control form-control-sm" multiple size="5">
-                            <option value="irisxe">Intel IrisXe</option>
-                            <option value="arc">Intel Arc</option>
-                            <option value="apple18">Apple 18 Core</option>
-                            <option value="apple40">Apple 40 Core</option>
-                            <option value="rtx3050">Nvidia RTX 3050</option>
-                            <option value="rtx3060">Nvidia RTX 3060</option>
-                            <option value="rtx3070">Nvidia RTX 3070</option>
-                            <option value="rtx3080">Nvidia RTX 3080</option>
-                            <option value="rtx3090">Nvidia RTX 3090</option>
-                            <option value="rtx4050">Nvidia RTX 4050</option>
-                            <option value="rtx4060">Nvidia RTX 4060</option>
-                            <option value="rtx4070">Nvidia RTX 4070</option>
-                            <option value="rtx4080">Nvidia RTX 4080</option>
-                            <option value="rtx4090">Nvidia RTX 4090</option>
-                            <option value="amdrx6850">AMD RX6850</option>
-                            <option value="amd780">AMD 780M</option>
-                            <option value="amdrx6500">AMD RX6500</option>
-                        </select>
-                    </div>
-                    <script>
-                        var isMouseDown = false;
-
-                        document.getElementById('gpuFilter').addEventListener('mousedown', function (e) {
-                            e.preventDefault();
-                            isMouseDown = true;
-                            selectOption(e);
-                        });
-
-                        document.addEventListener('mouseup', function () {
-                            isMouseDown = false;
-                        });
-
-                        document.getElementById('gpuFilter').addEventListener('mousemove', function (e) {
-                            if (isMouseDown) {
-                                selectOption(e);
-                            }
-                        });
-
-                        function selectOption(event) {
-                            var option = document.elementFromPoint(event.clientX, event.clientY);
-                            if (option && option.tagName === 'OPTION') {
-                                option.selected = !option.selected;
-                            }
-                        }
-                    </script>
-                    <div class="mb-3">
-                        <label for="PriceFilter">Filter by Price:</label>
-                        <select id="PriceFilter" name="PriceFilter" class="form-control form-control-sm" multiple size="5">
-                            <option value="1000">over 1000$</option>
-                            <option value="2000">over 2000$</option>
-                            <option value="3000">over 3000$</option>
-                        </select>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="ssdFilter">Filter by SSD:</label>
-                        <select id="ssdFilter" name="ssdFilter" class="form-control form-control-sm" multiple size="5">
-                            <option value="128">128 GB</option>
-                            <option value="256">256 GB</option>
-                            <option value="512">512 GB</option>
-                            <option value="1024">1 TB</option>
-                            <option value="2048">2 TB</option>
-                        </select>
+
+                    <div style="width: 200px" class="mb-3">
+                        <label>Filter by CPU:</label>
+                        @foreach (var cpuOption in new List<SelectListItem>
+                        {
+                        new SelectListItem { Value = "I3", Text = "Intel I3" },
+                        new SelectListItem { Value = "I5", Text = "Intel I5" },
+                        new SelectListItem { Value = "I7", Text = "Intel I7" },
+                        new SelectListItem { Value = "I9", Text = "Intel I9" },
+                        new SelectListItem { Value = "R3", Text = "Ryzen 3" },
+                        new SelectListItem { Value = "R5", Text = "Ryzen 5" },
+                        new SelectListItem { Value = "R7", Text = "Ryzen 7" },
+                        new SelectListItem { Value = "R9", Text = "Ryzen 9" }
+                        })
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="cpuCheckbox_@cpuOption.Value" name="cpuFilter" value="@cpuOption.Value">
+                                <label class="form-check-label" for="cpuCheckbox_@cpuOption.Value">
+                                    @cpuOption.Text
+                                </label>
+                            </div>
+                        }
                     </div>
-                    <script>
-                        var isMouseDown = false;
 
-                        document.getElementById('ssdFilter').addEventListener('mousedown', function (e) {
-                            e.preventDefault();
-                            isMouseDown = true;
-                            selectOption(e);
-                        });
-
-                        document.addEventListener('mouseup', function () {
-                            isMouseDown = false;
-                        });
-
-                        document.getElementById('ssdFilter').addEventListener('mousemove', function (e) {
-                            if (isMouseDown) {
-                                selectOption(e);
-                            }
-                        });
-
-                        function selectOption(event) {
-                            var option = document.elementFromPoint(event.clientX, event.clientY);
-                            if (option && option.tagName === 'OPTION') {
-                                option.selected = !option.selected;
-                            }
+                    <div style="width: 200px" class="mb-3">
+                        <label>Filter by GPU:</label>
+                        @foreach (var gpuOption in new List<SelectListItem>
+                        {
+                        new SelectListItem { Value = "irisxe", Text = "Intel IrisXe" },
+                        new SelectListItem { Value = "arc", Text = "Intel Arc" },
+                        new SelectListItem { Value = "apple18", Text = "Apple 18 Core" },
+                        new SelectListItem { Value = "apple40", Text = "Apple 40 Core" },
+                        new SelectListItem { Value = "rtx3050", Text = "Nvidia RTX 3050" },
+                        new SelectListItem { Value = "rtx3060", Text = "Nvidia RTX 3060" },
+                        new SelectListItem { Value = "rtx3070", Text = "Nvidia RTX 3070" },
+                        new SelectListItem { Value = "rtx3080", Text = "Nvidia RTX 3080" },
+                        new SelectListItem { Value = "rtx3090", Text = "Nvidia RTX 3090" },
+                        new SelectListItem { Value = "rtx4050", Text = "Nvidia RTX 4050" },
+                        new SelectListItem { Value = "rtx4060", Text = "Nvidia RTX 4060" },
+                        new SelectListItem { Value = "rtx4070", Text = "Nvidia RTX 4070" },
+                        new SelectListItem { Value = "rtx4080", Text = "Nvidia RTX 4080" },
+                        new SelectListItem { Value = "rtx4090", Text = "Nvidia RTX 4090" },
+                        new SelectListItem { Value = "amdrx6850", Text = "AMD RX6850" },
+                        new SelectListItem { Value = "amd780", Text = "AMD 780M" },
+                        new SelectListItem { Value = "amdrx6500", Text = "AMD RX6500" },
+                        })
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gpuCheckbox_@gpuOption.Value" name="gpuFilter" value="@gpuOption.Value">
+                                <label class="form-check-label" for="gpuCheckbox_@gpuOption.Value">
+                                    @gpuOption.Text
+                                </label>
+                            </div>
                         }
-                    </script>
-                    <div class="mb-3">
-                        <label for="MakerFilter">Filter by Maker:</label>
-                        <select id="MakerFilter" name="MakerFilter" class="form-control form-control-sm" multiple size="5">
-                            <option value="Asus">Asus</option>
-                            <option value="Lenovo">Lenovo</option>
-                            <option value="Apple">Apple</option>
-                        </select>
                     </div>
-                    <script>
-                        var isMouseDown = false;
-
-                        document.getElementById('MakerFilter').addEventListener('mousedown', function (e) {
-                            e.preventDefault();
-                            isMouseDown = true;
-                            selectOption(e);
-                        });
-
-                        document.addEventListener('mouseup', function () {
-                            isMouseDown = false;
-                        });
-
-                        document.getElementById('MakerFilter').addEventListener('mousemove', function (e) {
-                            if (isMouseDown) {
-                                selectOption(e);
-                            }
-                        });
-
-                        function selectOption(event) {
-                            var option = document.elementFromPoint(event.clientX, event.clientY);
-                            if (option && option.tagName === 'OPTION') {
-                                option.selected = !option.selected;
-                            }
+                    <div style="width: 200px" class="mb-3">
+                        <label>Filter by Price:</label>
+                        @foreach (var priceOption in new List<SelectListItem>
+                        {
+                        new SelectListItem { Value = "1000", Text = "over 1000$" },
+                        new SelectListItem { Value = "2000", Text = "over 2000$" },
+                        new SelectListItem { Value = "3000", Text = "over 3000$" },
+                        })
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="priceCheckbox_@priceOption.Value" name="PriceFilter" value="@priceOption.Value">
+                                <label class="form-check-label" for="priceCheckbox_@priceOption.Value">
+                                    @priceOption.Text
+                                </label>
+                            </div>
                         }
-                    </script>
-                    <div class="mb-3">
-                        <label for="screenFilter">Filter by Screen:</label>
-                        <select id="screenFilter" name="screenFilter" class="form-control form-control-sm" multiple size="5">
-                            <option value="13.3">13.3"</option>
-                            <option value="14">14"</option>
-                            <option value="14.5">14.5"</option>
-                            <option value="15.6">15.6"</option>
-                            <option value="16">16"</option>
-                            <option value="17.3">17.3"</option>
-                            <option value="18">18"</option>
-                        </select>
                     </div>
-                    <script>
-                        var isMouseDown = false;
 
-                        document.getElementById('screenFilter').addEventListener('mousedown', function (e) {
-                            e.preventDefault();
-                            isMouseDown = true;
-                            selectOption(e);
-                        });
-
-                        document.addEventListener('mouseup', function () {
-                            isMouseDown = false;
-                        });
-
-                        document.getElementById('screenFilter').addEventListener('mousemove', function (e) {
-                            if (isMouseDown) {
-                                selectOption(e);
-                            }
-                        });
-
-                        function selectOption(event) {
-                            var option = document.elementFromPoint(event.clientX, event.clientY);
-                            if (option && option.tagName === 'OPTION') {
-                                option.selected = !option.selected;
-                            }
+                    <div style="width: 200px" class="mb-3">
+                        <label>Filter by SSD:</label>
+                        @foreach (var ssdOption in new List<SelectListItem>
+                        {
+                        new SelectListItem { Value = "128", Text = "128 GB" },
+                        new SelectListItem { Value = "256", Text = "256 GB" },
+                        new SelectListItem { Value = "512", Text = "512 GB" },
+                        new SelectListItem { Value = "1024", Text = "1 TB" },
+                        new SelectListItem { Value = "2048", Text = "2 TB" },
+                        })
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ssdCheckbox_@ssdOption.Value" name="ssdFilter" value="@ssdOption.Value">
+                                <label class="form-check-label" for="ssdCheckbox_@ssdOption.Value">
+                                    @ssdOption.Text
+                                </label>
+                            </div>
                         }
-                    </script>
-                    <div class="mb-3">
-                    <label for="categoryFilter">Filter by Screen:</label>
-                        <select id="categoryFilter" name="categoryFilter" class="form-control form-control-sm" multiple size="5">
-                        <option value="gaming">Gaming</option>
-                        <option value="2-in-1">2-in-1</option>
-                        <option value="everyday">Every Day Work</option>
-                        <option value="office">Expert Office Work</option>
-                        <option value="students">Students</option>
-                    </select>
-                </div>
-                <script>
-                    var isMouseDown = false;
-
-                    document.getElementById('categoryFilter').addEventListener('mousedown', function (e) {
-                        e.preventDefault();
-                        isMouseDown = true;
-                        selectOption(e);
-                    });
-
-                    document.addEventListener('mouseup', function () {
-                        isMouseDown = false;
-                    });
-
-                    document.getElementById('categoryFilter').addEventListener('mousemove', function (e) {
-                        if (isMouseDown) {
-                            selectOption(e);
+                    </div>
+                    <div style="width: 200px" class="mb-3">
+                        <label>Filter by Maker:</label>
+                        @foreach (var makerOption in new List<SelectListItem>
+                        {
+                        new SelectListItem { Value = "Asus", Text = "Asus" },
+                        new SelectListItem { Value = "Lenovo", Text = "Lenovo" },
+                        new SelectListItem { Value = "Apple", Text = "Apple" }
+                        // Add more maker options as needed
+                        })
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="makerCheckbox_@makerOption.Value" name="MakerFilter" value="@makerOption.Value">
+                                <label class="form-check-label" for="makerCheckbox_@makerOption.Value">
+                                    @makerOption.Text
+                                </label>
+                            </div>
                         }
-                    });
-
-                    function selectOption(event) {
-                        var option = document.elementFromPoint(event.clientX, event.clientY);
-                        if (option && option.tagName === 'OPTION') {
-                            option.selected = !option.selected;
+                    </div>
+                    <div style="width: 200px" class="mb-3">
+                        <label>Filter by Screen:</label>
+                        @foreach (var screenOption in new List<SelectListItem>
+                        {
+                        new SelectListItem { Value = "13.3", Text = "13.3\"" },
+                        new SelectListItem { Value = "14", Text = "14\"" },
+                        new SelectListItem { Value = "14.5", Text = "14.5\"" },
+                        new SelectListItem { Value = "15.6", Text = "15.6\"" },
+                        new SelectListItem { Value = "16", Text = "16\"" },
+                        new SelectListItem { Value = "17.3", Text = "17.3\"" },
+                        new SelectListItem { Value = "18", Text = "18\"" }
+                        
+                        })
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="screenCheckbox_@screenOption.Value" name="screenFilter" value="@screenOption.Value">
+                                <label class="form-check-label" for="screenCheckbox_@screenOption.Value">
+                                    @screenOption.Text
+                                </label>
+                            </div>
                         }
-                    }
-                </script>
+                    </div>
+                    <div style="width: 200px" class="mb-3">
+                        <label>Filter by Category:</label>
+                        @foreach (var categoryOption in new List<SelectListItem>
+                        {
+                        new SelectListItem { Value = "gaming", Text = "Gaming" },
+                        new SelectListItem { Value = "2-in-1", Text = "2-in-1" },
+                        new SelectListItem { Value = "everyday", Text = "Every Day Work" },
+                        new SelectListItem { Value = "office", Text = "Expert Office Work" },
+                        new SelectListItem { Value = "students", Text = "Students" }
+                        // Add more category options as needed
+                        })
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="categoryCheckbox_@categoryOption.Value" name="categoryFilter" value="@categoryOption.Value">
+                                <label class="form-check-label" for="categoryCheckbox_@categoryOption.Value">
+                                    @categoryOption.Text
+                                </label>
+                            </div>
+                        }
+                    </div>
                   
                     <div>
                         <button type="submit" class="btn btn-primary">Filter</button>

@@ -57,9 +57,9 @@ namespace TheLaptopStore.Controllers
             }
             if (PriceFilter != null && PriceFilter.Any())
             {
-                
-                int targetPrice = PriceFilter.First();
-                filteredProducts = filteredProducts.Where(laptop => laptop.Price > targetPrice);
+
+                int lowest_price = PriceFilter.Min();
+                filteredProducts = filteredProducts.Where(laptop => laptop.Price > lowest_price);
             }
             if (ssdFilter != null && ssdFilter.Any())
             {
