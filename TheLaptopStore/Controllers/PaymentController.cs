@@ -24,7 +24,11 @@ namespace TheLaptopStore.Controllers
         public IActionResult RemoveProductCart(string? laptopModel)
         {
             string userId = _userManager.GetUserId(User);
-       
+
+            if (userId == null) {
+                userId = HttpContext.Session.GetString("id");
+            }
+
             ApplicationUser user = _db.Users.Find(userId);
             List<ShoppingCart> userCarts = _db.ShoppingCarts.Include(c => c.laptop).Where(cart => cart.userId == userId).ToList();
             foreach (ShoppingCart cart in userCarts)
@@ -46,6 +50,11 @@ namespace TheLaptopStore.Controllers
         public IActionResult AddProductCart(string? laptopModel)
         {
             string userId = _userManager.GetUserId(User);
+
+            if (userId == null) {
+                userId = HttpContext.Session.GetString("id");
+            }
+
             ApplicationUser user = _db.Users.Find(userId);
             List<ShoppingCart> userCarts = _db.ShoppingCarts.Include(c => c.laptop).Where(cart => cart.userId == userId).ToList();
             foreach (ShoppingCart cart in userCarts)
@@ -86,6 +95,11 @@ namespace TheLaptopStore.Controllers
         public IActionResult DecreaseProductCart(string? laptopModel)
         {
             string userId = _userManager.GetUserId(User);
+
+            if (userId == null) {
+                userId = HttpContext.Session.GetString("id");
+            }
+
             ApplicationUser user = _db.Users.Find(userId);
             List<ShoppingCart> userCarts = _db.ShoppingCarts.Include(c => c.laptop).Where(cart => cart.userId == userId).ToList();
             foreach (ShoppingCart cart in userCarts)
@@ -113,15 +127,12 @@ namespace TheLaptopStore.Controllers
                     }
                     else
                     {
-
-
                         _db.ShoppingCarts.Remove(cart);
                         _db.SaveChanges();
                         int price = 0;
                         var cartList = _db.ShoppingCarts.Include(c => c.laptop).Where(c => c.userId == userId).ToList();
                         foreach (var Cart in cartList)
                         {
-
                             price += Cart.totalPrice;
 
                         }
@@ -129,7 +140,6 @@ namespace TheLaptopStore.Controllers
                         return Redirect("~/ShoppingCart");
                     }
                 }
-
             }
             return Redirect("~/ShoppingCart");
         }
@@ -139,12 +149,12 @@ namespace TheLaptopStore.Controllers
             string userId = _userManager.GetUserId(User);
             ApplicationUser user = _db.Users.Find(userId);
 
+            if (userId == null) {
+                return View("GuestPayment");
+            }
+
             // Check if the shopping cart for the user exists
             ShoppingCart userCart = _db.ShoppingCarts.FirstOrDefault(cart => cart.userId == userId);
-
-
-
-
 
             if (userCart == null)
             {
@@ -163,21 +173,35 @@ namespace TheLaptopStore.Controllers
                         _db.SaveChanges();
                         return Redirect("~/ShoppingCart");
                     }
-
                 }
-
             }
-
-
-
-                return View("PaymentPage", user);
+          return View("PaymentPage", user);
             
         }
 
         public IActionResult payNow(string? cardnumber, string? expmonth, string? expyear, string? cvv)
         {
             string userId = _userManager.GetUserId(User);
+
+            if (userId == null) {
+                userId = HttpContext.Session.GetString("id");
+            }
+
             ApplicationUser user = _db.Users.Find(userId);
+
+            if (user == null) {
+                List<ShoppingCart> guestCarts = _db.ShoppingCarts.Include(c => c.laptop).Where(cart => cart.userId == userId).ToList();
+
+                foreach (ShoppingCart cart in guestCarts) {
+                    var product = _db.Laptops.Find(cart.laptop.Model);
+                    product.Quantity -= cart.quantity;
+                    _db.ShoppingCarts.Remove(cart);
+                }
+
+                _db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+
             if (cardnumber == "0" || expmonth == "0" || expyear == "0" || cvv == "0")
             {
                 TempData["PaymentError"] = "Must fill the payment filed before you pay";
@@ -186,9 +210,6 @@ namespace TheLaptopStore.Controllers
 
 
             List<ShoppingCart> userCarts = _db.ShoppingCarts.Include(c => c.laptop).Where(cart => cart.userId == userId).ToList();
-
-
-
 
             foreach(ShoppingCart cart in userCarts)
             {

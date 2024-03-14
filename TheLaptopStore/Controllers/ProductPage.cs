@@ -30,9 +30,8 @@ namespace TheLaptopStore.Controllers {
             string id = _userManager.GetUserId(User);
             var laptop = _db.Laptops.Find(model);
 
-            if (id == null)
-            {
-                return Redirect("~/Identity/Account/Login");
+            if (id == null) {
+                id = HttpContext.Session.GetString("id");
             }
 
             if (laptop == null) {

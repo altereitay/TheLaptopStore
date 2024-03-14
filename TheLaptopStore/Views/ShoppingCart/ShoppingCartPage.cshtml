@@ -140,12 +140,7 @@
                         <th>Total Price</th>
                     </tr>
 
-
-
-
-
-                    @foreach (var cart in Model)
-                    {
+                    @foreach (var cart in Model) {
                         <tr>
                             <td>
                                 <div class="d-flex flex-row align-items-center">
@@ -163,7 +158,6 @@
                                 <a href="@Url.Action("AddProductCart", "Payment", new { laptopModel = cart.laptopModel })" class="quantity-link" onclick="changeQuantity('@cart.laptopModel', 'increase')">&#9650;</a>
                                 
                                 <a href="@Url.Action("DecreaseProductCart", "Payment", new { laptopModel = cart.laptopModel })" class="quantity-link" onclick="changeQuantity('@cart.laptopModel', 'decrease')">&#9660;</a>
-
                             </td>
                             <td>
                                 <span class="font-weight-bold">@cart.totalPrice</span>
@@ -175,8 +169,7 @@
                                 <a class="btn btn-primary" href="@Url.Action("RemoveProductCart", "Payment", new { laptopModel = cart.laptopModel })" role="button">Remove</a><br />
                             </td>
                             <td>
-                                @if (cart.quantity == cart.laptop.Quantity)
-                                {
+                                @if (cart.quantity == cart.laptop.Quantity) {
                                     <span id="cantAddMessage" class="font-weight-bold">@TempData["CantAdd"]</span>
 
                                     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -199,10 +192,6 @@
                 @{
                     var modelError = TempData["ModelError"] as string;
                 }
-              
-
-
-
                 <a class="btn btn-primary" href="@Url.Action("showPaymentPage", "Payment")" role="button">Checkout</a><br />
                 <span id="modelError" class="text-danger">@modelError</span><br/>
                 <span class="font-weight-bold">Total price:  @TempData["Price"]</span><br />
