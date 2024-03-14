@@ -71,7 +71,8 @@ namespace TheLaptopStore.Controllers
             if (priceRange != null)
             {
                 int lowest_price = priceRange;
-                filteredProducts = filteredProducts.Where(laptop => laptop.Price*(1-laptop.SalePrecentage/100) > lowest_price);
+              
+                filteredProducts = filteredProducts.Where(laptop => Convert.ToInt32(laptop.Price - laptop.Price * (laptop.SalePrecentage * 0.01))>= lowest_price);
             }
             if (ssdFilter != null && ssdFilter.Any())
             {
