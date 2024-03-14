@@ -14,28 +14,69 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Ram" class="control-label"></label>
-                <input asp-for="Ram" class="form-control" />
-                <span asp-validation-for="Ram" class="text-danger"></span>
+                <select asp-for="Ram">
+                    <option value="4">4 GB</option>
+                    <option value="8">8 GB</option>
+                    <option value="16">16 GB</option>
+                    <option value="32">32 GB</option>
+                    <option value="64">64 GB</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="SSD" class="control-label"></label>
-                <input asp-for="SSD" class="form-control" />
-                <span asp-validation-for="SSD" class="text-danger"></span>
+                <select asp-for="SSD">
+                    <option value="128">128 GB</option>
+                    <option value="256">256 GB</option>
+                    <option value="512">512 GB</option>
+                    <option value="1024">1 TB</option>
+                    <option value="2048">2 TB</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="CPU" class="control-label"></label>
-                <input asp-for="CPU" class="form-control" />
-                <span asp-validation-for="CPU" class="text-danger"></span>
-            </div>
+                <select asp-for="CPU">
+                    <option value="I3">Intel I3</option>
+                    <option value="I5">Intel I5</option>
+                    <option value="I7">Intel I7</option>
+                    <option value="I9">Intel I9</option>
+                    <option value="R3">Ryzen 3</option>
+                    <option value="R5">Ryzen 5</option>
+                    <option value="R7">Ryzen 7</option>
+                    <option value="R9">Ryzen 9</option>
+                </select>
             <div class="form-group">
                 <label asp-for="ScreenSize" class="control-label"></label>
-                <input asp-for="ScreenSize" class="form-control" />
-                <span asp-validation-for="ScreenSize" class="text-danger"></span>
+                    <select asp-for="ScreenSize">
+                        <option value="13.3">13.3"</option>
+                        <option value="14">14"</option>
+                        <option value="14.5">14.5"</option>
+                        <option value="15.6">15.6"</option>
+                        <option value="16">16"</option>
+                        <option value="17.3">17.3"</option>
+                        <option value="18">18"</option>
+                    </select>
             </div>
             <div class="form-group">
                 <label asp-for="GPU" class="control-label"></label>
-                <input asp-for="GPU" class="form-control" />
-                <span asp-validation-for="GPU" class="text-danger"></span>
+                    <select asp-for="GPU">
+                        <option value="irisxe">Intel IrisXe</option>
+                        <option value="arc">Intel Arc</option>
+                        <option value="apple18">Apple 18 Core</option>
+                        <option value="apple40">Apple 40 Core</option>
+                        <option value="rtx3050">Nvidia RTX 3050</option>
+                        <option value="rtx3060">Nvidia RTX 3060</option>
+                        <option value="rtx3070">Nvidia RTX 3070</option>
+                        <option value="rtx3080">Nvidia RTX 3080</option>
+                        <option value="rtx3090">Nvidia RTX 3090</option>
+                        <option value="rtx4050">Nvidia RTX 4050</option>
+                        <option value="rtx4060">Nvidia RTX 4060</option>
+                        <option value="rtx4070">Nvidia RTX 4070</option>
+                        <option value="rtx4080">Nvidia RTX 4080</option>
+                        <option value="rtx4090">Nvidia RTX 4090</option>
+                        <option value="amdrx6850">AMD RX6850</option>
+                        <option value="amd780">AMD 780M</option>
+                        <option value="amdrx6500">AMD RX6500</option>
+                    </select>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
@@ -67,25 +108,20 @@
                 <input asp-for="Picture" class="form-control" />
                 <span asp-validation-for="Picture" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsOnSale" /> @Html.DisplayNameFor(model => model.IsOnSale)
-                </label>
-            </div>
             <div class="form-group">
                 <label asp-for="SalePrecentage" class="control-label"></label>
                 <input asp-for="SalePrecentage" class="form-control" />
                 <span asp-validation-for="SalePrecentage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PopularityIndex" class="control-label"></label>
-                <input asp-for="PopularityIndex" class="form-control" />
-                <span asp-validation-for="PopularityIndex" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
-                <span asp-validation-for="Category" class="text-danger"></span>
+                    <select asp-for="Category">
+                        <option value="gaming">Gaming</option>
+                        <option value="2-in-1">2-in-1</option>
+                        <option value="everyday">Every Day Work</option>
+                        <option value="office">Expert Office Work</option>
+                        <option value="students">Students</option>
+                    </select>
             </div>
             <div class="form-group">
                 <label asp-for="ReleaseDate" class="control-label"></label>

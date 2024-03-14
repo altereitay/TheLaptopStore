@@ -49,13 +49,12 @@
                             </div>
                             <div class="col-lg-12 pt-3">
                                 <p class="tag-section"><strong>Category: </strong>@Model.Category</p>
-                                <p class="tag-section"><strong>Ram: </strong>@Model.Ram</p>
-                                <p class="tag-section"><strong>SSD: </strong>@Model.SSD</p>
+                                <p class="tag-section"><strong>Ram: </strong>@Model.Ram GB</p>
+                                <p class="tag-section"><strong>SSD: </strong>@Model.SSD GB</p>
                                 <p class="tag-section"><strong>GPU: </strong>@Model.GPU</p>
-                                <p class="tag-section"><strong>Screen Size: </strong>@Model.ScreenSize</p>
+                                <p class="tag-section"><strong>Screen Size: </strong>@Model.ScreenSize "</p>
                                 <p class="tag-section"><strong>Color: </strong>@Model.Color</p>
                                 <p class="tag-section"><strong>Release Date: </strong>@Model.ReleaseDate</p>
-                                <p class="tag-section"><strong>Popularity Index: </strong>@Model.PopularityIndex</p>
                             </div>
                             <div class="col-lg-12">
                                 <h6><strong>Quantity in stock: </strong>@Model.Quantity</h6>
@@ -81,8 +80,6 @@
                                             </div>
                                         </div>
                                     </form>
-
-
                                 } else {
                                     <p>Sorry, this product is currently out of stock.</p>
                                     <button id="NoQuantity" class="waitlist-button">Add me to wait-list</button>
@@ -103,10 +100,7 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script>
             $(document).ready(function () {
-                // Set the duration in milliseconds (e.g., 5000 for 5 seconds)
                 var duration = 1000;
-
-                // Hide the message after the specified duration
                 setTimeout(function () {
                     $("#EmptyQuantity").fadeOut();
                 }, duration);

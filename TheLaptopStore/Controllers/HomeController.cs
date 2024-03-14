@@ -37,7 +37,7 @@ namespace TheLaptopStore.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public IActionResult FilterProducts(List<int> ramFilter, List<string> cpuFilter, List<string> gpuFilter,int priceRange, List<int> ssdFilter,List<string> MakerFilter, List<double> screenFilter,List<string> categoryFilter,string modelSearch)
+        public IActionResult FilterProducts(List<int> ramFilter, List<string> cpuFilter, List<string> gpuFilter,int priceRange, List<int> ssdFilter,List<string> MakerFilter, List<double> screenFilter,List<string> categoryFilter,string modelSearch, string saleFilter)
         {
             IQueryable<Laptop> filteredProducts = _db.Laptops.AsQueryable();
 
@@ -89,6 +89,10 @@ namespace TheLaptopStore.Controllers
             if (categoryFilter != null && categoryFilter.Any())
             {
                 filteredProducts = filteredProducts.Where(laptop => categoryFilter.Contains(laptop.Category));
+            }
+
+            if (saleFilter == "true") {
+                filteredProducts = filteredProducts.Where(laptop => laptop.SalePrecentage > 0);
             }
 
             // Execute the query and retrieve the filtered products

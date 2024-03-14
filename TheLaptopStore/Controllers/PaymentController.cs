@@ -144,8 +144,7 @@ namespace TheLaptopStore.Controllers
             return Redirect("~/ShoppingCart");
         }
 
-        public IActionResult showPaymentPage()
-        {
+        public IActionResult showPaymentPage(){
             string userId = _userManager.GetUserId(User);
             ApplicationUser user = _db.Users.Find(userId);
 
@@ -165,7 +164,7 @@ namespace TheLaptopStore.Controllers
                 List<ShoppingCart> userCarts = _db.ShoppingCarts.Include(c => c.laptop).Where(cart => cart.userId == userId).ToList();
                 foreach (ShoppingCart cart in userCarts)
                 {
-                    if(_db.Laptops.Find(cart.laptop.Model).Quantity==0)
+                    if(_db.Laptops.Find(cart.laptop.Model).Quantity - cart.quantity < 0)
                     {
                         TempData["UnavailableLaptop"] = "The product model : "+ cart.laptop.Model+ " is Unavailable";
                         _db.ShoppingCarts.Remove(cart);
