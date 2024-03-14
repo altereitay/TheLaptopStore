@@ -85,9 +85,15 @@
 
                                 } else {
                                     <p>Sorry, this product is currently out of stock.</p>
-                                    <button class="waitlist-button">Add me to wait-list</button>
+                                    <button id="NoQuantity" class="waitlist-button">Add me to wait-list</button>
                                 }
                             </div>
+
+                            <script>
+                                document.getElementById("NoQuantity").addEventListener("click", function () {
+                                    alert("You have been added to the wait-list!");
+                                });
+                            </script>
 
                         </div>
                     </div>

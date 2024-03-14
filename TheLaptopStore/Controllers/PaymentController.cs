@@ -197,6 +197,7 @@ namespace TheLaptopStore.Controllers
                 foreach (ShoppingCart cart in guestCarts) {
                     var product = _db.Laptops.Find(cart.laptop.Model);
                     product.Quantity -= cart.quantity;
+                    product.PopularityIndex += cart.quantity;
                     _db.ShoppingCarts.Remove(cart);
                 }
 
@@ -217,6 +218,7 @@ namespace TheLaptopStore.Controllers
             {
                 var product = _db.Laptops.Find(cart.laptop.Model);
                 product.Quantity -= cart.quantity;
+                product.PopularityIndex += cart.quantity;
                 _db.ShoppingCarts.Remove(cart);
             }
             user.CreditCardNumber = long.Parse(cardnumber);
