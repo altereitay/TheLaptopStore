@@ -37,11 +37,20 @@ namespace TheLaptopStore.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public IActionResult FilterProducts(List<int> ramFilter, List<string> cpuFilter, List<string> gpuFilter,List<int> PriceFilter, List<int> ssdFilter,List<string> MakerFilter, List<double> screenFilter,List<string> categoryFilter)
+        public IActionResult FilterProducts(List<int> ramFilter, List<string> cpuFilter, List<string> gpuFilter,int priceRange, List<int> ssdFilter,List<string> MakerFilter, List<double> screenFilter,List<string> categoryFilter,string modelSearch)
         {
             IQueryable<Laptop> filteredProducts = _db.Laptops.AsQueryable();
 
-         
+
+            if (modelSearch != null)
+            {
+                filteredProducts = filteredProducts.AsEnumerable()
+                    .Where(laptop => laptop.Model.StartsWith(modelSearch, StringComparison.OrdinalIgnoreCase))
+                    .Union(filteredProducts.AsEnumerable().Where(laptop => laptop.Model.Equals(modelSearch, StringComparison.OrdinalIgnoreCase)))
+                    .AsQueryable();
+            }
+
+
             // Apply RAM filter
             if (ramFilter != null && ramFilter.Any())
             {
@@ -59,11 +68,11 @@ namespace TheLaptopStore.Controllers
             {
                 filteredProducts = filteredProducts.Where(laptop => gpuFilter.Contains(laptop.GPU));
             }
-            if (PriceFilter != null && PriceFilter.Any())
+            if (priceRange != null)
             {
 
-                int lowest_price = PriceFilter.Min();
-                filteredProducts = filteredProducts.Where(laptop => laptop.Price > lowest_price);
+                int lowest_price = priceRange;
+                filteredProducts = filteredProducts.Where(laptop => laptop.Price*(1-laptop.SalePrecentage/100) > lowest_price);
             }
             if (ssdFilter != null && ssdFilter.Any())
             {
@@ -87,6 +96,24 @@ namespace TheLaptopStore.Controllers
 
             // Pass the filtered products to the view
             return View("Index",result);
+        }
+        public IActionResult priceHighToLow()
+        {
+            List<Laptop> laptops = _db.Laptops.OrderByDescending(l => l.Price).ToList();
+
+            return View("Index", laptops);
+        }
+        public IActionResult priceLowToHigh()
+        {
+            List<Laptop> laptops = _db.Laptops.OrderBy(l => l.Price).ToList();
+
+            return View("Index", laptops);
+        }
+        public IActionResult Popularity()
+        {
+            List<Laptop> laptops = _db.Laptops.OrderBy(l => l.PopularityIndex).ToList();
+
+            return View("Index", laptops);
         }
 
 

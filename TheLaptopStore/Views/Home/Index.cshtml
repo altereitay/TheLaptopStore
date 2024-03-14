@@ -340,6 +340,26 @@
 
 <div class="container">
     <div class="row">
+        <div class="col-md-9 offset-md-3">
+            <div class="dropdown" style="float: right;">
+                <button class="nav-link btn btn-link text-dark dropdown-toggle no-arrow" type="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort by
+                </button>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" asp-controller="Home" asp-action="priceHighToLow">Price: high to low</a>
+                    <a class="dropdown-item" asp-controller="Home" asp-action="priceLowToHigh">Price: low to high</a>
+                    <a class="dropdown-item" asp-controller="Home" asp-action="Popularity">Popularity</a>
+                </div>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.dropdown-toggle').on('click', function () {
+                    $(this).next('.dropdown-menu').toggle();
+                });
+            });
+        </script>
         <!-- Filter Section -->
         <div class="col-md-3">
             <form method="post" action="@Url.Action("FilterProducts", "Home")">
@@ -435,22 +455,21 @@
                     <div style="width: 200px" class="mb-3 filter-section">
                         <label class="toggle-btn" data-toggle="priceOptions">Filter by Price:</label>
                         <div class="options" id="priceOptions">
-                        @foreach (var priceOption in new List<SelectListItem>
-                        {
-                        new SelectListItem { Value = "1000", Text = "over 1000$" },
-                        new SelectListItem { Value = "2000", Text = "over 2000$" },
-                        new SelectListItem { Value = "3000", Text = "over 3000$" },
-                        })
-                        {
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="priceCheckbox_@priceOption.Value" name="PriceFilter" value="@priceOption.Value">
-                                <label class="form-check-label" for="priceCheckbox_@priceOption.Value">
-                                    @priceOption.Text
-                                </label>
-                            </div>
-                        }
+                            <input type="range" id="priceRange" name="priceRange" min="0" max="5000" step="100" value="0">
+                            <p>Price Range: <span id="priceValue">$0 - $5000</span></p>
                         </div>
                     </div>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                        var priceRange = document.getElementById("priceRange");
+                        var priceValue = document.getElementById("priceValue");
+
+                        priceRange.addEventListener("input", function () {
+                        var selectedPrice = parseInt(priceRange.value);
+                        priceValue.textContent = selectedPrice + "- $5000"  ;
+                        });
+                        });
+                    </script>
 
                     <div style="width: 200px" class="mb-3 filter-section">
                         <label class="toggle-btn" data-toggle="ssdOptions">Filter by SSD:</label>
@@ -539,6 +558,13 @@
                         }
                         </div>
                     </div>
+
+                    <div style="width: 200px" class="mb-3 filter-section">
+                        <label class="toggle-btn" data-toggle="Search">Search by Model:</label>
+                        <div class="options" id="Search">
+                            <input type="text" id="modelSearchInput" name="modelSearch" class="form-control" placeholder="Search by Model">
+                        </div>
+                    </div>
                     <script>
                         document.addEventListener("DOMContentLoaded", function () {
                             var toggleButtons = document.querySelectorAll('.toggle-btn');
@@ -551,6 +577,16 @@
                             });
                         });
                     </script>
+
+
+                  
+                
+
+
+
+
+
+
                     <div>
                         <button type="submit" class="btn btn-primary">Filter</button>
                     </div>
