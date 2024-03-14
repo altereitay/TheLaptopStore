@@ -111,7 +111,7 @@ namespace TheLaptopStore.Controllers
         }
         public IActionResult Popularity()
         {
-            List<Laptop> laptops = _db.Laptops.OrderBy(l => l.PopularityIndex).ToList();
+            List<Laptop> laptops = _db.Laptops.OrderByDescending(l => l.PopularityIndex).ToList();
 
             return View("Index", laptops);
         }
