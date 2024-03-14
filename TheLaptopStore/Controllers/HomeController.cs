@@ -70,7 +70,6 @@ namespace TheLaptopStore.Controllers
             }
             if (priceRange != null)
             {
-
                 int lowest_price = priceRange;
                 filteredProducts = filteredProducts.Where(laptop => laptop.Price*(1-laptop.SalePrecentage/100) > lowest_price);
             }
