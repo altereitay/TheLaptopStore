@@ -461,23 +461,23 @@
                         });
                     </script>
 
-                     <div style="width: 200px" class="mb-3 filter-section">
+                    <div style="width: 200px" class="mb-3 filter-section">
                         <label class="toggle-btn" data-toggle="saleOptions">Show On Sale Only:</label>
-                        @* <div class="options">
-                            id=saleOptions"*@
-                        @* @foreach (var saleOption in new List<SelectListItem>
+                        <div class="options" id="saleOptions">
+                            @foreach (var saleOption in new List<SelectListItem>
                             {
                             new SelectListItem { Value = "true", Text = "Show On Sale" },
-                            }) { *@
+                            }) {
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" id="saleFilter" name="SaleFilter" value="true">
-                                    <label class="form-check-label" for="saleFilter">
-                                        Show On Sale
+                                    <input class="form-check-input" type="checkbox" id="saleCheckbox_@saleOption.Value" name="saleFilter" value="@saleOption.Value">
+                                    <label class="form-check-label" for="ssdCheckbox_@saleOption.Value">
+                                        @saleOption.Text
                                     </label>
                                 </div>
-                        @* }
-                            </div>*@
-                    </div> 
+                            }
+                        </div>
+                    </div>
+
 
                     <div style="width: 200px" class="mb-3 filter-section">
                         <label class="toggle-btn" data-toggle="ssdOptions">Filter by SSD:</label>
