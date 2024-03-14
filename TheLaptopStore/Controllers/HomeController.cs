@@ -3,6 +3,7 @@ using System.Diagnostics;
 using TheLaptopStore.Data;
 using TheLaptopStore.Models;
 using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace TheLaptopStore.Controllers
 {
@@ -16,9 +17,12 @@ namespace TheLaptopStore.Controllers
             _db = db;
         }
 
-        public IActionResult Index()
-        {
+        public IActionResult Index() {
             List<Laptop> laptops = _db.Laptops.ToList();
+
+            if (HttpContext.Session.GetString("id") == null) {
+                HttpContext.Session.SetString("id", HttpContext.Session.Id);
+            }
 
             return View(laptops);
         }

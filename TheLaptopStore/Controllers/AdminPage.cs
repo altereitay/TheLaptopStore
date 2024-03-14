@@ -68,16 +68,14 @@ namespace TheLaptopStore.Controllers
             return View("addProduct");
         }
 
-        public IActionResult addProduct()
-        {
+        public IActionResult addProduct() {
             Laptop l1 = _db.Laptops.Find(Request.Form["Model"]);
             if(l1 != null)
             {
                 ModelState.AddModelError("Model", "Model already exists. Please choose a different one.");
                 return View("addProduct");
             }
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid) {
                 Laptop laptop = new Laptop();
                 laptop.Ram = Convert.ToInt32(Request.Form["Ram"]);
                 laptop.SSD = Convert.ToInt32(Request.Form["SSD"]);

@@ -19,15 +19,12 @@ namespace TheLaptopStore.Controllers {
         public IActionResult Index() {
 
             string id = _userManager.GetUserId(User);
-            if (id == null)
-            {
-                return Redirect("Identity/Account/Login");
+            if (id == null){
+                id = HttpContext.Session.GetString("id");
             }
             int price = 0;
             var cartList = _db.ShoppingCarts.Include(c => c.laptop).Where(c => c.userId == id).ToList();
-            foreach (var cart in cartList)
-             {
-
+            foreach (var cart in cartList) {
                price += cart.totalPrice;
 
              }
