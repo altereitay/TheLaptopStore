@@ -385,9 +385,6 @@
                             }
                         </div>
                     </div>
-
-                   
-
                     <div style="width: 200px" class="mb-3 filter-section">
                         <label class="toggle-btn" data-toggle="cpuOptions">Filter by CPU:</label>
                         <div class="options" id="cpuOptions">
@@ -412,9 +409,6 @@
                         }
                         </div>
                     </div>
-
-
-
                     <div style="width: 200px"  class="mb-3 filter-section">
                         <label class="toggle-btn" data-toggle="gpuOptions" >Filter by GPU:</label>
                         <div class="options" id="gpuOptions">
@@ -448,10 +442,6 @@
                         }
                         </div>
                     </div>
-
-
-
-
                     <div style="width: 200px" class="mb-3 filter-section">
                         <label class="toggle-btn" data-toggle="priceOptions">Filter by Price:</label>
                         <div class="options" id="priceOptions">
@@ -470,6 +460,24 @@
                         });
                         });
                     </script>
+
+                     <div style="width: 200px" class="mb-3 filter-section">
+                        <label class="toggle-btn" data-toggle="saleOptions">Show On Sale Only:</label>
+                        <div class="options">
+                            @*id=saleOptions"*@
+                        @* @foreach (var saleOption in new List<SelectListItem>
+                            {
+                            new SelectListItem { Value = "true", Text = "Show On Sale" },
+                            }) { *@
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="saleFilter" name="SaleFilter" value="true">
+                                    <label class="form-check-label" for="saleFilter">
+                                        Show On Sale
+                                    </label>
+                                </div>
+                        @* }*@
+                        </div>
+                    </div> 
 
                     <div style="width: 200px" class="mb-3 filter-section">
                         <label class="toggle-btn" data-toggle="ssdOptions">Filter by SSD:</label>
@@ -577,16 +585,6 @@
                             });
                         });
                     </script>
-
-
-                  
-                
-
-
-
-
-
-
                     <div>
                         <button type="submit" class="btn btn-primary">Filter</button>
                     </div>
