@@ -250,8 +250,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Navbar -->
     <div class="navbar">
         <!-- Navbar content goes here -->
     </div>
@@ -269,7 +267,7 @@
             </div>
             <label for="cname">Name on Card</label>
             <input type="text" id="cname" name="cardname" placeholder="Name">
-            <form method="post" action="payNow">
+            <form method="post" action="payNow" id="paymentForm">
                 <label for="ccnum">Credit card number</label>
                 <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444" >
                 <label for="expmonth">Exp Month</label>
@@ -290,5 +288,42 @@
         </div>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var form = document.getElementById("paymentForm");
+            form.addEventListener("submit", function (event) {
+                var ccnum = document.getElementById("ccnum").value;
+                var expmonth = parseInt(document.getElementById("expmonth").value);
+                var expyear = parseInt(document.getElementById("expyear").value);
+                var cvv = document.getElementById("cvv").value;
+                var currentYear = new Date().getFullYear();
+                var currentMonth = new Date().getMonth() + 1;
+                if (ccnum.length !== 16 || ccnum[0] === '0' || isNaN(parseInt(ccnum))) {
+                    document.getElementById("modelError").innerText = "Credit card number must be a 16-digit number and cannot start with 0.";
+                    event.preventDefault();
+                    return false;
+                }
+
+                if (expyear < currentYear || (expyear === currentYear && expmonth < currentMonth)) {
+                    document.getElementById("modelError").innerText = "Expiration date must be in the future.";
+                    event.preventDefault();
+                    return false;
+                }
+
+                if (isNaN(parseInt(expmonth)) || expmonth < 1 || expmonth > 12) {
+                    document.getElementById("modelError").innerText = "Invalid expiration month.";
+                    event.preventDefault();
+                    return false;
+                }
+
+                if (cvv.length !== 3 || isNaN(parseInt(cvv))) {
+                    document.getElementById("modelError").innerText = "CVV must be a 3-digit number.";
+                    event.preventDefault();
+                    return false;
+                }
+                return true;
+            });
+        });
+    </script>
 </body>
 </html>

@@ -150,14 +150,13 @@ namespace TheLaptopStore.Controllers
             ApplicationUser user = _db.Users.Find(userId);
 
             if (userId == null) {
-                return View("GuestPayment");
+                userId = HttpContext.Session.GetString("id");
             }
 
             // Check if the shopping cart for the user exists
             ShoppingCart userCart = _db.ShoppingCarts.FirstOrDefault(cart => cart.userId == userId);
 
-            if (userCart == null)
-            {
+            if (userCart == null) {
                 TempData["ModelError"] = "Add products to your cart";
                 return Redirect("~/ShoppingCart");
             } 
@@ -174,6 +173,9 @@ namespace TheLaptopStore.Controllers
                         return Redirect("~/ShoppingCart");
                     }
                 }
+            }
+            if (user == null) {
+                return View("GuestPayment");
             }
           return View("PaymentPage", user);
             
