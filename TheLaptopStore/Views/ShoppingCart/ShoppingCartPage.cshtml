@@ -120,7 +120,9 @@
 
 
 </style>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <div class="container mt-5 p-3 rounded cart">
     <div class="row no-gutters">
         <div class="col-md-8">
@@ -139,9 +141,9 @@
                         <th>Quantity</th>
                         <th>Total Price</th>
                     </tr>
-
-                    @foreach (var cart in Model) {
-                        <tr>
+                    @foreach (var cart in Model)
+                    {
+                        <tr class="cart-row animate__animated animate__fadeInLeft" style="animation-delay: @(Model.IndexOf(cart) * 0.2)s;">
                             <td>
                                 <div class="d-flex flex-row align-items-center">
                                     <img class="rounded" src="~/photos/@(cart.laptop.Picture).jpg" width="40">
@@ -156,7 +158,6 @@
                             <td>
                                 <span class="quantity-value">@cart.quantity</span>
                                 <a href="@Url.Action("AddProductCart", "Payment", new { laptopModel = cart.laptopModel })" class="quantity-link" onclick="changeQuantity('@cart.laptopModel', 'increase')">&#9650;</a>
-                                
                                 <a href="@Url.Action("DecreaseProductCart", "Payment", new { laptopModel = cart.laptopModel })" class="quantity-link" onclick="changeQuantity('@cart.laptopModel', 'decrease')">&#9660;</a>
                             </td>
                             <td>
@@ -169,25 +170,29 @@
                                 <a class="btn btn-primary" href="@Url.Action("RemoveProductCart", "Payment", new { laptopModel = cart.laptopModel })" role="button">Remove</a><br />
                             </td>
                             <td>
-                                @if (cart.quantity == cart.laptop.Quantity) {
+                                @if (cart.quantity == cart.laptop.Quantity)
+                                {
                                     <span id="cantAddMessage" class="font-weight-bold">@TempData["CantAdd"]</span>
 
                                     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
                                     <script>
                                         $(document).ready(function () {
-                                        // Set the duration in milliseconds (e.g., 5000 for 5 seconds)
-                                        var duration = 1000;
+                                            // Set the duration in milliseconds (e.g., 1000 for 1 second)
+                                            var duration = 1000;
 
-                                        // Hide the message after the specified duration
-                                        setTimeout(function () {
-                                        $("#cantAddMessage").fadeOut();
-                                        }, duration);
+                                            // Hide the message after the specified duration
+                                            setTimeout(function () {
+                                                $("#cantAddMessage").fadeOut();
+                                            }, duration);
                                         });
                                     </script>
                                 }
                             </td>
                         </tr>
                     }
+
+
+
                 </table>
                 @{
                     var modelError = TempData["ModelError"] as string;

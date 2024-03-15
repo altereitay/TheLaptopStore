@@ -120,7 +120,7 @@ namespace TheLaptopStore.Controllers
 
             _db.Users.Remove(obj);
             _db.SaveChanges();
-            return View("AdminPage");
+            return RedirectToAction("Index", "Home");
         }
         public IActionResult showAddAdmin() { 
         
