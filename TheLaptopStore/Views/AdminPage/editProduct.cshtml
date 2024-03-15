@@ -12,9 +12,10 @@
     <div class="col-md-4">
         <form asp-controller="AdminPage" asp-action="edit" asp-route-model="@Model.Model">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Ram" class="control-label"></label>
-                <select asp-for="Ram" value="@Model.Ram">
+            <div class="mb-3">
+                <label for="ram" class="form-label">RAM:</label>
+                <select asp-for="Ram" value="@Model.Ram" class="form-select" id="Ram" required>
+                    <option value="">Choose...</option>
                     <option value="4">4 GB</option>
                     <option value="8">8 GB</option>
                     <option value="16">16 GB</option>
@@ -23,8 +24,9 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="SSD" class="control-label"></label>
-                <select asp-for="SSD" value="@Model.SSD">
+                <label asp-for="SSD" class="control-label">SSD:</label>
+                <select asp-for="SSD" class="form-select" id="SSD" required>
+                    <option value="">Choose...</option>
                     <option value="128">128 GB</option>
                     <option value="256">256 GB</option>
                     <option value="512">512 GB</option>
@@ -32,9 +34,11 @@
                     <option value="2048">2 TB</option>
                 </select>
             </div>
+
             <div class="form-group">
-                <label asp-for="CPU" class="control-label"></label>
-                <select asp-for="CPU" value="@Model.CPU">
+                <label asp-for="CPU" class="control-label">CPU:</label>
+                <select asp-for="CPU" value="@Model.CPU" class="form-select" id="CPU" required>
+                    <option value="">Choose...</option>
                     <option value="I3">Intel I3</option>
                     <option value="I5">Intel I5</option>
                     <option value="I7">Intel I7</option>
@@ -45,9 +49,11 @@
                     <option value="R9">Ryzen 9</option>
                 </select>
             </div>
+
             <div class="form-group">
-                <label asp-for="ScreenSize" class="control-label"></label>
-                <select asp-for="ScreenSize" value="@Model.ScreenSize">
+                <label asp-for="ScreenSize" class="control-label">Screen Size:</label>
+                <select asp-for="ScreenSize" value="@Model.ScreenSize" class="form-select" id="ScreenSize" required>
+                    <option value="">Choose...</option>
                     <option value="13.3">13.3"</option>
                     <option value="14">14"</option>
                     <option value="14.5">14.5"</option>
@@ -57,9 +63,11 @@
                     <option value="18">18"</option>
                 </select>
             </div>
+
             <div class="form-group">
-                <label asp-for="GPU" class="control-label"></label>
-                <select asp-for="GPU" value="@Model.GPU">
+                <label asp-for="GPU" class="control-label">GPU:</label>
+                <select asp-for="GPU" value="@Model.GPU" class="form-select" id="GPU" required>
+                    <option value="">Choose...</option>
                     <option value="irisxe">Intel IrisXe</option>
                     <option value="arc">Intel Arc</option>
                     <option value="apple18">Apple 18 Core</option>
@@ -100,10 +108,11 @@
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" value="@Model.Description" />
+                <label asp-for="Description" class="control-label">Description:</label>
+                <textarea asp-for="Description" class="form-control" rows="8">@Model.Description</textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Picture" class="control-label"></label>
                 <input asp-for="Picture" class="form-control" value="@Model.Picture" />
@@ -115,8 +124,9 @@
                 <span asp-validation-for="SalePrecentage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                <select asp-for="Category" value="@Model.Category">
+                <label asp-for="Category" class="control-label">Category:</label>
+                <select asp-for="Category" value="@Model.Category" class="form-select" id="Category" required>
+                    <option value="">Choose...</option>
                     <option value="gaming">Gaming</option>
                     <option value="2-in-1">2-in-1</option>
                     <option value="everyday">Every Day Work</option>
