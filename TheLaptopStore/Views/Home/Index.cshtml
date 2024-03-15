@@ -330,6 +330,21 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
         max-width: 100%;
+    
+    }
+  @@keyframes slideInFromLeft {
+        0% {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .filter-section {
+        animation: slideInFromLeft 0.5s ease-in-out;
     }
 
 </style>
@@ -459,7 +474,17 @@
                         priceValue.textContent = selectedPrice + "- $5000"  ;
                         });
                         });
+                        document.addEventListener("DOMContentLoaded", function () {
+                            var filterSections = document.querySelectorAll('.filter-section');
+                            filterSections.forEach(function (section, index) {
+                                section.style.animationDelay = (index * 0.2) + "s";
+                            });
+                        });
+
+
+
                     </script>
+
 
                     <div style="width: 200px" class="mb-3 filter-section">
                         <label class="toggle-btn" data-toggle="saleOptions">Show On Sale Only:</label>
