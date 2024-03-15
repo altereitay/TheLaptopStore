@@ -180,9 +180,15 @@ namespace TheLaptopStore.Controllers
             
         }
 
-        public IActionResult payNow(string? cardnumber, string? expmonth, string? expyear, string? cvv)
+        public IActionResult payNow(string? cardNumber, string? expDate, string? CVV)
         {
             string userId = _userManager.GetUserId(User);
+
+            string cardWithoutSpaces = cardNumber.Replace(" ", "");
+
+            string[] parts = expDate.Split('/');
+            int expMonth = int.Parse(parts[0]);
+            int expYear = int.Parse("20" + parts[1]);
 
             if (userId == null) {
                 userId = HttpContext.Session.GetString("id");
@@ -204,11 +210,11 @@ namespace TheLaptopStore.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            if (cardnumber == "0" || expmonth == "0" || expyear == "0" || cvv == "0")
-            {
-                TempData["PaymentError"] = "Must fill the payment filed before you pay";
-                return View("PaymentPage", user);
-            }
+            //if (cardnumber == "0" || expmonth == "0" || expyear == "0" || cvv == "0")
+            //{
+            //    TempData["PaymentError"] = "Must fill the payment filed before you pay";
+            //    return View("PaymentPage", user);
+            //}
 
 
             List<ShoppingCart> userCarts = _db.ShoppingCarts.Include(c => c.laptop).Where(cart => cart.userId == userId).ToList();
@@ -220,10 +226,10 @@ namespace TheLaptopStore.Controllers
                 product.PopularityIndex += cart.quantity;
                 _db.ShoppingCarts.Remove(cart);
             }
-            user.CreditCardNumber = long.Parse(cardnumber);
-            user.ExpDateMonth = Convert.ToInt32(expmonth);
-            user.ExpDateYear = Convert.ToInt32(expyear);
-            user.CVV = Convert.ToInt32(cvv);
+            user.CreditCardNumber = long.Parse(cardWithoutSpaces);
+            user.ExpDateMonth = expMonth;
+            user.ExpDateYear = expYear;
+            user.CVV = Convert.ToInt32(CVV);
 
             _db.SaveChanges();
             return RedirectToAction("Index", "Home");
