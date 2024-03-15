@@ -3,7 +3,21 @@
 @{
     ViewData["Title"] = "editProduct";
 }
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <style>
+        .form-group {
+            opacity: 0;
+            transform: translateY(-50px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+    </style>
+</head>
+<body>
 <h1>editProduct</h1>
 
 <h4>Laptop</h4>
@@ -154,3 +168,16 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var formGroups = document.querySelectorAll('.form-group');
+            formGroups.forEach(function (formGroup, index) {
+                setTimeout(function () {
+                    formGroup.style.opacity = '1';
+                    formGroup.style.transform = 'translateY(0)';
+                }, index * 200); // Adjust the delay between each form element falling into place
+            });
+        });
+    </script>
+</body>
+</html>
