@@ -34,6 +34,7 @@
             gap: 20px;
             background-color: #13274F;
             align-items: center;
+            margin-left: 135px
         }
 
         .container-left {
@@ -164,7 +165,7 @@
                         </div>
                         <div class="cvv-container">
                             <label for="cvv-text">CVV</label>
-                            <input type="text" name="CVV" id="CVV" maxlength="4" placeholder="1234" required>
+                            <input type="text" name="CVV" id="CVV" maxlength="4" placeholder="123" required>
                         </div>
                     </div>
                     <input type="submit" value="Pay Now" id="add">
@@ -289,6 +290,11 @@
             if (errors.length > 0) {
                 event.preventDefault();
                 alert(errors.join("\n"));
+            }
+            else {
+                // If no errors, show alert and submit form
+                alert("Thanks for buying!");
+                form.submit();
             }
         });
 
