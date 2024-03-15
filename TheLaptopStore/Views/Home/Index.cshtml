@@ -597,15 +597,15 @@
             <div class="row">
                 @foreach (var laptop in Model)
                 {
-                    <div class="col-md-6 col-md-6 animate__animated animate__rotateInDownLeft">
+                    <div class="col-md-6 col-md-6 animate__animated animate__rotateInDownLeft animate__zoomIn">
                         <div class="product-content product-wrap clearfix" style="position: relative;">
                             <div class="row">
-                                <div class="col-md-5 col-sm-12 col-xs-12">
+                                <div class="col-md-5 col-sm-12 col-xs-12 animate__animated animate__fadeInLeft">
                                     <div class="product-image">
                                         <img src="~/photos/@(laptop.Picture).jpg" alt="194x228" class="img-responsive img-fluid">
                                     </div>
                                 </div>
-                                <div class="col-md-7 col-sm-12 col-xs-12">
+                                <div class="col-md-7 col-sm-12 col-xs-12 animate__animated animate__fadeInRight">
                                     <div class="product-deatil">
                                         <h5 class="name">
                                             <a href="#">
@@ -625,13 +625,13 @@
 
                                         <span class="tag1"></span>
                                     </div>
-                                    <div class="description">
+                                    <div class="description animate__animated animate__fadeIn">
                                         <p>@laptop.Description</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="product-info smart-form" style="position: absolute; bottom: 10px; right: 10px;">
+                            <div class="product-info smart-form animate__animated animate__bounceIn" style="position: absolute; bottom: 10px; right: 10px;">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <a class="btn" asp-controller="ProductPage" asp-action="showProductCard" asp-route-model="@laptop.Model" style="width: 200px; background-color: #007FFF; color: #fff; text-align: center; display: inline-block; padding: 10px 20px; text-decoration: none; border-radius: 5px;">More Information</a>
@@ -643,6 +643,7 @@
                 }
             </div>
         </div>
+
     </div>
 </div>
 
