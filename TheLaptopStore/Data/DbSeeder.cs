@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
 using static TheLaptopStore.Areas.Identity.Pages.Account.RegisterModel;
 
 namespace TheLaptopStore.Data {
@@ -20,7 +19,7 @@ namespace TheLaptopStore.Data {
                 LastName = "admin",
                 PersonalID = "111111111",
                 City = "Beer",
-                StreetName= "Bazel",
+                StreetName = "Bazel",
                 BuildingNumber = 1,
                 ApartmentNumber = 1,
                 EmailConfirmed = true,
