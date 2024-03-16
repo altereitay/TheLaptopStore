@@ -143,6 +143,10 @@
             display: flex;
         }
 
+        .payment-section {
+            display: none; 
+        }
+
     </style>
 </head>
 <body>
@@ -150,6 +154,31 @@
         <source src="~/photos/song.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
+    <div id="address-section">
+        <h1>Shipping Info</h1>
+        <div class="form-floating mb-3">
+            <input class="form-control" autocomplete="City" aria-required="true" placeholder="City" />
+            <label>City</label>
+            <span class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" autocomplete="StreetName" aria-required="true" placeholder="Street" />
+            <label>Street Name</label>
+            <span class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" autocomplete="BuildingNumber" aria-required="true" placeholder="Building Number" />
+            <label>Building Number</label>
+            <span class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" autocomplete="ApartmentNumber" aria-required="true" placeholder="Apartment Number" />
+            <label>Apartment Number</label>
+            <span class="text-danger"></span>
+        </div>
+        <button id="show-payment">Proceed to Payment</button>
+    </div>
+
     <main class="payment-section">
         <section class="ui">
             <div class="container-left">
@@ -202,6 +231,48 @@
             </div>
         </section>
     </main>
+
+    <script>
+        document.getElementById("show-payment").addEventListener("click", function () {
+            // Check if all input fields in the address section are filled
+            var cityInput = document.querySelector("#address-section input[autocomplete='City']");
+            var streetNameInput = document.querySelector("#address-section input[autocomplete='StreetName']");
+            var buildingNumberInput = document.querySelector("#address-section input[autocomplete='BuildingNumber']");
+            var apartmentNumberInput = document.querySelector("#address-section input[autocomplete='ApartmentNumber']");
+
+         
+            var cityRegex = /^[A-Za-z]+$/;
+            var cityValid = cityRegex.test(cityInput.value.trim());
+
+        
+            var streetNameRegex = /^[A-Za-z\s]+$/;
+            var streetNameValid = streetNameRegex.test(streetNameInput.value.trim());
+
+       
+            var buildingNumberRegex = /^[0-9]+$/;
+            var buildingNumberValid = buildingNumberRegex.test(buildingNumberInput.value.trim());
+
+   
+            var apartmentNumberValid = buildingNumberRegex.test(apartmentNumberInput.value.trim());
+
+            if (cityInput.value.trim() !== "" && streetNameInput.value.trim() !== "" && buildingNumberInput.value.trim() !== "" && apartmentNumberInput.value.trim() !== "" && cityValid && streetNameValid && buildingNumberValid && apartmentNumberValid) {
+                document.getElementById("address-section").style.display = "none"; 
+                document.querySelector(".payment-section").style.display = "block"; 
+            } else {
+                if (!cityValid) {
+                    alert("City name should contain only letters.");
+                } else if (!streetNameValid) {
+                    alert("Street name should contain only letters.");
+                } else if (!buildingNumberValid) {
+                    alert("Building number should contain only numbers.");
+                } else if (!apartmentNumberValid) {
+                    alert("Apartment number should contain only numbers.");
+                } else {
+                    alert("Please fill in all address fields.");
+                }
+            }
+        });
+    </script>
     <script>
         const form = document.querySelector("#credit-card");
 
