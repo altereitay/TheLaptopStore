@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TheLaptopStore.Data;
 
 namespace TheLaptopStore.Controllers {
@@ -15,8 +14,8 @@ namespace TheLaptopStore.Controllers {
             _logger = logger;
             _db = db;
         }
-            
-        public IActionResult showProductCard(string ? model) {
+
+        public IActionResult showProductCard(string? model) {
             var obj = _db.Laptops.Find(model);
 
             if (obj == null) {
@@ -25,7 +24,7 @@ namespace TheLaptopStore.Controllers {
             return View("ProductCard", obj);
         }
 
-        public IActionResult AddToCart(string ? model, string addToCart, string buyNow) {
+        public IActionResult AddToCart(string? model, string addToCart, string buyNow) {
 
             string id = _userManager.GetUserId(User);
             var laptop = _db.Laptops.Find(model);
@@ -39,13 +38,11 @@ namespace TheLaptopStore.Controllers {
             }
             string quan = Request.Form["quantity"];
 
-            if (!string.IsNullOrEmpty(quan) && laptop.Quantity< Convert.ToInt32(Request.Form["quantity"]))
-            {
+            if (!string.IsNullOrEmpty(quan) && laptop.Quantity < Convert.ToInt32(Request.Form["quantity"])) {
                 TempData["TooMuchProducts"] = "Only " + laptop.Quantity + " laptops left";
-                return View("ProductCard",laptop);
+                return View("ProductCard", laptop);
             }
-            if(string.IsNullOrEmpty(quan))
-            {
+            if (string.IsNullOrEmpty(quan)) {
                 TempData["EmptyQuantity"] = "Add products";
                 return View("ProductCard", laptop);
             }
@@ -55,21 +52,17 @@ namespace TheLaptopStore.Controllers {
             if (sc is not null) {
                 int checkQuantity = sc.quantity + Convert.ToInt32(Request.Form["quantity"]);
                 if (checkQuantity > laptop.Quantity) {
-                    TempData["cartPlusQuantity"]="You have in your cart "+ sc.quantity + "\nThere is left: "+(laptop.Quantity- sc.quantity);
+                    TempData["cartPlusQuantity"] = "You have in your cart " + sc.quantity + "\nThere is left: " + (laptop.Quantity - sc.quantity);
                     return View("ProductCard", laptop);
                 }
                 sc.quantity += Convert.ToInt32(Request.Form["quantity"]);
                 sc.totalPrice = sc.quantity * laptop.Price;
-            } 
-            else {
+            } else {
                 int totalPrice = 0;
                 int quantity = Convert.ToInt32(Request.Form["quantity"]);
-                if (laptop.SalePrecentage > 0)
-                {
+                if (laptop.SalePrecentage > 0) {
                     totalPrice = Convert.ToInt32(quantity * (laptop.Price - laptop.Price * (laptop.SalePrecentage * 0.01)));
-                }
-                else
-                {
+                } else {
                     totalPrice = quantity * laptop.Price;
                 }
                 ShoppingCart cart = new ShoppingCart();
@@ -80,20 +73,17 @@ namespace TheLaptopStore.Controllers {
                 cart.userId = id;
 
                 _db.ShoppingCarts.Add(cart);
-            }            
-            _db.SaveChanges();
-            if (!string.IsNullOrEmpty(addToCart))
-            {
-                return RedirectToAction("Index", "Home");
             }
-            else 
-            {
+            _db.SaveChanges();
+            if (!string.IsNullOrEmpty(addToCart)) {
+                return RedirectToAction("Index", "Home");
+            } else {
 
                 return Redirect("~/ShoppingCart"); // Redirect to the checkout page or any other appropriate action
             }
 
         }
-        
+
 
 
     }

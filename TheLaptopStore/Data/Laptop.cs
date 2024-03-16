@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TheLaptopStore.Data
-{
+namespace TheLaptopStore.Data {
     [Table("Laptop")]
-    public class Laptop
-    {
+    public class Laptop {
         [Required]
         public int Ram { get; set; }
 

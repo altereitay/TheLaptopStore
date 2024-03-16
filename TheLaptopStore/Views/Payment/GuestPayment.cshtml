@@ -309,7 +309,7 @@
 
         cardHolder.addEventListener("keyup", (e) => {
             if (!e.target.value) {
-                cardHolderText.innerHTML = "NOAH JACOB";
+                cardHolderText.innerHTML = "LIOR GOFMAN";
             } else {
                 cardHolderText.innerHTML = e.target.value.toUpperCase();
             }
@@ -349,9 +349,13 @@
 
             // Validate expiration date
             const cardExpiration = document.querySelector("#expDate");
-            const currentDate = new Date();
-            const enteredDate = new Date("20" + cardExpiration.value.split("/").reverse().join("-"));
-            if (enteredDate <= currentDate) {
+            const currentYear = new Date().getFullYear();
+            const currentMonth = new Date().getMonth() + 1
+            const userYear = parseInt('20' + cardExpiration.value.split("/")[1])
+            const userMonth = parseInt(cardExpiration.value.split("/")[0])
+            if (userMonth > 12 || userMonth < 1) {
+                errors.push('Expiration Month invalid');
+            } else if ((userYear === currentYear && userMonth < currentMonth) || userYear < currentYear) {
                 errors.push("Expiration date must be in the future.");
             }
 

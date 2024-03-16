@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-namespace TheLaptopStore.Data
-{
-    public class ApplicationUser : IdentityUser
-    {
+namespace TheLaptopStore.Data {
+    public class ApplicationUser : IdentityUser {
         [Required]
         [RegularExpression("^[0-9]{9}$", ErrorMessage = "ID must be 9 numbers long")]
         public string PersonalID { get; set; }
