@@ -50,6 +50,18 @@
                 <label asp-for="Input.DateOfBirth">Date Of Birth</label>
                 <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
             </div>
+            <script>
+                function isValidDate(dateString) {
+                    var regexDate = /^\d{4}-\d{2}-\d{2}$/;
+                    return regexDate.test(dateString);
+                }
+                var releaseDateInput = document.querySelector('input[type="date"]');
+                var today = new Date();
+                var tenYearsAgo = new Date(today.getFullYear() - 16, today.getMonth(), today.getDate());
+                var tenYearsAgoISOString = tenYearsAgo.toISOString().split('T')[0];
+                releaseDateInput.setAttribute('max', tenYearsAgoISOString);
+
+            </script>
             <div class="form-floating mb-3">
                 <input asp-for="Input.City" class="form-control" autocomplete="City" aria-required="true" placeholder="City" />
                 <label asp-for="Input.City">City</label>

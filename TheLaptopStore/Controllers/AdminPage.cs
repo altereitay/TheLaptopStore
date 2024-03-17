@@ -89,7 +89,8 @@ namespace TheLaptopStore.Controllers {
 
             _db.Users.Remove(obj);
             _db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            List<ApplicationUser> users = _db.Users.ToList();
+            return View("deleteUser", users);
         }
         public IActionResult showAddAdmin() {
 
