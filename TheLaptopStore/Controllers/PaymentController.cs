@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TheLaptopStore.Data;
@@ -66,6 +67,8 @@ namespace TheLaptopStore.Controllers {
 
                     } else {
                         TempData["CantAdd"] = "Cant add another product";
+                        TempData["idModel"] = _db.Laptops.Find(laptopModel).Model;
+                        
                         return Redirect("~/ShoppingCart");
                     }
                 }

@@ -22,19 +22,19 @@
 </style>
 <body style="background-color: #E1EBEE">
     <div class="container">
-        <div class="col-lg-12 border p-3 main-section bg-white fall-animation">
+        <div class="col-lg-12 border p-3 main-section bg-white ">
             <div class="row m-0">
-                <div class="col-lg-4 left-side-product-box pb-3 fall-animation ">
+                <div class="col-lg-4 left-side-product-box pb-3  ">
                     <img src="~/photos/@(Model.Picture).jpg" class="img-fluid img-thumbnail" style="width: 100%;" alt="Laptop Image">
                 </div>
-                <div class="col-lg-8 fall-animation">
-                    <div class="right-side-pro-detail border p-3 m-0 fall-animation">
+                <div class="col-lg-8 ">
+                    <div class="right-side-pro-detail border p-3 m-0 ">
                         <div class="row">
-                            <div class="col-lg-12 fall-animation">
+                            <div class="col-lg-12 ">
                                 <span><strong>@Model.Maker</strong></span>
                                 <p class="m-0 p-0"><strong>@Model.Model</strong></p>
                             </div>
-                            <div class="col-lg-12 fall-animation">
+                            <div class="col-lg-12 ">
                                 <div class="d-inline-flex justify-content-between align-items-center">
                                     <strong><h3>@((int)(Math.Floor(Model.Price - Model.Price * (Model.SalePrecentage * 0.01)))) $</h3></strong>
                                     @if (Model.SalePrecentage > 0) {
@@ -44,12 +44,12 @@
                                 </div>
                                 <hr class="p-0 m-0">
                             </div>
-                            <div class="col-lg-12 pt-2 fall-animation">
+                            <div class="col-lg-12 pt-2 ">
                                 <h5><strong>Description: </strong></h5>
                                 <span>@Model.Description</span>
 
                             </div>
-                            <div class="col-lg-12 pt-3 fall-animation ">
+                            <div class="col-lg-12 pt-3  ">
                                 <p class="tag-section"><strong>Category: </strong>@Model.Category</p>
                                 <p class="tag-section"><strong>Ram: </strong>@Model.Ram GB</p>
                                 <p class="tag-section"><strong>SSD: </strong>@Model.SSD GB</p>
@@ -58,7 +58,7 @@
                                 <p class="tag-section"><strong>Color: </strong>@Model.Color</p>
                                 <p class="tag-section"><strong>Release Date: </strong>@Model.ReleaseDate</p>
                             </div>
-                            <div class="col-lg-12 fall-animation ">
+                            <div class="col-lg-12  ">
                                 <h6><strong>Quantity in stock: </strong>@Model.Quantity</h6>
                                 @if (Model.Quantity > 0) {
                                     <form asp-action="AddToCart" asp-controller="ProductPage">
@@ -69,13 +69,13 @@
                                         <input type="hidden" id="model" name="model" value="@Model.Model" />
 
                                         <!-- Adjusted structure with div elements -->
-                                        <div class="row" fall-animation>
+                                        <div class="row" >
                                             <div class="col-lg-12 mt-3">
-                                                <div class="row fall-animation">
-                                                    <div class="col-lg-6 pb-2 fall-animation">
+                                                <div class="row ">
+                                                    <div class="col-lg-6 pb-2 ">
                                                         <input class="btn btn-danger w-100" name="addToCart" id="addToCart" type="submit" value="Add to Cart" />
                                                     </div>
-                                                    <div class="col-lg-6 fall-animation">
+                                                    <div class="col-lg-6 ">
                                                         <input class="btn btn-success w-100" name="buyNow" id="buyNow" type="submit" value="buyNow" />
                                                     </div>
                                                 </div>
@@ -99,23 +99,6 @@
                 </div>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                var duration = 1000;
-                setTimeout(function () {
-                    $("#EmptyQuantity").fadeOut();
-                }, duration);
-                setTimeout(function () {
-                    $("#TooMuchProducts").fadeOut();
-                }, duration);
-                setTimeout(function () {
-                    $("#cartPlusQuantity").fadeOut();
-                }, duration);
-
-
-            });
-        </script>
-
+     
     </div>
 </body>

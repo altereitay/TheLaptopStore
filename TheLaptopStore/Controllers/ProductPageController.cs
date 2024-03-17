@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using TheLaptopStore.Data;
 
 namespace TheLaptopStore.Controllers {
-    public class ProductPage : Controller {
+    public class ProductPageController : Controller {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
-        public ProductPage(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ILogger<HomeController> logger, ApplicationDbContext db) {
+        public ProductPageController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ILogger<HomeController> logger, ApplicationDbContext db) {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;

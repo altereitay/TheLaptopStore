@@ -1,4 +1,11 @@
-﻿<style>
+﻿@{
+    ViewData["Title"] = "ShoppingCartPage";
+    var sessionId = TempData["idModel"];
+}
+
+
+
+<style>
     .payment-info {
         background: blue;
         padding: 10px;
@@ -120,14 +127,12 @@
 
 
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-<!-- Include jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <div class="container mt-5 p-3 rounded cart">
     <div class="row no-gutters">
         <div class="col-md-8">
             <div class="product-details mr-2">
-                <div class="d-flex flex-row align-items-center"><i class="fa fa-long-arrow-left"></i><span class="ml-2">Continue Shopping</span></div>
+                
                 <hr>
                 <h6 class="mb-0">Shopping cart</h6>
                 <div class="d-flex justify-content-between">
@@ -143,7 +148,7 @@
                     </tr>
                     @foreach (var cart in Model)
                     {
-                        <tr class="cart-row animate__animated animate__fadeInLeft" style="animation-delay: @(Model.IndexOf(cart) * 0.2)s;">
+                        <tr class="cart-row ">
                             <td>
                                 <div class="d-flex flex-row align-items-center">
                                     <img class="rounded" src="~/photos/@(cart.laptop.Picture).jpg" width="40">
@@ -170,27 +175,30 @@
                                 <a class="btn btn-primary" href="@Url.Action("RemoveProductCart", "Payment", new { laptopModel = cart.laptopModel })" role="button">Remove</a><br />
                             </td>
                             <td>
-                                @if (cart.quantity == cart.laptop.Quantity)
+                                @if (sessionId != null)
                                 {
-                                    <span id="cantAddMessage" class="font-weight-bold">@TempData["CantAdd"]</span>
+                                    @if (cart.laptopModel == sessionId.ToString())
+                                    {
+                                        <span id="cantAddMessage" class="font-weight-bold">@TempData["CantAdd"]</span>
 
-                                    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-                                    <script>
-                                        $(document).ready(function () {
+                                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                                        <script>
+                                            $(document).ready(function () {
                                             // Set the duration in milliseconds (e.g., 1000 for 1 second)
                                             var duration = 1000;
 
                                             // Hide the message after the specified duration
                                             setTimeout(function () {
-                                                $("#cantAddMessage").fadeOut();
+                                            $("#cantAddMessage").fadeOut();
                                             }, duration);
-                                        });
-                                    </script>
+                                            });
+                                        </script>
+                                    }
                                 }
                             </td>
                         </tr>
                     }
-
+                    
 
 
                 </table>
