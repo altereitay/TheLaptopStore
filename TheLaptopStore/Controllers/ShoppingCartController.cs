@@ -32,5 +32,21 @@ namespace TheLaptopStore.Controllers {
             TempData["Price"] = price;
             return View("ShoppingCartPage", cartList);
         }
+
+        public IActionResult cartItemsCounter() {
+            string id = _userManager.GetUserId(User);
+            if (id == null) {
+                id = HttpContext.Session.GetString("id");
+            }
+            List<ShoppingCart> carts = _db.ShoppingCarts.Where(cart => cart.userId == id).ToList();
+            int count1 = 0;
+
+            foreach (var cart in carts) {
+                count1 += cart.quantity;
+            }
+
+            return Ok(new { count = count1 });
+
+        }
     }
 }

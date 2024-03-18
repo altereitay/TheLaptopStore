@@ -134,7 +134,7 @@
             <div class="product-details mr-2">
                 
                 <hr>
-                <h6 class="mb-0">Shopping cart</h6>
+                <h2 class="mb-0">Shopping cart</h2>
                 <div class="d-flex justify-content-between">
                     
 
@@ -142,7 +142,7 @@
                 <table class="table mt-3 items rounded">
                     <tr>
                         <th>Product</th>
-                        <th>Description</th>
+                        <th>Model</th>
                         <th>Quantity</th>
                         <th>Total Price</th>
                     </tr>
@@ -151,14 +151,11 @@
                         <tr class="cart-row ">
                             <td>
                                 <div class="d-flex flex-row align-items-center">
-                                    <img class="rounded" src="~/photos/@(cart.laptop.Picture).jpg" width="40">
-                                    <div class="ml-2">
-                                        <span class="font-weight-bold">@cart.laptop.Model</span>
-                                    </div>
+                                    <img class="rounded" src="~/photos/@(cart.laptop.Picture).jpg" width="40">                               
                                 </div>
                             </td>
                             <td>
-                                <span class="spec">@cart.laptop.Description</span>
+                                <span class="font-weight-bold">@cart.laptop.Model</span>
                             </td>
                             <td>
                                 <span class="quantity-value">@cart.quantity</span>

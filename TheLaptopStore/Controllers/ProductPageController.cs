@@ -38,6 +38,11 @@ namespace TheLaptopStore.Controllers {
             }
             string quan = Request.Form["quantity"];
 
+            if (Convert.ToInt32(quan) <= 0) {
+                TempData["NagtiveNumber"] = "Quantity must be positive";
+                return View("ProductCard", laptop);
+            }
+
             if (!string.IsNullOrEmpty(quan) && laptop.Quantity < Convert.ToInt32(Request.Form["quantity"])) {
                 TempData["TooMuchProducts"] = "Only " + laptop.Quantity + " laptops left";
                 return View("ProductCard", laptop);

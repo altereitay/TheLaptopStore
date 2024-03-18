@@ -75,6 +75,7 @@
                                 @if (Model.Quantity > 0) {
                                     <form asp-action="AddToCart" asp-controller="ProductPage">
                                         <input id="quantity" name="quantity" type="number" placeholder="Choose Quantity" />
+                                        <span id="NagtiveNumber" class="text-danger">@TempData["NagtiveNumber"]</span>
                                         <span id="EmptyQuantity" class="text-danger">@TempData["EmptyQuantity"]</span>
                                         <span id="TooMuchProducts" class="text-danger">@TempData["TooMuchProducts"]</span>
                                         <span id="cartPlusQuantity" class="text-danger">@TempData["cartPlusQuantity"]</span>
