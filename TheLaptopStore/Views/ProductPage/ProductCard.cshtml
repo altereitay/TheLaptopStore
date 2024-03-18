@@ -18,7 +18,19 @@
             background-color: #0056b3; /* Darker shade on hover */
         }
 
+    a.waitlist-a {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
 
+        a.waitlist-a:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
 </style>
 <body style="background-color: #E1EBEE">
     <div class="container">
@@ -83,8 +95,16 @@
                                         </div>
                                     </form>
                                 } else {
-                                    <p>Sorry, this product is currently out of stock.</p>
-                                    <button id="NoQuantity" class="waitlist-button">Add me to wait-list</button>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <p>Sorry, this product is currently out of stock.</p>
+                                        <a asp-controller="AdminPage" asp-action="editProduct" asp-route-model="@Model.Model"  id="addQuantity" type="submit" class="waitlist-a">Add products</a>
+                                    }
+                                    else
+                                    {
+                                        <p>Sorry, this product is currently out of stock.</p>
+                                        <button id="NoQuantity" class="waitlist-button">Add me to wait-list</button>
+                                    }
                                 }
                             </div>
 

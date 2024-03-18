@@ -2,7 +2,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 using TheLaptopStore.Data;
+using System;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace TheLaptopStore.Controllers {
     public class PaymentController : Controller {
@@ -196,5 +200,12 @@ namespace TheLaptopStore.Controllers {
             _db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
+
+     
+
+
+
+
+
     }
 }
