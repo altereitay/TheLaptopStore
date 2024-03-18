@@ -1,7 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 using TheLaptopStore.Data;
+using System;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace TheLaptopStore.Controllers {
     public class PaymentController : Controller {
@@ -66,6 +71,8 @@ namespace TheLaptopStore.Controllers {
 
                     } else {
                         TempData["CantAdd"] = "Cant add another product";
+                        TempData["idModel"] = _db.Laptops.Find(laptopModel).Model;
+                        
                         return Redirect("~/ShoppingCart");
                     }
                 }
@@ -193,5 +200,12 @@ namespace TheLaptopStore.Controllers {
             _db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
+
+     
+
+
+
+
+
     }
 }

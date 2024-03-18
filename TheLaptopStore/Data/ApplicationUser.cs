@@ -29,11 +29,11 @@ namespace TheLaptopStore.Data {
         public DateTime DateOfBirth { get; set; }
 
         [Required]
-        [RegularExpression("^[A-Z][a-z]+$", ErrorMessage = "City must start with uppercase latter and be at least 2 characters length")]
+        [RegularExpression(@"^([A-Z][a-z]+(?:\s[A-Z][a-z]+)*)$", ErrorMessage = "City must contain only letters, and each word must start with an uppercase letter")]
         public string City { get; set; }
 
         [Required]
-        [RegularExpression("^[A-Z][a-z]+$", ErrorMessage = "Street name must start with uppercase latter and be at least 2 characters length")]
+        [RegularExpression(@"^([A-Z][a-z]+(?:\s[A-Z][a-z]+)*)$", ErrorMessage = "StreetName must contain only letters, and each word must start with an uppercase letter")]
         public string StreetName { get; set; }
 
         [Required]

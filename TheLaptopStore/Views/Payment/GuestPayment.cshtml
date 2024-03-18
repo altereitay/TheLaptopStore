@@ -176,7 +176,7 @@
             <label>Apartment Number</label>
             <span class="text-danger"></span>
         </div>
-        <button id="show-payment">Proceed to Payment</button>
+        <button id="show-payment" style= "width: 300px; background-color: #007FFF; color: #fff; text-align: center; display: inline-block; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Proceed to Payment</button>
     </div>
 
     <main class="payment-section">
@@ -191,6 +191,36 @@
                         <label for="name-text">Holder</label>
                         <input type="text" name="name-text" id="name-text" maxlength="30" placeholder="Lior Gofman" required>
                     </div>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const nameInput = document.getElementById("name-text");
+
+                            nameInput.addEventListener("input", function () {
+                                const inputValue = this.value.trim();
+
+
+                                const regex = /^[a-zA-Z]+(?: [a-zA-Z]+)*$/;
+
+                                if (!regex.test(inputValue)) {
+
+                                    this.value = inputValue.replace(/[^a-zA-Z ]/g, '');
+                                }
+
+
+                                const names = inputValue.split(' ');
+
+
+                                if (names.length < 2 || names[0].length === 0 || names[1].length === 0) {
+
+                                    this.setCustomValidity("Please enter both first name and last name.");
+                                } else {
+                                    this.setCustomValidity("");
+                                }
+                            });
+                        });
+                    </script>
+
+
                     <div class="infos-container">
                         <div class="expiration-container">
                             <label for="valid-thru-text">Valid-thru</label>
@@ -198,8 +228,22 @@
                         </div>
                         <div class="cvv-container">
                             <label for="cvv-text">CVV</label>
-                            <input type="text" name="CVV" id="CVV" maxlength="4" placeholder="123" required>
+                            <input type="text" name="CVV" id="CVV" maxlength="3" placeholder="123" required>
                         </div>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                                const cvvInput = document.getElementById("CVV");
+
+                                cvvInput.addEventListener("input", function () {
+                                    
+                                    this.value = this.value.replace(/\D/g, '');
+
+                                    if (this.value.length > parseInt(this.getAttribute("maxlength"))) {
+                                        this.value = this.value.slice(0, parseInt(this.getAttribute("maxlength")));
+                                    }
+                                });
+                            });
+                        </script>
                     </div>
                     <input type="submit" value="Pay Now" id="add">
                 </form>
@@ -234,7 +278,7 @@
 
     <script>
         document.getElementById("show-payment").addEventListener("click", function () {
-            // Check if all input fields in the address section are filled
+            
             var cityInput = document.querySelector("#address-section input[autocomplete='City']");
             var streetNameInput = document.querySelector("#address-section input[autocomplete='StreetName']");
             var buildingNumberInput = document.querySelector("#address-section input[autocomplete='BuildingNumber']");
@@ -286,26 +330,16 @@
         const cardExpirationText = document.querySelector(".expiration-vl");
         const cardCVVText = document.querySelector(".cvv-vl");
 
-        cardNumber.addEventListener("keyup", (e) => {
-            if (!e.target.value) {
-                cardNumberText.innerText = "1234 5678 9101 1121";
-            } else {
-                const valuesOfInput = e.target.value.replaceAll(" ", "");
+        cardNumber.addEventListener("input", (e) => {
+            const input = e.target.value.replace(/\D/g, '');
 
-                if (e.target.value.length > 14) {
-                    e.target.value = valuesOfInput.replace(/(\d{4})(\d{4})(\d{4})(\d{0,4})/, "$1 $2 $3 $4");
-                    cardNumberText.innerHTML = valuesOfInput.replace(/(\d{4})(\d{4})(\d{4})(\d{0,4})/, "$1 $2 $3 $4");
-                } else if (e.target.value.length > 9) {
-                    e.target.value = valuesOfInput.replace(/(\d{4})(\d{4})(\d{0,4})/, "$1 $2 $3");
-                    cardNumberText.innerHTML = valuesOfInput.replace(/(\d{4})(\d{4})(\d{0,4})/, "$1 $2 $3");
-                } else if (e.target.value.length > 4) {
-                    e.target.value = valuesOfInput.replace(/(\d{4})(\d{0,4})/, "$1 $2");
-                    cardNumberText.innerHTML = valuesOfInput.replace(/(\d{4})(\d{0,4})/, "$1 $2");
-                } else {
-                    cardNumberText.innerHTML = valuesOfInput
-                }
-            }
-        })
+
+            const formattedInput = input.replace(/(\d{4})(?=\d)/g, '$1 ');
+
+
+            e.target.value = formattedInput;
+            cardNumberText.innerText = formattedInput || "1234 5678 9101 1121";
+        });
 
         cardHolder.addEventListener("keyup", (e) => {
             if (!e.target.value) {
@@ -313,22 +347,17 @@
             } else {
                 cardHolderText.innerHTML = e.target.value.toUpperCase();
             }
-        })
+        });
 
-        cardExpiration.addEventListener("keyup", (e) => {
-            if (!e.target.value) {
-                cardExpirationText.innerHTML = "02/40";
-            } else {
-                const valuesOfInput = e.target.value.replace("/", "");
+        cardExpiration.addEventListener("input", (e) => {
+            const input = e.target.value.replace(/\D/g, ''); 
 
-                if (e.target.value.length > 2) {
-                    e.target.value = valuesOfInput.replace(/^(\d{2})(\d{0,2})/, "$1/$2");
-                    cardExpirationText.innerHTML = valuesOfInput.replace(/^(\d{2})(\d{0,2})/, "$1/$2");
-                } else {
-                    cardExpirationText.innerHTML = valuesOfInput;
-                }
-            }
-        })
+            const formattedInput = input.replace(/(\d{2})(?=\d)/g, '$1/');
+
+          
+            e.target.value = formattedInput;
+            cardExpirationText.innerHTML = formattedInput || "02/40";
+        });
 
         cardCVV.addEventListener("keyup", (e) => {
             if (!e.target.value) {
@@ -336,18 +365,22 @@
             } else {
                 cardCVVText.innerHTML = e.target.value;
             }
-        })
+        });
 
         form.addEventListener("submit", function (event) {
             let errors = [];
 
-            // Validate card number length
             const cardNumber = document.querySelector("#cardNumber");
+            const regex = /^[0-9]+$/;
+
+            if (!regex.test(cardNumber.value.replace(/\s/g, ""))) {
+                errors.push("Card number must be only digits.");
+            }
+
             if (cardNumber.value.replace(/\s/g, "").length !== 16) {
                 errors.push("Card number must be 16 digits.");
             }
 
-            // Validate expiration date
             const cardExpiration = document.querySelector("#expDate");
             const currentYear = new Date().getFullYear();
             const currentMonth = new Date().getMonth() + 1
@@ -359,26 +392,19 @@
                 errors.push("Expiration date must be in the future.");
             }
 
-            // Validate CVV length
             const cardCVV = document.querySelector("#CVV");
             if (cardCVV.value.length !== 3) {
                 errors.push("CVV must be 3 digits.");
             }
 
-            // Display errors if any
             if (errors.length > 0) {
                 event.preventDefault();
                 alert(errors.join("\n"));
-            }
-            else {
-                // If no errors, show alert and submit form
+            } else {
                 alert("Thanks for buying!");
                 form.submit();
             }
         });
-
-
-
 
     </script>
 </body>

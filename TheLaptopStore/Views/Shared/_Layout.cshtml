@@ -22,8 +22,26 @@
 
     /* Shopping cart icon styles */
     .shopping-cart-icon {
-        display: inline-block;
-        font-size: 18px;
+        position: relative;
+        font-size: 25px;
+        margin-left: 10px;
+        text-decoration: none;
+    }
+
+    .cart-notification {
+        position: absolute;
+        top: -5px; /* Adjust as needed */
+        right: -5px; /* Adjust as needed */
+        background-color: red;
+        color: white;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        z-index: 2;
     }
 </style>
 <html lang="en">
@@ -53,6 +71,18 @@
                         </li>
                         <li class="nav-item">
                             <a class="shopping-cart-icon" asp-controller="ShoppingCart" asp-action="Index">
+                                <span id="countCart" class="cart-notification">0</span>
+                                <script>
+                                    async function countCart() {
+                                        const response = await fetch("/shoppingCart/cartItemsCounter")
+                                        if (response.ok) {
+                                            const data = await response.json()
+                                            console.log(data)
+                                            document.getElementById("countCart").innerText = data.count;
+                                        }
+                                    }
+                                    countCart();
+                                </script>
                                 <span class="shopping-cart-icon">🛒</span>
                             </a>
                         </li>
