@@ -58,7 +58,6 @@ namespace TheLaptopStore.Controllers {
             }
             if (priceRange != null) {
                 int lowest_price = priceRange;
-
                 filteredProducts = filteredProducts.Where(laptop => Convert.ToInt32(laptop.Price - laptop.Price * (laptop.SalePrecentage * 0.01)) >= lowest_price);
             }
             if (ssdFilter != null && ssdFilter.Any()) {
@@ -85,12 +84,12 @@ namespace TheLaptopStore.Controllers {
             return View("Index", result);
         }
         public IActionResult priceHighToLow() {
-            List<Laptop> laptops = _db.Laptops.OrderByDescending(l => l.Price).ToList();
+            List<Laptop> laptops = _db.Laptops.OrderByDescending(l => ((int)(Math.Floor(l.Price - l.Price * (l.SalePrecentage * 0.01))))).ToList();
 
             return View("Index", laptops);
         }
         public IActionResult priceLowToHigh() {
-            List<Laptop> laptops = _db.Laptops.OrderBy(l => l.Price).ToList();
+            List<Laptop> laptops = _db.Laptops.OrderBy(l => ((int)(Math.Floor(l.Price - l.Price * (l.SalePrecentage * 0.01))))).ToList();
 
             return View("Index", laptops);
         }
