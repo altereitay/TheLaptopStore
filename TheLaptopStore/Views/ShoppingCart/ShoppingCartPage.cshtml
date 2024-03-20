@@ -3,141 +3,16 @@
     var sessionId = TempData["idModel"];
 }
 
-
-
-<style>
-    .payment-info {
-        background: blue;
-        padding: 10px;
-        border-radius: 6px;
-        color: #fff;
-        font-weight: bold;
-    }
-
-    .product-details {
-        padding: 10px;
-    }
-
-    body {
-        background: #eee;
-    }
-
-    .cart {
-        background: #fff;
-    }
-
-    .p-about {
-        font-size: 12px;
-    }
-
-    .table-shadow {
-        -webkit-box-shadow: 5px 5px 15px -2px rgba(0,0,0,0.42);
-        box-shadow: 5px 5px 15px -2px rgba(0,0,0,0.42);
-    }
-
-    .type {
-        font-weight: 400;
-        font-size: 10px;
-    }
-
-    label.radio {
-        cursor: pointer;
-    }
-
-        label.radio input {
-            position: absolute;
-            top: 0;
-            left: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        label.radio span {
-            padding: 1px 12px;
-            border: 2px solid #ada9a9;
-            display: inline-block;
-            color: #8f37aa;
-            border-radius: 3px;
-            text-transform: uppercase;
-            font-size: 11px;
-            font-weight: 300;
-        }
-
-        label.radio input:checked + span {
-            border-color: #fff;
-            background-color: blue;
-            color: #fff;
-        }
-
-    .credit-inputs {
-        background: rgb(102,102,221);
-        color: #fff !important;
-        border-color: rgb(102,102,221);
-    }
-
-        .credit-inputs::placeholder {
-            color: #fff;
-            font-size: 13px;
-        }
-
-    .credit-card-label {
-        font-size: 9px;
-        font-weight: 300;
-    }
-
-    .form-control.credit-inputs:focus {
-        background: rgb(102,102,221);
-        border: rgb(102,102,221);
-    }
-
-    .line {
-        border-bottom: 1px solid rgb(102,102,221);
-    }
-
-    .information span {
-        font-size: 12px;
-        font-weight: 500;
-    }
-
-    .information {
-        margin-bottom: 5px;
-    }
-
-    .items {
-        -webkit-box-shadow: 5px 5px 4px -1px rgba(0,0,0,0.25);
-        box-shadow: 5px 5px 4px -1px rgba(0, 0, 0, 0.08);
-    }
-
-    .spec {
-        font-size: 11px;
-    }
-
-    .quantity-link {
-        text-decoration: none;
-        color: #333; /* Change the color if desired */
-        font-size: 16px;
-        cursor: pointer;
-    }
-
-        .quantity-link:hover {
-            color: #555; /* Change the hover color if desired */
-            text-decoration: underline; /* Add underline on hover if desired */
-        }
-
-
-
-</style>
+<link rel="stylesheet" href="~/css/ShoppingCartPage.css">
 
 <div class="container mt-5 p-3 rounded cart">
     <div class="row no-gutters">
         <div class="col-md-8">
             <div class="product-details mr-2">
-                
+
                 <hr>
                 <h2 class="mb-0">Shopping cart</h2>
                 <div class="d-flex justify-content-between">
-                    
-
                 </div>
                 <table class="table mt-3 items rounded">
                     <tr>
@@ -146,12 +21,11 @@
                         <th>Quantity</th>
                         <th>Total Price</th>
                     </tr>
-                    @foreach (var cart in Model)
-                    {
+                    @foreach (var cart in Model) {
                         <tr class="cart-row ">
                             <td>
                                 <div class="d-flex flex-row align-items-center">
-                                    <img class="rounded" src="~/photos/@(cart.laptop.Picture).jpg" width="40">                               
+                                    <img class="rounded" src="~/photos/@(cart.laptop.Picture)" width="40">
                                 </div>
                             </td>
                             <td>
@@ -172,22 +46,20 @@
                                 <a class="btn btn-primary" href="@Url.Action("RemoveProductCart", "Payment", new { laptopModel = cart.laptopModel })" role="button">Remove</a><br />
                             </td>
                             <td>
-                                @if (sessionId != null)
-                                {
-                                    @if (cart.laptopModel == sessionId.ToString())
-                                    {
+                                @if (sessionId != null) {
+                                    @if (cart.laptopModel == sessionId.ToString()) {
                                         <span id="cantAddMessage" class="font-weight-bold">@TempData["CantAdd"]</span>
 
                                         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
                                         <script>
                                             $(document).ready(function () {
-                                            // Set the duration in milliseconds (e.g., 1000 for 1 second)
-                                            var duration = 1000;
+                                                // Set the duration in milliseconds (e.g., 1000 for 1 second)
+                                                var duration = 1000;
 
-                                            // Hide the message after the specified duration
-                                            setTimeout(function () {
-                                            $("#cantAddMessage").fadeOut();
-                                            }, duration);
+                                                // Hide the message after the specified duration
+                                                setTimeout(function () {
+                                                    $("#cantAddMessage").fadeOut();
+                                                }, duration);
                                             });
                                         </script>
                                     }
@@ -195,7 +67,7 @@
                             </td>
                         </tr>
                     }
-                    
+
 
 
                 </table>
@@ -203,9 +75,9 @@
                     var modelError = TempData["ModelError"] as string;
                 }
                 <a class="btn btn-primary" href="@Url.Action("showPaymentPage", "Payment")" role="button">Checkout</a><br />
-                <span id="modelError" class="text-danger">@modelError</span><br/>
+                <span id="modelError" class="text-danger">@modelError</span><br />
                 <span class="font-weight-bold">Total price:  @TempData["Price"]</span><br />
-                <span id="modelError" class="text-danger">@TempData["UnavailableLaptop"]</span><br/>
+                <span id="modelError" class="text-danger">@TempData["UnavailableLaptop"]</span><br />
             </div>
         </div>
     </div>

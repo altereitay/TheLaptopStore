@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\css\Index.css" />
     <None Include="wwwroot\photos\laptop1.jpg" />
     <None Include="wwwroot\photos\laptop2.jpg" />
     <None Include="wwwroot\photos\laptop3.jpg" />
