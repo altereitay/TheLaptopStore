@@ -9,12 +9,10 @@
     <div class="row no-gutters">
         <div class="col-md-8">
             <div class="product-details mr-2">
-                
+
                 <hr>
                 <h2 class="mb-0">Shopping cart</h2>
                 <div class="d-flex justify-content-between">
-                    
-
                 </div>
                 <table class="table mt-3 items rounded">
                     <tr>
@@ -23,12 +21,11 @@
                         <th>Quantity</th>
                         <th>Total Price</th>
                     </tr>
-                    @foreach (var cart in Model)
-                    {
+                    @foreach (var cart in Model) {
                         <tr class="cart-row ">
                             <td>
                                 <div class="d-flex flex-row align-items-center">
-                                    <img class="rounded" src="~/photos/@(cart.laptop.Picture).jpg" width="40">                               
+                                    <img class="rounded" src="~/photos/@(cart.laptop.Picture)" width="40">
                                 </div>
                             </td>
                             <td>
@@ -49,22 +46,20 @@
                                 <a class="btn btn-primary" href="@Url.Action("RemoveProductCart", "Payment", new { laptopModel = cart.laptopModel })" role="button">Remove</a><br />
                             </td>
                             <td>
-                                @if (sessionId != null)
-                                {
-                                    @if (cart.laptopModel == sessionId.ToString())
-                                    {
+                                @if (sessionId != null) {
+                                    @if (cart.laptopModel == sessionId.ToString()) {
                                         <span id="cantAddMessage" class="font-weight-bold">@TempData["CantAdd"]</span>
 
                                         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
                                         <script>
                                             $(document).ready(function () {
-                                            // Set the duration in milliseconds (e.g., 1000 for 1 second)
-                                            var duration = 1000;
+                                                // Set the duration in milliseconds (e.g., 1000 for 1 second)
+                                                var duration = 1000;
 
-                                            // Hide the message after the specified duration
-                                            setTimeout(function () {
-                                            $("#cantAddMessage").fadeOut();
-                                            }, duration);
+                                                // Hide the message after the specified duration
+                                                setTimeout(function () {
+                                                    $("#cantAddMessage").fadeOut();
+                                                }, duration);
                                             });
                                         </script>
                                     }
@@ -72,7 +67,7 @@
                             </td>
                         </tr>
                     }
-                    
+
 
 
                 </table>
@@ -80,9 +75,9 @@
                     var modelError = TempData["ModelError"] as string;
                 }
                 <a class="btn btn-primary" href="@Url.Action("showPaymentPage", "Payment")" role="button">Checkout</a><br />
-                <span id="modelError" class="text-danger">@modelError</span><br/>
+                <span id="modelError" class="text-danger">@modelError</span><br />
                 <span class="font-weight-bold">Total price:  @TempData["Price"]</span><br />
-                <span id="modelError" class="text-danger">@TempData["UnavailableLaptop"]</span><br/>
+                <span id="modelError" class="text-danger">@TempData["UnavailableLaptop"]</span><br />
             </div>
         </div>
     </div>
