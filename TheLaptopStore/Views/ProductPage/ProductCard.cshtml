@@ -1,5 +1,8 @@
 ﻿@model TheLaptopStore.Data.Laptop
-
+@using TheLaptopStore.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "ProductCard";
 }
@@ -103,8 +106,17 @@
                                     }
                                     else
                                     {
-                                        <p>Sorry, this product is currently out of stock.</p>
-                                        <button id="NoQuantity" class="waitlist-button">Add me to wait-list</button>
+                                        @if (SignInManager.IsSignedIn(User)==false)
+                                        {
+                                            <p>Sorry, this product is currently out of stock.</p>
+                                            <a asp-area ="Identity" asp-page="/Account/Login" class="waitlist-a">Register for waiting list</a>
+                                           
+                                        }
+                                        else
+                                        {
+                                            <p>Sorry, this product is currently out of stock.</p>
+                                            <button id="NoQuantity" class="waitlist-button">Add me to wait-list</button>
+                                        }
                                     }
                                 }
                             </div>

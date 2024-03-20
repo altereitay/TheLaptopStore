@@ -103,7 +103,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" value="@Model.Price" />
+                <input asp-for="Price" class="form-control" value="@Model.Price" min="0" type="number"/>
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -118,7 +118,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" value="@Model.Quantity" />
+                <input asp-for="Quantity" class="form-control" value="@Model.Quantity" min="0" type="number"/>
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -134,7 +134,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="SalePrecentage" class="control-label"></label>
-                <input asp-for="SalePrecentage" class="form-control" value="@Model.SalePrecentage" />
+                <input asp-for="SalePrecentage" class="form-control" value="@Model.SalePrecentage" min="0" type="number" max="100"/>
                 <span asp-validation-for="SalePrecentage" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -170,16 +170,9 @@
                             this.value = '';
                         }
                     });
-
-
                     var today = new Date().toISOString().split('T')[0];
                     releaseDateInput.setAttribute('max', today);
                 </script>
-
-
-
-
-
             <input type="hidden" asp-for="Model" />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary"/>
@@ -202,7 +195,7 @@
                 setTimeout(function () {
                     formGroup.style.opacity = '1';
                     formGroup.style.transform = 'translateY(0)';
-                }, index * 200); // Adjust the delay between each form element falling into place
+                }, index * 200);
             });
         });
     </script>
