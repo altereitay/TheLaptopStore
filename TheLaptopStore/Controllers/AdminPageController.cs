@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using TheLaptopStore.Data;
 
 
@@ -7,9 +8,11 @@ namespace TheLaptopStore.Controllers {
     public class AdminPage : Controller {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
-        public AdminPage(ILogger<HomeController> logger, ApplicationDbContext db) {
+        private IWebHostEnvironment webHostEnvironment;
+        public AdminPage(ILogger<HomeController> logger, ApplicationDbContext db, IWebHostEnvironment _webHostEnvironment) {
             _logger = logger;
             _db = db;
+            webHostEnvironment = _webHostEnvironment;
         }
 
 
@@ -42,14 +45,18 @@ namespace TheLaptopStore.Controllers {
         public IActionResult Add() {
             return View("addProduct");
         }
-
-        public IActionResult addProduct() {
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+       public async Task <IActionResult>  addProduct(IFormFile Picture) {
+            
+            
             Laptop l1 = _db.Laptops.Find(Request.Form["Model"]);
             if (l1 != null) {
                 ModelState.AddModelError("Model", "Model already exists. Please choose a different one.");
                 return View("addProduct");
             }
             if (ModelState.IsValid) {
+                
                 Laptop laptop = new Laptop();
                 laptop.Ram = Convert.ToInt32(Request.Form["Ram"]);
                 laptop.SSD = Convert.ToInt32(Request.Form["SSD"]);
@@ -61,7 +68,12 @@ namespace TheLaptopStore.Controllers {
                 laptop.Color = Request.Form["Color"];
                 laptop.Quantity = Convert.ToInt32(HttpContext.Request.Form["Quantity"]);
                 laptop.Description = Request.Form["Description"];
-                laptop.Picture = Request.Form["Picture"];
+                laptop.Picture= Picture.FileName;
+                string path = Path.Combine(webHostEnvironment.WebRootPath, $"photos\\{Picture.FileName}");
+                using (var stream = System.IO.File.Create(path))
+                {
+                    await Picture.CopyToAsync(stream);
+                }
                 laptop.IsOnSale = true;
                 laptop.SalePrecentage = Convert.ToInt32(Request.Form["SalePrecentage"]);
                 laptop.PopularityIndex = 1;
@@ -110,7 +122,8 @@ namespace TheLaptopStore.Controllers {
             return View("editProduct", laptop);
         }
 
-        public IActionResult edit(string? model) {
+        public async Task< IActionResult> edit(string? model,IFormFile Picture) {
+         
             Laptop laptop = _db.Laptops.Find(model);
             laptop.Ram = Convert.ToInt32(Request.Form["Ram"]);
             laptop.SSD = Convert.ToInt32(Request.Form["SSD"]);
@@ -122,15 +135,18 @@ namespace TheLaptopStore.Controllers {
             laptop.Color = Request.Form["Color"];
             laptop.Quantity = Convert.ToInt32(HttpContext.Request.Form["Quantity"]);
             laptop.Description = Request.Form["Description"];
-            laptop.Picture = Request.Form["Picture"];
             laptop.IsOnSale = Request.Form["IsOnSale"].Count > 0 ? true : false;
-
             laptop.SalePrecentage = Convert.ToInt32(Request.Form["SalePrecentage"]);
-
             laptop.PopularityIndex = Convert.ToInt32(HttpContext.Request.Form["PopularityIndex"]);
             laptop.Category = Request.Form["Category"];
             laptop.ReleaseDate = Request.Form["ReleaseDate"];
             laptop.Model = Request.Form["Model"];
+            laptop.Picture = Picture.FileName;
+            string path = Path.Combine(webHostEnvironment.WebRootPath, $"photos\\{laptop.Picture}");
+            using (var stream = System.IO.File.OpenWrite(path))
+            {
+                await Picture.CopyToAsync(stream);
+            }
             _db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
