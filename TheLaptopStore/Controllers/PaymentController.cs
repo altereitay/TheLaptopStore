@@ -1,16 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 using TheLaptopStore.Data;
-using System;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace TheLaptopStore.Controllers {
     public class PaymentController : Controller {
-
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<HomeController> _logger;
@@ -39,8 +34,6 @@ namespace TheLaptopStore.Controllers {
                 }
             }
             return Redirect("~/ShoppingCart");
-
-
         }
         public IActionResult AddProductCart(string? laptopModel) {
             string userId = _userManager.GetUserId(User);
@@ -53,7 +46,6 @@ namespace TheLaptopStore.Controllers {
             List<ShoppingCart> userCarts = _db.ShoppingCarts.Include(c => c.laptop).Where(cart => cart.userId == userId).ToList();
             foreach (ShoppingCart cart in userCarts) {
                 if (cart.laptopModel == laptopModel) {
-
                     if (_db.Laptops.Find(laptopModel).Quantity > cart.quantity) {
                         cart.quantity++;
                         cart.totalPrice = Convert.ToInt32(cart.quantity * (cart.laptop.Price - cart.laptop.Price * cart.laptop.SalePrecentage * 0.01));
@@ -61,25 +53,19 @@ namespace TheLaptopStore.Controllers {
                         int price = 0;
                         var cartList = _db.ShoppingCarts.Include(c => c.laptop).Where(c => c.userId == userId).ToList();
                         foreach (var Cart in cartList) {
-
                             price += Cart.totalPrice;
-
                         }
                         TempData["Price"] = price;
-
                         return Redirect("~/ShoppingCart");
-
                     } else {
                         TempData["CantAdd"] = "Cant add another product";
                         TempData["idModel"] = _db.Laptops.Find(laptopModel).Model;
-                        
+
                         return Redirect("~/ShoppingCart");
                     }
                 }
-
             }
             return Redirect("~/ShoppingCart");
-
         }
 
         public IActionResult DecreaseProductCart(string? laptopModel) {
@@ -152,7 +138,6 @@ namespace TheLaptopStore.Controllers {
                 return View("GuestPayment");
             }
             return View("PaymentPage", user);
-
         }
 
         public IActionResult payNow(string? cardNumber, string? expDate, string? CVV) {
@@ -200,12 +185,5 @@ namespace TheLaptopStore.Controllers {
             _db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
-
-     
-
-
-
-
-
     }
 }

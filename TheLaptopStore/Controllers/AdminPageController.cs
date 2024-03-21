@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TheLaptopStore.Data;
-using System.IO;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace TheLaptopStore.Controllers {
     public class AdminPage : Controller {
@@ -15,13 +12,10 @@ namespace TheLaptopStore.Controllers {
             webHostEnvironment = _webHostEnvironment;
         }
 
-
         public IActionResult Managment() {
             List<Laptop> laptops = _db.Laptops.ToList();
             return View("AdminPage", laptops);
         }
-
-
 
         public IActionResult Delete(string? model) {
             var obj = _db.Laptops.Find(model);
@@ -43,7 +37,7 @@ namespace TheLaptopStore.Controllers {
 
 
         public IActionResult Add() {
-            return View("addProduct",  new Laptop());
+            return View("addProduct", new Laptop());
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -86,8 +80,7 @@ namespace TheLaptopStore.Controllers {
                 laptop.Quantity = Convert.ToInt32(HttpContext.Request.Form["Quantity"]);
                 laptop.Description = Request.Form["Description"];
 
-                if (Picture.ContentType.StartsWith("image/"))
-                    {
+                if (Picture.ContentType.StartsWith("image/")) {
 
                     string webRootPath = webHostEnvironment.WebRootPath;
                     string photosFolderPath = Path.Combine(webRootPath, "photos");
@@ -98,27 +91,19 @@ namespace TheLaptopStore.Controllers {
                     if (isDuplicatePicture) {
                         ModelState.AddModelError("Picture", "This picture file name is already associated with another product.");
                         return View("addProduct", l);
-                    }
-                    else if (photoFiles.Any(filePath => Path.GetFileName(filePath) == Picture.FileName))
-                    {
+                    } else if (photoFiles.Any(filePath => Path.GetFileName(filePath) == Picture.FileName)) {
                         laptop.Picture = Picture.FileName;
-                    }
-                    else
-                    {
+                    } else {
                         laptop.Picture = Picture.FileName;
                         string path = Path.Combine(webHostEnvironment.WebRootPath, $"photos\\{laptop.Picture}");
-                        using (var stream = System.IO.File.Create(path))
-                        {
+                        using (var stream = System.IO.File.Create(path)) {
                             await Picture.CopyToAsync(stream);
                         }
                     }
-                }
-                else
-                {
+                } else {
                     ModelState.AddModelError("Picture", "This picture file must be image type.");
                     return View("addProduct", l);
                 }
-
 
                 laptop.IsOnSale = true;
                 laptop.SalePrecentage = Convert.ToInt32(Request.Form["SalePrecentage"]);
@@ -187,60 +172,40 @@ namespace TheLaptopStore.Controllers {
             laptop.Category = Request.Form["Category"];
             laptop.ReleaseDate = Request.Form["ReleaseDate"];
             laptop.Model = Request.Form["Model"];
-            
 
-
-          
-              
-                if (Picture != null)
-              {
-                if (Picture.ContentType.StartsWith("image/"))
-                {
+            if (Picture != null) {
+                if (Picture.ContentType.StartsWith("image/")) {
                     string webRootPath = webHostEnvironment.WebRootPath;
                     string photosFolderPath = Path.Combine(webRootPath, "photos");
                     string[] photoFiles = Directory.GetFiles(photosFolderPath);
 
-                    for (int i = 0; i < photoFiles.Length; i++)
-                    {
+                    for (int i = 0; i < photoFiles.Length; i++) {
                         photoFiles[i] = Path.GetFileName(photoFiles[i]);
                     }
 
                     bool isDuplicatePicture = _db.Laptops.Any(l => l.Picture == Picture.FileName);
-                    if(laptop.Picture==Picture.FileName)
-                    {
+                    if (laptop.Picture == Picture.FileName) {
                         laptop.Picture = Picture.FileName;
-                    }
-                    else if (isDuplicatePicture)
-                    {
+                    } else if (isDuplicatePicture) {
                         string existPath = Path.Combine(webHostEnvironment.WebRootPath, $"photos\\{laptop.Picture}");
                         laptop.Picture = Picture.FileName;
-                        using (var stream = System.IO.File.OpenWrite(existPath))
-                        {
+                        using (var stream = System.IO.File.OpenWrite(existPath)) {
                             await Picture.CopyToAsync(stream);
                         }
-                    }
-                    else if (photoFiles.Any(filePath => Path.GetFileName(filePath) == Picture.FileName))
-                    {
+                    } else if (photoFiles.Any(filePath => Path.GetFileName(filePath) == Picture.FileName)) {
                         laptop.Picture = Picture.FileName;
-                    }
-                    else
-                    {
+                    } else {
                         laptop.Picture = Picture.FileName;
                         string path = Path.Combine(webHostEnvironment.WebRootPath, $"photos\\{laptop.Picture}");
-                        using (var stream = System.IO.File.Create(path))
-                        {
+                        using (var stream = System.IO.File.Create(path)) {
                             await Picture.CopyToAsync(stream);
                         }
                     }
-
-                }
-                else
-                {
+                } else {
                     ModelState.AddModelError("Picture", "This picture file must be image type.");
                     return View("editProduct", laptop);
                 }
             }
-         
             _db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
