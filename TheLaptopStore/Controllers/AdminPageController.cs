@@ -189,8 +189,6 @@ namespace TheLaptopStore.Controllers {
             laptop.Model = Request.Form["Model"];
             if (Picture.ContentType.StartsWith("image/"))
             {
-
-
                 string webRootPath = webHostEnvironment.WebRootPath;
                 string photosFolderPath = Path.Combine(webRootPath, "photos");
                 string[] photoFiles = Directory.GetFiles(photosFolderPath);
@@ -204,8 +202,8 @@ namespace TheLaptopStore.Controllers {
                     bool isDuplicatePicture = _db.Laptops.Any(l => l.Picture == Picture.FileName);
                     if (isDuplicatePicture)
                     {
-                        laptop.Picture = Picture.FileName;
                         string existPath = Path.Combine(webHostEnvironment.WebRootPath, $"photos\\{laptop.Picture}");
+                        laptop.Picture = Picture.FileName;
                         using (var stream = System.IO.File.OpenWrite(existPath))
                         {
                             await Picture.CopyToAsync(stream);
