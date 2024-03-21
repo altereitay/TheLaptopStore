@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TheLaptopStore.Data;
 using System.IO;
-
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace TheLaptopStore.Controllers {
     public class AdminPage : Controller {
@@ -187,18 +187,24 @@ namespace TheLaptopStore.Controllers {
             laptop.Category = Request.Form["Category"];
             laptop.ReleaseDate = Request.Form["ReleaseDate"];
             laptop.Model = Request.Form["Model"];
-            if (Picture!=null  && Picture.ContentType.StartsWith("image/"))
-            {
-                string webRootPath = webHostEnvironment.WebRootPath;
-                string photosFolderPath = Path.Combine(webRootPath, "photos");
-                string[] photoFiles = Directory.GetFiles(photosFolderPath);
+            
 
-                for (int i = 0; i < photoFiles.Length; i++)
-                {
-                    photoFiles[i] = Path.GetFileName(photoFiles[i]);
-                }
+
+          
+              
                 if (Picture != null)
+              {
+                if (Picture.ContentType.StartsWith("image/"))
                 {
+                    string webRootPath = webHostEnvironment.WebRootPath;
+                    string photosFolderPath = Path.Combine(webRootPath, "photos");
+                    string[] photoFiles = Directory.GetFiles(photosFolderPath);
+
+                    for (int i = 0; i < photoFiles.Length; i++)
+                    {
+                        photoFiles[i] = Path.GetFileName(photoFiles[i]);
+                    }
+
                     bool isDuplicatePicture = _db.Laptops.Any(l => l.Picture == Picture.FileName);
                     if(laptop.Picture==Picture.FileName)
                     {
@@ -228,13 +234,13 @@ namespace TheLaptopStore.Controllers {
                     }
 
                 }
+                else
+                {
+                    ModelState.AddModelError("Picture", "This picture file must be image type.");
+                    return View("editProduct", laptop);
+                }
             }
-            else
-            {
-                ModelState.AddModelError("Picture", "This picture file must be image type.");
-                return View("editProduct", laptop);
-            }
-
+         
             _db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
