@@ -187,7 +187,7 @@ namespace TheLaptopStore.Controllers {
             laptop.Category = Request.Form["Category"];
             laptop.ReleaseDate = Request.Form["ReleaseDate"];
             laptop.Model = Request.Form["Model"];
-            if (Picture.ContentType.StartsWith("image/"))
+            if (Picture!=null  && Picture.ContentType.StartsWith("image/"))
             {
                 string webRootPath = webHostEnvironment.WebRootPath;
                 string photosFolderPath = Path.Combine(webRootPath, "photos");
@@ -200,7 +200,11 @@ namespace TheLaptopStore.Controllers {
                 if (Picture != null)
                 {
                     bool isDuplicatePicture = _db.Laptops.Any(l => l.Picture == Picture.FileName);
-                    if (isDuplicatePicture)
+                    if(laptop.Picture==Picture.FileName)
+                    {
+                        laptop.Picture = Picture.FileName;
+                    }
+                    else if (isDuplicatePicture)
                     {
                         string existPath = Path.Combine(webHostEnvironment.WebRootPath, $"photos\\{laptop.Picture}");
                         laptop.Picture = Picture.FileName;
