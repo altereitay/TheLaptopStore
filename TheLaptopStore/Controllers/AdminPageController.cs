@@ -182,7 +182,7 @@ namespace TheLaptopStore.Controllers {
                     if (photoFiles.Any(filePath => Path.GetFileName(filePath) == Picture.FileName))
                     {
                         ModelState.AddModelError("Picture", "This picture file name is already associated with another product.");
-                        return View("addProduct", laptop);
+                        return View("editProduct", laptop);
                     }
                     else {
                         laptop.Picture = Picture.FileName;
