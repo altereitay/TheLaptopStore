@@ -197,7 +197,7 @@ namespace TheLaptopStore.Controllers {
                 }
             }
             _db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return deleteProduct();
         }
 
     }
