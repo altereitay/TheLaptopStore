@@ -32,7 +32,7 @@
             <form method="post" action="@Url.Action("FilterProducts", "Home")">
                 <div class="d-flex flex-column">
                     <div style="width: 200px" class="mb-3 filter-section">
-                        <label class="toggle-btn" data-toggle="ramOptions">Filter by RAM:</label>
+                        <label class="toggle-btn" data-toggle="ramOptions">Filter by RAM</label>
                         <div class="options" id="ramOptions">
                             @foreach (var ramOption in new List<SelectListItem>
                             {
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div style="width: 200px" class="mb-3 filter-section">
-                        <label class="toggle-btn" data-toggle="cpuOptions">Filter by CPU:</label>
+                        <label class="toggle-btn" data-toggle="cpuOptions">Filter by CPU</label>
                         <div class="options" id="cpuOptions">
                         @foreach (var cpuOption in new List<SelectListItem>
                         {
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div style="width: 200px"  class="mb-3 filter-section">
-                        <label class="toggle-btn" data-toggle="gpuOptions" >Filter by GPU:</label>
+                        <label class="toggle-btn" data-toggle="gpuOptions" >Filter by GPU</label>
                         <div class="options" id="gpuOptions">
                         @foreach (var gpuOption in new List<SelectListItem>
                         {
@@ -110,7 +110,7 @@
                         </div>
                     </div>
                     <div style="width: 200px" class="mb-3 filter-section">
-                        <label class="toggle-btn" data-toggle="priceOptions">Filter by Price:</label>
+                        <label class="toggle-btn" data-toggle="priceOptions">Filter by Price</label>
                         <div class="options" id="priceOptions">
                             <input type="range" id="priceRange" name="priceRange" min="0" max="20000" step="100" value="0">
                             <p>Price Range: <span id="priceValue">$0 - $20000</span></p>
@@ -139,7 +139,7 @@
 
 
                     <div style="width: 200px" class="mb-3 filter-section">
-                        <label class="toggle-btn" data-toggle="saleOptions">Show On Sale Only:</label>
+                        <label class="toggle-btn" data-toggle="saleOptions">Show On Sale Only</label>
                         <div class="options" id="saleOptions">
                             @foreach (var saleOption in new List<SelectListItem>
                             {
@@ -157,7 +157,7 @@
 
 
                     <div style="width: 200px" class="mb-3 filter-section">
-                        <label class="toggle-btn" data-toggle="ssdOptions">Filter by SSD:</label>
+                        <label class="toggle-btn" data-toggle="ssdOptions">Filter by SSD</label>
                         <div class="options" id="ssdOptions">
                         @foreach (var ssdOption in new List<SelectListItem>
                         {
@@ -178,7 +178,7 @@
                         </div>
                     </div>
                     <div style="width: 200px" class="mb-3 filter-section">
-                        <label class="toggle-btn" data-toggle="makerOptions">Filter by Maker:</label>
+                        <label class="toggle-btn" data-toggle="makerOptions">Filter by Maker</label>
                         <div class="options" id="makerOptions">
                         @foreach (var makerOption in new List<SelectListItem>
                         {
@@ -198,7 +198,7 @@
                         </div>
                     </div>
                     <div style="width: 200px" class="mb-3 filter-section">
-                        <label class="toggle-btn" data-toggle="screenOptions">Filter by Screen:</label>
+                        <label class="toggle-btn" data-toggle="screenOptions">Filter by Screen</label>
                         <div class="options" id="screenOptions">
                         @foreach (var screenOption in new List<SelectListItem>
                         {
@@ -222,7 +222,7 @@
                         </div>
                     </div>
                     <div style="width: 200px" class="mb-3 filter-section">
-                        <label class="toggle-btn" data-toggle="categoryOptions">Filter by Category:</label>
+                        <label class="toggle-btn" data-toggle="categoryOptions">Filter by Category</label>
                         <div class="options" id="categoryOptions">
                         @foreach (var categoryOption in new List<SelectListItem>
                         {
@@ -245,7 +245,7 @@
                     </div>
 
                     <div style="width: 200px" class="mb-3 filter-section">
-                        <label class="toggle-btn" data-toggle="Search">Search by Model:</label>
+                        <label class="toggle-btn" data-toggle="Search">Search by Model</label>
                         <div class="options" id="Search">
                             <input type="text" id="modelSearchInput" name="modelSearch" class="form-control" placeholder="Search by Model">
                         </div>

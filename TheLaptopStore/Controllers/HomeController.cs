@@ -36,7 +36,7 @@ namespace TheLaptopStore.Controllers {
 
             if (modelSearch != null) {
                 filteredProducts = filteredProducts.AsEnumerable()
-                    .Where(laptop => laptop.Model.StartsWith(modelSearch, StringComparison.OrdinalIgnoreCase))
+                    .Where(laptop => laptop.Model.Contains(modelSearch, StringComparison.OrdinalIgnoreCase))
                     .Union(filteredProducts.AsEnumerable().Where(laptop => laptop.Model.Equals(modelSearch, StringComparison.OrdinalIgnoreCase)))
                     .AsQueryable();
             }
