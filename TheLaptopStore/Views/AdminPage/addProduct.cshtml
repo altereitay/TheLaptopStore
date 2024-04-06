@@ -99,27 +99,27 @@
 
                 <div class="form-group">
                     <label asp-for="Price" class="control-label"></label>
-                    <input asp-for="Price" class="form-control" min="0" type="number" value="@Model.Price"/>
+                    <input asp-for="Price" class="form-control" min="0" type="number" value="@Model.Price" required />
                     <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Maker" class="control-label" ></label>
-                    <input asp-for="Maker" class="form-control" value="@Model.Maker" />
+                    <input asp-for="Maker" class="form-control" value="@Model.Maker" required />
                     <span asp-validation-for="Maker" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Color" class="control-label"></label>
-                    <input asp-for="Color" class="form-control" value="@Model.Color"/>
+                    <input asp-for="Color" class="form-control" value="@Model.Color" required />
                     <span asp-validation-for="Color" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Quantity" class="control-label"></label>
-                    <input asp-for="Quantity" class="form-control" type="number" min="0" value="@Model.Quantity"/>
+                    <input asp-for="Quantity" class="form-control" type="number" min="0" value="@Model.Quantity" required />
                     <span asp-validation-for="Quantity" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Description" class="control-label"></label>
-                    <textarea asp-for="Description" class="form-control" style="height: 200px;" value="@Model.Description"></textarea>
+                    <textarea asp-for="Description" class="form-control" style="height: 200px;" value="@Model.Description" required></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
 
@@ -130,7 +130,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="SalePrecentage" class="control-label"></label>
-                    <input asp-for="SalePrecentage" class="form-control" type="number" min="0" max="100" value="@Model.SalePrecentage" />
+                    <input asp-for="SalePrecentage" class="form-control" type="number" min="0" max="100" value="@Model.SalePrecentage" required />
                     <span asp-validation-for="SalePrecentage" class="text-danger"></span>
                 </div>
                 <div class="form-group">
@@ -146,7 +146,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="ReleaseDate" class="control-label"></label>
-                    <input asp-for="ReleaseDate" class="form-control" type="date" required value="@Model.ReleaseDate" />
+                    <input asp-for="ReleaseDate" class="form-control" type="date" required value="@Model.ReleaseDate" required />
                     <span asp-validation-for="ReleaseDate" class="text-danger"></span>
                 </div>
 
